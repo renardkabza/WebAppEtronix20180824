@@ -1,0 +1,32 @@
+﻿@using WebAppEtronix20180824.App_Start.Other
+@model WebAppEtronix20180824.Models.Entity.Procedures.ResultDeletePoint
+           
+@if (ViewData.ModelState.IsValid && Model != null)
+{
+    if (Model.EtronixValidation.ValidationCode == EtronixValidationCode.ValidationDic[0])
+    {
+    <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
+        @foreach (var item in Model.EtronixValidation.ValidationMessage)
+        {
+            <p class="mb-0">
+                @item
+            </p>
+        }
+    </div>
+    }
+}
+@if (Model != null && Model.EtronixValidation.ValidationCode != EtronixValidationCode.ValidationDic[0])
+{
+    <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
+        @foreach (var item in Model.EtronixValidation.ValidationMessage)
+        {
+            <p class="mb-0">
+                @item
+            </p>
+        }
+    </div>
+}

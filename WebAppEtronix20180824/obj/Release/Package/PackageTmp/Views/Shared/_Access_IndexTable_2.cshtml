@@ -1,0 +1,273 @@
+﻿@model PagedList.IPagedList<WebAppEtronix20180824.Models.DTO.AccessPo >
+@using System.Data.SqlClient
+@using PagedList.Mvc;
+
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+<div id="TablePanel" class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <!--<label for="button100" class="text-secondary">Action</label>-->
+                    @*@Html.ActionLink("Go to page", "Index", "Employee",
+            new
+            {
+                @SortOrder = ViewBag.SortOrder,
+                @CurrentSort = ViewBag.CurrentSort,
+                @PreviousSort = ViewBag.PreviousSort,
+                @CurrentPage = ViewBag.CurrentPage,
+                @PreviousPage = ViewBag.PreviousPage,
+                @gotopage = true
+            }, new {@id = "button100", @type = "button", @class = "btn btn-primary btn-block"})*@
+
+                    <div class="btn-group btn-block RKbtn" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button104()"><</button>
+                        <input id="btn1003" type="button" class="btn btn-primary" style="width: 60%" onclick="button103()" value="Go to page" />
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button105()">></button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group RKinput-group">
+                        <input type="text" id="inputDefault" class="form-control" placeholder="@ViewBag.CurrentPage" value="@ViewBag.CurrentPage">
+                        <span class="input-group-addon" id="basic-addon1">/@Model.PageCount</span>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="AIpanel-body"> <!--"collapse in" was removed-->
+        <div class="container">
+            <div class="row">
+                <div id="Tab1" class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>Point Name</span>
+                            </th>
+                            <th>
+
+                                <span>Table Name</span>
+                            </th>
+                            <th>
+                                <span>Dabase Name</span>
+                            </th>
+                            <th>
+                                <span>Tag 1</span>
+                            </th>
+                            <th>
+                                <span>Tag 2</span>
+                            </th>
+                            
+                            <th>
+                                <span>Tag 3</span>
+                            </th>
+                            <th>
+                                <span>Access</span>
+                                <input type="button" id="button1092" class="btn btn-danger btn-block RKbtn" onclick="button1092()" value="Update Access">
+                            </th>
+                            @*
+                            <th style="display:none;">
+                                <span>MU ID</span>
+                            </th>
+                            <th>
+                                <span>MU Name</span>
+                            </th>
+                               
+                            <th>
+                                <span>Action</span>
+                            </th>
+                            <th>
+                                <span>Action</span>
+                            </th>
+                                *@
+                                
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <!--DisplayFor Renders plain text without any html tag-->
+                                    <!--@Html.DisplayFor(modelItem => item.PointName, new {@class = "item.Id"})-->
+                                    @Html.LabelForModel(item.PointName, new { @id = item.Id, @value = item.PointName })
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TableName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DatabaseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag3)
+                                </td>
+                                <td>
+                                    <label class="custom-checkbox">
+                                        @Html.CheckBoxFor(modelItem => item.Access)
+                                        <!--<span>Ren</span>-->
+                                    </label>
+                                </td>
+
+                                @*
+                                    <td style="display:none;">
+                                        @Html.DisplayFor(modelItem => item.MUT_id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Type)
+                                    </td>
+
+
+                                    <td>
+                                        <!--<button type="button" class="btn btn-success btn-block" onclick="button106('@item.Id')" value="UserId_+@item.Id">Edit</button>-->
+                                        @Html.ActionLink("Edit", "EditPoint", "Point", new { @pointID = item.Id }, new { @class = "btn btn-success btn-block", @id = item.Id })
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-block" onclick="button107('@item.Id')" value="@item.Id">Delete</button>
+                                    </td>
+
+                                    <td>
+                                        <!--Get-->
+                                        @Html.ActionLink("Set Roles", "UsersRoles", "Account", new {@userID = item.Id}, new {@class = "btn btn-primary btn-block", @id = item.Id})
+
+                                    </td>*@
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* footer of the panel*@
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="button" id="button1091" class="btn btn-danger btn-block RKbtn" onclick="button1091()" value="Update Access">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+    
+<div class="modal" id="myModal2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white bg-danger">
+                <h5 class="modal-title ">Are you sure you want to delete the point</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--body-->
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="point_idDelete" class="RKtext-secondary">Point Id</label>
+                        <input type="text" class="form-control" id="point_idDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">
+                    </div>
+                </div>
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="point_nameDelete" class="RKtext-secondary">Point Name</label>
+                        <input type="text" class="form-control" id="point_nameDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="button108()">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    
+
+    //Goto Page
+    function button103() {
+        console.log('function Button103() pressed by OnClick from _Point_IndexTable:');
+        
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        var vCurrentPage = $("#inputDefault").val();
+        console.log('Current Page:' + vCurrentPage);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Point/IndexTableActionResult",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: vCurrentPage,
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                console.log('After call:');
+                //replace the section page
+                $("#Tab1").html(response);
+            });
+
+
+
+
+    };
+
+
+</script>
+
+

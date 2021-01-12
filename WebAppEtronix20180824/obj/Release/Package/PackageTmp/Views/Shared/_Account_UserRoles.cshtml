@@ -1,0 +1,102 @@
+﻿@model WebAppEtronix20180824.Models.DTO.UserRoles
+
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+<style>
+    table tr:hover {
+        background-color: #0275d8;
+        color: #fff;
+    }
+
+    table tr:first-child:hover {
+        background-color: white;
+        color: #000000;
+    }
+
+    table tr th {
+        text-align: center;
+        background-color: #fff;
+    }
+
+    table tr td {
+        text-align: center;
+        word-wrap: break-word;
+    }
+</style>
+
+@{
+    ViewBag.Title = "User Roles";
+}
+
+<hr />
+<h2>@ViewBag.Title.</h2>
+
+<h4>Update permissions.</h4>
+<hr />
+
+<div id="Message2"></div>
+
+<div class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <fieldset disabled="">
+                            <label class="control-label" for="userID">User ID</label>
+                            <input class="form-control" id="userID" type="text" placeholder="@Model.ID" disabled="" />
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <fieldset disabled="">
+                            <label class="control-label" for="userName">User Name</label>
+                            <input class="form-control" id="userName" type="text" placeholder="@Model.UserName" disabled="" />
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<label for="button101" class="text-secondary">Filter</label>-->
+                    
+                    <button id="btnGetRoles" type="button" class="btn btn-success btn-block RKbtn" onclick="GetRoles('@Model.ID')">
+                        Get Roles
+                        <span class="glyphicon glyphicon-filter"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Tab1">
+
+    </div>    
+    
+</div>
+
+
+
+<script type="text/javascript">
+    $("#btnGetRoles").click(function () {
+        console.log('btnGetRoles clicked');
+        $("#Filter_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    function GetRoles(pid) {
+        $.get("/Account/GetUserRoles",
+            {
+                userID: pid
+                
+            },
+            function (response) {
+                $("#Tab1").html(response);
+            });
+    }
+
+
+
+</script>

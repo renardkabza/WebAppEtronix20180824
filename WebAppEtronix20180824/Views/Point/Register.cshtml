@@ -1,0 +1,350 @@
+﻿@using WebAppEtronix20180824.App_Start.Other
+@model WebAppEtronix20180824.Models.PointViewModel
+@{
+    ViewBag.Title = "Points List ";
+}
+
+
+<!--MUT Tbale-->
+<style>
+    .bg-lgrey {
+        background: darkgray;
+    }
+    .text-white {
+        color: white;
+    }
+
+    .modal-open {
+        overflow: hidden;
+        }
+</style>
+
+<!--spinner-->
+<link href="~/Content/bootstrap-4.3.1/bootstrap.css" rel="stylesheet" />
+<!--table-->
+<link href="~/Content/Point/bootstrap_PointIndex.css" rel="stylesheet" />
+
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Register", "Point", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<hr />
+<h2>Point </h2>
+<h4>Add, delete or modify.</h4>
+<hr />
+
+    
+    <!--Fedbackk-->
+    if (ViewData.ModelState.IsValid && Model != null)
+    {
+        if (Model.EtronixValidation.ValidationCode == EtronixValidationCode.ValidationDic[0])
+        {
+            <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
+                @foreach (var item in Model.EtronixValidation.ValidationMessage)
+                {
+                    <p class="mb-0">
+                        @item
+                    </p>
+                }
+            </div>
+        }
+    }
+    if (Model != null && Model.EtronixValidation.ValidationCode != EtronixValidationCode.ValidationDic[0])
+    {
+        <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
+            @foreach (var item in Model.EtronixValidation.ValidationMessage)
+            {
+                <p class="mb-0">
+                    @item
+                </p>
+            }
+        </div>
+    }
+    
+    
+    
+<!--space for message-->
+
+<div id="Message2"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section id="PointName">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PointName, new { @class = "col-md-8 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.PointName, new { @class = "form-control", @placeholder = "e.g. Point's Name" })
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-12">
+            <section id="TableName">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.TableName, new { @class = "col-md-8 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.TableName, new { @class = "form-control", @placeholder = "e.g. Table's Name" })
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-12">
+            <section id="DatabaseName">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DataBaseName, new { @class = "col-md-8 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.DataBaseName, new { @class = "form-control", @placeholder = "e.g. DB's Name"  })
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tag1, new { @class = "col-md-8 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Tag1, new { @class = "form-control", @placeholder = "Tag 1"})
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tag2, new { @class = "col-md-8 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Tag2, new { @class = "form-control", @placeholder = "Tag 2"})
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tag3, new { @class = "col-md-8 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Tag3, new { @class = "form-control", @placeholder = "Tag 3"})
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="row">
+    
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.LabelFor(m => m.MUT, new { @class = "col-md-8 control-label" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "Choose MUT" , @readonly="readonly", @value="", @valueId="" })
+            </div>
+        </div>
+    </div>
+    
+    
+
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-2 col-md-6">
+                <div class="form-group">
+                    <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button102()">Choose MUT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" class="btn btn-success btn-block" value="Add Point" />
+        </div>
+    </div>
+}
+
+
+<div class="container">
+    <div id="spinner1" class="spinner-border text-primary d-none" role="status"></div>
+</div>
+<div id="Tab1">
+
+</div>
+
+
+<div class="modal" id="myModal" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-lgrey">
+                <h5 class="modal-title text-white ">Measurement Unit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModal()">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--body-->
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="MUId" class="RKtext-secondary">MU Id</label>
+                        <input type="text" class="form-control" id="MUId" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value=""><!--Default MU Null-->
+                    </div>
+                </div>
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="MU_Type" class="RKtext-secondary">MU Name</label>
+                        <!--<input type="text" class="form-control" id="user_nameDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">-->
+                        <select class="form-control" id="MU_Type">
+                            <!--<option value="64">Null</option>--> 
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="ChooseMU()">Choose</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CloseModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script type="text/javascript">
+
+    function CloseModal() {
+        $('#myModal').attr('style', 'display:none');
+        //Close Spinner
+        HideSpinner();
+
+    }
+
+    function button102() {
+        console.log('Button102 Pressed');
+        //Show Spinner
+        ShowSpinner();
+        //AJAX Get MU
+        $.ajax({
+                url: "/Point/GetData"
+            })
+            .error(function() {
+                alert('Data not returned');
+            })
+            .done(function(response) {
+                console.log(response);
+                var availableTags = JSON.parse(response);
+                console.log("Received Data");
+
+                //add ids &tags
+                //[{ "MUid": 1, "MUType": "New" }]
+
+
+                //itterate through the whole list and add all MUs
+                $.each(availableTags,
+                    function(k, l) {
+                        var vK = k; // row
+                        console.log('ID:' + l.MUid +" , Type:"+l.MUType);
+                        var option = new Option(l.MUType, l.MUid);
+                        //first element is set as default
+                        if (k === 0) {
+                            //MUid & MU_Type
+                            var vId2 = $('#MU_Type').val();
+                            //Chosen MU Type
+                            var vType2 = $("#MU_Type :selected").text();
+
+                            // //set the field of Measurement Unit Type on the main page
+                            $('#MUId').attr('value', l.MUid);
+                            $('#MUId').attr('valueid', l.MUid);
+                        }
+                        $('#MU_Type').append($(option));
+                        //$('#MU_Type').append('<option value="' + l.MUid + '"' + '>' + l.MUType + '</option>');
+                    });
+
+
+            });
+
+        //Spinner off
+        HideSpinner();
+        //remove all options before loading new items
+        $('#MU_Type').children().remove();
+        //show modal
+        //$('#myModal').attr('style', 'display:block');
+
+        $('#myModal').modal('show');
+
+        //onfocuse, blurring <body>
+        //$('body').addClass('modal-open');
+    }
+
+
+
+    // Show spinner ON
+    function ShowSpinner() {
+        console.log('Spinner: ON');
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+    }
+
+    //Spinnef OFF
+    function HideSpinner() {
+        console.log('Spinner: Off');
+        //hide tab
+        $('#Tab1').show();
+        //spinner
+        $('#spinner1').addClass('d-none');
+    }
+
+
+    //When Modal of MU is open Server will rreturn all available MU
+
+    //when the Choose button was pressed
+    function ChooseMU() {
+        //value2 has id
+        var vID = $('#MUId').prop('value');
+        console.log('Chosen MUId:' + vID);
+        //value keeps what is displayed 
+        var vType = $('#MU_Type').text();
+        console.log('Chosen MU_Type:' + vType);
+
+        
+
+        //MUid & MU_Type
+        var vId1 = $('#MU_Type').val();
+        //Chosen MU Type
+        var vType1 = $("#MU_Type :selected").text();
+
+        // //set the field of Measurement Unit Type on the main page
+        $('#MUT').attr('value', vType1);
+        $('#MUT').attr('valueid', vId1);
+
+        //hide Modal
+        //$('#myModal').attr('style', 'display:none');
+        $('#myModal').modal('hide');
+        
+        
+    }
+
+
+    //document ready requires JS lib on this page
+    $(function() {
+
+        $('select').on('change',
+            function () {
+                //remove previous selected item
+                //$("option :selected").removeAttr("selected");
+                //var vItem=$('#MU_Type').find('option:selected');
+                //vItem.prop('selected', -1);
+
+                
+
+                //Chosen MU id
+                var vId = $('#MU_Type').val();
+                console.log('Selected MUid:' + vId);
+                //Chosen MU Type
+                var vType = $("#MU_Type :selected").text();
+                console.log('Selected MU_Type:' + vType);
+                //Update MUid on Modal
+                $('#MUId').val(vId);
+            });
+    });
+
+</script>

@@ -1,0 +1,85 @@
+﻿@model  List<WebAppEtronix20180824.Models.Entity.Procedures.ResultGetAllRoles>
+
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-cerulean.css" rel="stylesheet" />
+
+
+
+    <div class="AIpanel-body">
+        <!--"collapse in" was removed-->
+        <div class="container">
+            <div class="row">
+                <div id="Tab1" class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>Access</span>
+                            </th>
+                            <th>
+                                <span>Main Menu/Sub Menu</span>
+                            </th>
+
+                            <th>
+                                <span>Controller/Action</span>
+                            </th>
+
+
+                        </tr>
+                        
+                        @{
+                            int i = 0;
+                            foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <!--DisplayFor Renders plain text without any html tag-->
+                                        <div class="custom-control custom-checkbox">
+
+                                            <!-- <input type="checkbox" class="custom-control-input" id="@item.Id" checked="checked"/>-->
+                                            <!--@Html.CheckBoxFor(x => item.Access, new {@class = "custom-control-input", @id = item.Id, @Row = i })-->
+                                            @Html.CheckBox("Name" + i.ToString(), item.Access, new { @class = "custom-control-input", @id = item.Id, @Row = i })
+                                            <label class="custom-control-label" for="@item.Id"><br/></label>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        @Html.LabelForModel(item.MainMenu + "/" + item.SubMenu)
+
+                                    </td>
+
+
+                                    <td>
+                                        <!--DisplayFor Renders plain text without any html tag-->
+                                        @Html.LabelForModel(item.Controller + "/" + item.Action)
+
+                                    </td>
+
+
+
+                                </tr>
+                                i++;
+                            }
+                        }
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="AIpanel-heading-RK">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="button" id="button102" class="btn btn-primary btn-block RKbtn" onclick="UpdateRole()" value="Update Roles">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+

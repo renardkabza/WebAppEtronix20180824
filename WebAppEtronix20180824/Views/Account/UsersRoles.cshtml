@@ -1,0 +1,63 @@
+﻿@model WebAppEtronix20180824.Models.DTO.UserRoles
+
+@{
+    ViewBag.Title = "User Roles";
+
+}
+
+<div id="Message212"></div>
+@{
+        Html.RenderPartial("_Account_UserRoles", Model);
+    }
+
+
+<script type="text/javascript">
+
+    function UpdateRole() {
+        console.log('UpdateRole() pressed');
+        //all rows of the table
+        var selected = document.getElementsByClassName("custom-control-input");
+        //UserID - for whome I will modify roles
+        var vUserId = $('#userID').attr('placeholder');
+        //array of JSONs
+        var vArray = [];
+        for (var i = 0; i < selected.length; i++)
+        {
+
+        //all checboxes as the JSON array
+        //one row as JSON
+        //e.g. var car = { type: "Fiat", model: "500", color: "white" };
+        var va = $('#' + selected[i].attributes['id'].value).prop('checked');
+        var vValue = va;
+        var vID = selected[i].attributes['id'].value;
+        var vrow = { SValue: vValue, SID: vID, SUserID: vUserId}
+        vArray.push(vrow);
+        }
+        //AJAX POST
+        $.ajax({
+            url: "/Account/UpdateUserRoles",
+            dataType: 'html', //what is returned from the server
+            type: 'post',
+            contentType: 'application/json', //what is sent to the server
+            //data: JSON.stringify( { "first_name": car.type } ),
+            data: JSON.stringify({ pUserRolesParameters: vArray }),
+            //processData: false,
+            success:function (response) {
+                console.log('UpdateRole() response:');
+
+                var selected1 = document.getElementById("#Message21");
+                $("#Tab1").empty();
+                $(response).insertAfter("#Message2");
+
+                console.log('End');
+
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+
+
+</script>

@@ -1,0 +1,512 @@
+﻿
+
+<style>
+    table tr:hover {
+        background-color: #0275d8;
+        color: #fff;
+    }
+
+    table tr:first-child:hover {
+        background-color: white;
+        color: #000000;
+    }
+
+    table tr th {
+        text-align: center;
+        background-color: #fff;
+    }
+
+    table tr td {
+        text-align: center;
+        word-wrap: break-word;
+    }
+</style>
+
+<!--spinner-->
+<link href="~/Content/bootstrap-4.3.1/bootstrap.css" rel="stylesheet" />
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+<!--<br id="Message1"/>-->
+@{
+    ViewBag.Title = "Users";
+}
+<hr />
+<h2>@ViewBag.Title.</h2>
+
+<h4>Edit, delete or set the roles.</h4>
+<hr />
+
+<div id="Message2"></div>
+
+<div class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<label for="button101" class="text-secondary">Filter</label>-->
+                    <button id="btn_1" type="button" class="btn btn-primary btn-block RKbtn">
+                        Filter
+                        <span class="glyphicon glyphicon-filter"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Filter_1" class="AIpanel-body collapse">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <button id="btn_2" type="button" class="btn btn-danger btn-block RKbtn">
+                        Close Filter
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btn_5" type="button" class="btn btn-primary btn-block RKbtn">Clear Filter</button>
+                </div>
+                @*<div class="col-md-6">
+                        <label for="button101">Action</label>-->
+                        @Html.ActionLink("Get filtered data", "Index", "Employee",
+                            new
+                            {
+                                @SortOrder = ViewBag.SortOrder,
+                                @CurrentSort = ViewBag.CurrentSort,
+                                @PreviousSort = ViewBag.PreviousSort,
+                                @CurrentPage = ViewBag.CurrentPage,
+                                @PreviousPage = ViewBag.PreviousPage,
+                                @gotopage = true
+                            }, new { @id = "button101", @type = "button", @class = "btn btn-success btn-block" })
+                    </div>*@
+            </div>
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <label for="user_name" class="RKtext-secondary">User Name</label>
+                    <input type="text" class="form-control" id="user_name" aria-describedby="basic-addon3" placeholder="User Name">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="email" class="RKtext-secondary">Email</label>
+                    <input type="text" class="form-control" id="email" aria-describedby="basic-addon3" placeholder="Email">
+                </div>
+             </div>
+
+            </div>
+    </div>
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<label for="button101" class="text-secondary">Sorting</label>-->
+                    <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
+                        Sorting
+                        <span class="glyphicon glyphicon-sort"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Sorting_1" class="AIpanel-body collapse">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <button id="btn_4" type="button" class="btn btn-danger btn-block RKbtn">
+                        Close Sorting
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <label for="sel1" class="RKtext-secondary">Sort by</label>
+                    <select class="form-control" id="sel1">
+                        <option selected>User Name</option>
+                        <option value="Email">Email</option>
+                        </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="sel2" class="RKtext-secondary">Sorting Order</label>
+                    <select class="form-control" id="sel2">
+                        <option selected>Asc</option>
+                        <option value="Desc">Desc</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-md-6">
+                        <label for="button101" class="text-secondary">Data</label>
+                        @Html.ActionLink("Get all data", "Index", "Employee",
+                            new
+                            {
+                                @SortOrder = ViewBag.SortOrder,
+                                @CurrentSort = ViewBag.CurrentSort,
+                                @PreviousSort = ViewBag.PreviousSort,
+                                @CurrentPage = ViewBag.CurrentPage,
+                                @PreviousPage = ViewBag.PreviousPage,
+                                @gotopage = true,
+                            }, new {@id = "button101", @type = "button", @class = "btn btn-success btn-block"})
+                    </div>*@
+                <div class="col-md-6 col-lg-3">
+                    <div class="input-group RKinput-group">
+                        @*<label for="sel3" class="text-secondary">Elements per page</label>*@
+                        <select class="form-control" id="sel3">
+                            <option selected>1</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="400">400</option>
+                            <option value="800">800</option>
+                            <option value="1000">1000</option>
+                        </select>
+                        <span class="input-group-addon" id="basic-addon1"> Items/Page</span>
+                    </div>
+                </div>
+
+                @*<div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sel3" class="RKtext-secondary">Elemenets/Page</label>
+                        <select class="form-control" id="sel3">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+
+                        </select>
+                    </div>
+                </div>*@
+
+                <div class="col-md-3">
+                    @*<label for="button102" class="RKtext-transparentOnGrey">--</label>*@
+                    <input type="button" id="button102" class="btn btn-success btn-block RKbtn" onclick="button102()" value="Get data">
+                    @*@Html.ActionLink("Go to page", "Index", "Employee",
+                        new
+                        {
+                            @SortOrder = ViewBag.SortOrder,
+                            @CurrentSort = ViewBag.CurrentSort,
+                            @PreviousSort = ViewBag.PreviousSort,
+                            @CurrentPage = ViewBag.CurrentPage,
+                            @PreviousPage = ViewBag.PreviousPage,
+                            @gotopage = true
+                        }, new { @id = "button101", @type = "button", @class = "btn btn-primary btn-block" })*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*<div class="panel-footer">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+        </div>*@
+</div>
+
+<div class="container">
+    <div id="spinner1" class="spinner-border text-primary d-none" role="status"></div>
+</div>
+<div id="Tab1">
+
+</div>
+
+
+<br />
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@*<script src="~/Scripts/bootstrap-4.3.1/bootstrap.js"></script>*@
+
+
+<script type="text/javascript">
+    $(function() {
+        console.log('Start:');
+
+    });
+
+    $("#button100").click(
+        function() {
+            var vpage = $("#inputDefault").val();
+            var href = $("#button100").attr('href');
+            console.log('href:' + href);
+
+            var res = href.split("&");
+            console.log('substring:' + res);
+            res[3] = "CurrentPage=" + vpage;
+
+            //new href
+            href = res[0] + '&' + res[1] + '&' + res[2] + '&' + res[3] + '&' + res[4] + '&' + res[5];
+            //replace the old href
+            $("#button100").attr("href", href);
+            //verification purpose
+            var nb = $("#button100").attr("href");
+            console.log('End:');
+        });
+
+    $("#btn_2").click(function() {
+        console.log('btn_2 clicked');
+        $("#Filter_1").attr("class", "panel-body collapse");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_1").click(function() {
+        console.log('btn_2 clicked');
+        $("#Filter_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_3").click(function() {
+        console.log('btn_3 clicked');
+        $("#Sorting_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Sorting_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_4").click(function() {
+        console.log('btn_4 clicked');
+        $("#Sorting_1").attr("class", "panel-body collapse ");
+        //verification purpose
+        var nb = $("#Sorting_1").attr("href");
+        console.log(nb);
+    });
+
+    //clear filter
+    $("#btn_5").click(function() {
+        console.log('btn_5 clicked');
+        $("#user_name").val('');
+        $("#email").val('');
+
+
+    });
+
+
+    $("#button102").click(
+        function() {
+            console.log('button102 pressed JS .click:');
+        });
+
+    function button102() {
+        console.log('Button102 pressed by OnClick:');
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        var vfilterName = $("#user_name").val();
+        var vfilterEmail = $("#email").val();
+
+
+        console.log('UserName:' + vfilterName);
+        console.log('Email:' + vfilterEmail);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('UserName:' + vSortingColumn);
+        console.log('Email:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://192.168.1.186:15883/Account/IndexTableActionResult?userName=&email=&sortColumn=User+Name&sortOrder=Asc&currentpage=1&ppageSize=1
+        $.get("/Account/IndexTableActionResult",
+            {
+                userName: vfilterName,
+                email: vfilterEmail,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: 1,
+                ppageSize: vPageSize
+
+            },
+            function(response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+        //public ActionResult Index(string employeeName, string email, string phoneNumber,int ? salary, string sortColumn, string sortOrder, int? currentpage, int? ppageSize)
+
+
+    };
+
+    //Previous page
+    function button104() {
+        console.log('Button104 clicked');
+        var vfilterName = $("#inputDefault").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        var vfilterName = $("#user_name").val();
+        var vfilterEmail = $("#email").val();
+
+
+        console.log('Name:' + vfilterName);
+        console.log('Email:' + vfilterEmail);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Name:' + vSortingColumn);
+        console.log('Email:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Account/PreviousPageActionResult",
+            {
+                userName: vfilterName,
+                email: vfilterEmail,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault").val(),
+                ppageSize: vPageSize
+
+            },
+            function(response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+
+    }
+
+    //Next page
+    function button105() {
+        console.log('Button105 clicked');
+        var vfilterName = $("#inputDefault").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        var vfilterName = $("#user_name").val();
+        var vfilterEmail = $("#email").val();
+
+
+        console.log('Name:' + vfilterName);
+        console.log('Email:' + vfilterEmail);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Name:' + vSortingColumn);
+        console.log('Email:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Account/NextPageActionResult",
+            {
+                userName: vfilterName,
+                email: vfilterEmail,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault").val(),
+                ppageSize: vPageSize
+
+            },
+            //partial view of users
+            function(response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+    }
+
+    //delete user open modal
+    function button107(a) {
+        console.log('function Button107() pressed by OnClick from _Account_IndexTable:');
+        var vAspNetUser = a;
+        //console.log('AspNetUser:' + vAspNetUser + ' will be deleted');
+        $("#user_idDelete").val(vAspNetUser);
+        //var vAspNetUserName = $('[Tag1="UserId_4fae574e-328e-4783-b949-8f4b6cb9d1ff"]').val();
+        var vAspNetUserName = document.getElementById(vAspNetUser).attributes[2];
+        $('#user_idDeleteDelete').val(vAspNetUserName);
+        $('#user_nameDelete').val(vAspNetUserName.value);
+        $('#myModal').modal('show');
+    }
+
+
+        //delete user call a procedure on DB
+        function button108() {
+            console.log('function Button108() pressed by OnClick action from a partial view of _Account_IndexTable');
+            var vUser = $("#user_idDelete").val();
+
+            $.get("/Account/DeleteUser",
+                {
+                    userId: vUser
+                },
+                function(response) {
+                    //clode modal
+                    $('#myModal').modal('hide');
+                    //delete a partial view of the table to prevent showing the deleted user
+                    $('#TablePanel').remove();
+                    //add a message
+                    //$("#Message").html(response);
+                    $(response).insertAfter("#Message2");
+                });
+
+
+        }
+
+        //parameter: b- user id, 
+        //Edit User's details;
+        function button106(b) {
+
+            
+        }
+  
+
+</script>
+

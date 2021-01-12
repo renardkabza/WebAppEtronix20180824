@@ -1,0 +1,18 @@
+  <connectionStrings>
+    <!--On VM PowerEdgeR710-->
+
+    <!--For MS identity -->
+    <add name="DefaultConnection" 
+         providerName="System.Data.SqlClient" 
+         connectionString="Data Source=ETRONIXSQLSERVE;
+         Initial Catalog=aspnet-WebAppEtronix20180824-20180824021018; 
+         User ID=sa;
+         Password=Zasada2018"/>
+    
+    <!-- For Entity-->
+
+    <add name="Entities" connectionString="data source=ETRONIXSQLSERVE;initial catalog=aspnet-WebAppEtronix20180824-20180824021018;user id=sa;password=Zasada2018;multipleactiveresultsets=True;application name=EntityFramework" providerName="System.Data.SqlClient" />
+
+  
+
+  </connectionStrings> 

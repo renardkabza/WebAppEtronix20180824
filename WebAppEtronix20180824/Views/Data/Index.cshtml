@@ -1,0 +1,509 @@
+﻿@using WebAppEtronix20180824.App_Start.Other
+@model WebAppEtronix20180824.Models.MeasurementTypeViewModel
+    @{
+        ViewBag.Title = "Measurement Unit Type";
+    }
+
+
+<!--spinner-->
+<link href="~/Content/bootstrap-4.3.1/bootstrap.css" rel="stylesheet" />
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+    <hr />
+    <h2>Measurement Unit Type</h2>
+    <h4>Add, delete or modify.</h4>
+    <hr />
+
+@if (Model != null && Model.EtronixValidation.ValidationMessage.Count > 0)
+{
+    if (Model.EtronixValidation.ValidationCode == EtronixValidationCode.ValidationDic[0])
+    {
+        <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
+            <ul>
+                @foreach (var item in Model.EtronixValidation.ValidationMessage)
+                {
+                    <li class="mb-0">
+                        @item
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+}
+@if (Model != null && Model.EtronixValidation.ValidationCode != EtronixValidationCode.ValidationDic[0])
+{
+    <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
+        @foreach (var item in Model.EtronixValidation.ValidationMessage)
+        {
+            <p class="mb-0">
+                @item
+            </p>
+        }
+    </div>
+}
+
+<div id="Message2"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="measurementUnit">
+            @using (Html.BeginForm("AddType", "Data", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Type, new { @class = "col-md-8 control-label" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.Type, new { @class = "form-control", @placeholder="e.g. kWh" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input type="submit" value="Add" class="btn btn-primary btn-block" onclick="ClearUnitType()" />
+                    </div>
+                </div>
+            }
+                
+        </section>
+
+    </div>
+</div>
+
+<div class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<label for="button101" class="text-secondary">Filter</label>-->
+                    <button id="btn_1" type="button" class="btn btn-primary btn-block RKbtn">
+                        Filter
+                        <span class="glyphicon glyphicon-filter"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Filter_1" class="AIpanel-body collapse">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <button id="btn_2" type="button" class="btn btn-danger btn-block RKbtn">
+                        Close Filter
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btn_5" type="button" class="btn btn-primary btn-block RKbtn">Clear Filter</button>
+                </div>
+                @*<div class="col-md-6">
+                        <label for="button101">Action</label>-->
+                        @Html.ActionLink("Get filtered data", "Index", "Employee",
+                            new
+                            {
+                                @SortOrder = ViewBag.SortOrder,
+                                @CurrentSort = ViewBag.CurrentSort,
+                                @PreviousSort = ViewBag.PreviousSort,
+                                @CurrentPage = ViewBag.CurrentPage,
+                                @PreviousPage = ViewBag.PreviousPage,
+                                @gotopage = true
+                            }, new { @id = "button101", @type = "button", @class = "btn btn-success btn-block" })
+                    </div>*@
+            </div>
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <label for="unit_type" class="RKtext-secondary">Unit Type</label>
+                    <input type="text" class="form-control" id="unit_type" aria-describedby="basic-addon3" placeholder="Unit Type">
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<label for="button101" class="text-secondary">Sorting</label>-->
+                    <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
+                        Sorting
+                        <span class="glyphicon glyphicon-sort"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Sorting_1" class="AIpanel-body collapse">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <button id="btn_4" type="button" class="btn btn-danger btn-block RKbtn">
+                        Close Sorting
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <label for="sel1" class="RKtext-secondary">Sort by</label>
+                    <select class="form-control" id="sel1">
+                        <option selected>Unit Type</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="sel2" class="RKtext-secondary">Sorting Order</label>
+                    <select class="form-control" id="sel2">
+                        <option selected>Asc</option>
+                        <option value="Desc">Desc</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-md-6">
+                        <label for="button101" class="text-secondary">Data</label>
+                        @Html.ActionLink("Get all data", "Index", "Employee",
+                            new
+                            {
+                                @SortOrder = ViewBag.SortOrder,
+                                @CurrentSort = ViewBag.CurrentSort,
+                                @PreviousSort = ViewBag.PreviousSort,
+                                @CurrentPage = ViewBag.CurrentPage,
+                                @PreviousPage = ViewBag.PreviousPage,
+                                @gotopage = true,
+                            }, new {@id = "button101", @type = "button", @class = "btn btn-success btn-block"})
+                    </div>*@
+                <div class="col-md-6 col-lg-3">
+                    <div class="input-group RKinput-group">
+                        @*<label for="sel3" class="text-secondary">Elements per page</label>*@
+                        <select class="form-control" id="sel3">
+                            <option selected>1</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="400">400</option>
+                            <option value="800">800</option>
+                            <option value="1000">1000</option>
+                        </select>
+                        <span class="input-group-addon" id="basic-addon1"> Items/Page</span>
+                    </div>
+                </div>
+
+                @*<div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sel3" class="RKtext-secondary">Elemenets/Page</label>
+                            <select class="form-control" id="sel3">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="40">40</option>
+                                <option value="80">80</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+
+                            </select>
+                        </div>
+                    </div>*@
+
+                <div class="col-md-3">
+                    @*<label for="button102" class="RKtext-transparentOnGrey">--</label>*@
+                    <input type="button" id="button102" class="btn btn-success btn-block RKbtn" onclick="button102()" value="Get data">
+                    @*@Html.ActionLink("Go to page", "Index", "Employee",
+                        new
+                        {
+                            @SortOrder = ViewBag.SortOrder,
+                            @CurrentSort = ViewBag.CurrentSort,
+                            @PreviousSort = ViewBag.PreviousSort,
+                            @CurrentPage = ViewBag.CurrentPage,
+                            @PreviousPage = ViewBag.PreviousPage,
+                            @gotopage = true
+                        }, new { @id = "button101", @type = "button", @class = "btn btn-primary btn-block" })*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*<div class="panel-footer">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+        </div>*@
+</div>
+
+<div class="container">
+    <div id="spinner1" class="spinner-border text-primary d-none" role="status"></div>
+</div>
+<div id="Tab1">
+
+</div>
+
+
+<br />
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    /*open filter*/
+    $("#btn_1").click(function () {
+        console.log('btn_1 clicked');
+        $("#Filter_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    /*close filter*/
+    $("#btn_2").click(function () {
+        console.log('btn_2 clicked');
+        $("#Filter_1").attr("class", "panel-body collapse");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    //clear filter
+    $("#btn_5").click(function () {
+        console.log('btn_5 clicked');
+        $("#unit_type").val('');
+        
+
+
+    });
+
+    /*sorting open and close*/
+    $("#btn_3").click(function () {
+        console.log('btn_3 clicked');
+        $("#Sorting_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Sorting_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_4").click(function () {
+        console.log('btn_4 clicked');
+        $("#Sorting_1").attr("class", "panel-body collapse ");
+        //verification purpose
+        var nb = $("#Sorting_1").attr("href");
+        console.log(nb);
+    });
+
+    function button102() {
+        console.log('Button102 pressed,  OnClick event:');
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        var vfilterName = $("#unit_type").val();
+        
+
+
+        console.log('unit_type:' + vfilterName);
+        
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        //console.log('UserName:' + vSortingColumn);
+        //console.log('Email:' + vSortingOrder);
+
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://192.168.1.186:15883/Account/IndexTableActionResult?userName=&email=&sortColumn=User+Name&sortOrder=Asc&currentpage=1&ppageSize=1
+        $.get("/Data/IndexTableActionResult",
+            {
+                unit_type: vfilterName,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: 1,
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+        //public ActionResult Index(string employeeName, string email, string phoneNumber,int ? salary, string sortColumn, string sortOrder, int? currentpage, int? ppageSize)
+
+
+    }
+
+    //Next page
+    function button105() {
+        console.log('Button105 clicked');
+        var vfilterName = $("#inputDefault").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        var vfilterName = $("#unit_type").val();
+        
+
+
+        console.log('Name:' + vfilterName);
+        
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Unit Type:' + vSortingColumn);
+        
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Data/NextPageActionResult",
+            {
+                unit_type: vfilterName,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault").val(),
+                ppageSize: vPageSize
+
+            },
+            //partial view of users
+            function (response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+    }
+
+    //Previous page
+    function button104() {
+        console.log('Button104 clicked');
+        var vfilterName = $("#inputDefault").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        var vfilterName = $("#unit_type").val();
+        
+
+
+        console.log('Unit_type:' + vfilterName);
+        
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Unit type:' + vSortingColumn);
+        
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Data/PreviousPageActionResult",
+            {
+                unit_type: vfilterName,
+                
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault").val(),
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+
+    }
+
+    function ClearUnitType()
+    {
+        
+    }
+
+
+    //delete user open modal
+    function button107(a) {
+        console.log('function Button107() pressed by OnClick from _Data_IndexTable:');
+        var vMeasuremntUnitTypeIdDelete = a;
+        //console.log('AspNetUser:' + vAspNetUser + ' will be deleted');
+        $("#unit_type_idDelete").val(vMeasuremntUnitTypeIdDelete);
+        //var vAspNetUserName = $('[Tag1="UserId_4fae574e-328e-4783-b949-8f4b6cb9d1ff"]').val();
+        var vMeasurementUnitTypeName = document.getElementById(vMeasuremntUnitTypeIdDelete).attributes[2];
+        $('#unit_type_idDelete').val(vMeasuremntUnitTypeIdDelete);
+        $('#unit_typeDelete').val(vMeasurementUnitTypeName.value);
+        $('#myModal').modal('show');
+    }
+
+
+    //delete user call a procedure on DB
+    function button108() {
+        console.log('function Button108() pressed by OnClick action from a partial view of _Account_IndexTable');
+        var vmeasurementUnitType = $("#unit_type_idDelete").val();
+
+        $.get("/Data/DeleteMeasurementUnitType",
+            {
+                measurementUnitType: vmeasurementUnitType
+            },
+            function (response) {
+                //clode modal
+                $('#myModal').modal('hide');
+                //delete a partial view of the table to prevent showing the deleted user
+                $('#TablePanel').remove();
+                //add a message
+                //$("#Message").html(response);
+                $(response).insertAfter("#Message2");
+            });
+
+
+    }
+
+    </script>

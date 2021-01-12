@@ -1,0 +1,177 @@
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.dll.config
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.pdb
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Antlr3.Runtime.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.SqlServer.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Newtonsoft.Json.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Owin.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.Mvc.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Helpers.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Mvc.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Optimization.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Razor.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Razor.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebGrease.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.Mvc.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Helpers.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Mvc.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Optimization.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Razor.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Razor.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Antlr3.Runtime.pdb
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Newtonsoft.Json.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.SqlServer.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.dll
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.pdb
+C:\Users\Renard\Documents\Visual Studio 2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.csprojResolveAssemblyReference.cache
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.dll.config
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.pdb
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Antlr3.Runtime.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.SqlServer.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Core.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Cookies.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Facebook.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Google.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.OAuth.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Twitter.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Web.Infrastructure.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Newtonsoft.Json.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Owin.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.Mvc.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Helpers.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Mvc.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Optimization.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Razor.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Deployment.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Razor.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebGrease.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.Mvc.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Helpers.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Mvc.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Optimization.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Razor.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Deployment.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Razor.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Antlr3.Runtime.pdb
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Newtonsoft.Json.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.SqlServer.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Core.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Facebook.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Cookies.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.OAuth.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Google.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Twitter.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.csprojResolveAssemblyReference.cache
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.dll
+E:\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.pdb
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.dll.config
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebAppEtronix20180824.pdb
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Antlr3.Runtime.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.SqlServer.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Newtonsoft.Json.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Owin.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.Mvc.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Helpers.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Mvc.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Optimization.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Razor.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Deployment.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Razor.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\WebGrease.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\PagedList.Mvc.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Helpers.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Mvc.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Optimization.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.Razor.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Deployment.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\System.Web.WebPages.Razor.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Antlr3.Runtime.pdb
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Newtonsoft.Json.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\EntityFramework.SqlServer.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.csprojResolveAssemblyReference.cache
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.dll
+C:\Users\renar\OneDrive\VisualStudio\VisualStudio2013\Projects\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.pdb

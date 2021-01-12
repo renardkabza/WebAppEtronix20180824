@@ -1,0 +1,190 @@
+﻿@model PagedList.IPagedList<WebAppEtronix20180824.Models.Entity.AspNetUsers>
+@using System.Data.SqlClient
+@using PagedList.Mvc;
+
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+<div id="TablePanel" class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <!--<label for="button100" class="text-secondary">Action</label>-->
+                    @*@Html.ActionLink("Go to page", "Index", "Employee",
+            new
+            {
+                @SortOrder = ViewBag.SortOrder,
+                @CurrentSort = ViewBag.CurrentSort,
+                @PreviousSort = ViewBag.PreviousSort,
+                @CurrentPage = ViewBag.CurrentPage,
+                @PreviousPage = ViewBag.PreviousPage,
+                @gotopage = true
+            }, new {@id = "button100", @type = "button", @class = "btn btn-primary btn-block"})*@
+
+                    <div class="btn-group btn-block RKbtn" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button104()"><</button>
+                        <input id="btn1003" type="button" class="btn btn-primary" style="width: 60%" onclick="button103()" value="Go to page" />
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button105()">></button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group RKinput-group">
+                        <input type="text" id="inputDefault" class="form-control" placeholder="@ViewBag.CurrentPage" value="@ViewBag.CurrentPage">
+                        <span class="input-group-addon" id="basic-addon1">/@Model.PageCount</span>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="AIpanel-body"> <!--"collapse in" was removed-->
+        <div class="container">
+            <div class="row">
+                <div id="Tab1" class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>User Name</span>
+                            </th>
+                            <th>
+
+                                <span>Email</span>
+                            </th>
+                            <th>
+                                <span>Edit</span>
+                            </th>
+                            <th>
+                                <span>Delete</span>
+                            </th>
+                            <th>
+                                <span>Set Roles</span>
+                            </th>
+                                
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <!--DisplayFor Renders plain text without any html tag-->
+                                    <!--@Html.DisplayFor(modelItem => item.UserName, new {@class = "item.Id"})-->
+                                    @Html.LabelForModel(item.UserName, new {@id=item.Id, @value=item.UserName})
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    <!--<button type="button" class="btn btn-success btn-block" onclick="button106('@item.Id')" value="UserId_+@item.Id">Edit</button>-->
+                                    @Html.ActionLink("Edit", "EditUser", "Account", new { @userID = item.Id }, new { @class = "btn btn-success btn-block", @id = item.Id })
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-block" onclick="button107('@item.Id')" value="@item.Id">Delete</button>
+                                </td>
+                                <td>
+                                    <!--Get-->
+                                    @Html.ActionLink("Set Roles", "UsersRoles", "Account", new {@userID = item.Id}, new {@class = "btn btn-primary btn-block", @id = item.Id})
+                                    
+                                </td>
+                                    
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+    
+<div class="modal" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white bg-danger">
+                <h5 class="modal-title ">Are you sure you want to delete a user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--body-->
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="user_idDelete" class="RKtext-secondary">User Id</label>
+                        <input type="text" class="form-control" id="user_idDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">
+                    </div>
+                </div>
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="user_nameDelete" class="RKtext-secondary">Email</label>
+                        <input type="text" class="form-control" id="user_nameDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="button108()">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    
+
+    //Goto Page
+    function button103() {
+        console.log('function Button103() pressed by OnClick from _Account_IndexTable:');
+        //filter
+        var vfilterName = $("#user_name").val();
+        var vfilterEmail = $("#email").val();
+        
+
+        console.log('UserName:' + vfilterName);
+        console.log('Email:' + vfilterEmail);
+        
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('UserName:' + vSortingColumn);
+        console.log('Email:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        var vCurrentPage = $("#inputDefault").val();
+        console.log('Current Page:' + vCurrentPage);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Account/IndexTableActionResult",
+            {
+                userName: vfilterName,
+                email: vfilterEmail,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: vCurrentPage,
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                console.log('After call:');
+                //replace the section page
+                $("#Tab1").html(response);
+            });
+
+
+
+
+    };
+
+
+</script>
+
+

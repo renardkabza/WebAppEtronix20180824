@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Entity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="0" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tlbRoles" Relationship="Self.FK_tlbRoles_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="tlbRoles" />
+  </EntityType>
+  <EntityType Name="tblMainMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MainMenu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblSubMenu" Relationship="Self.FK_tblSubMenu_tblMainMenuId" FromRole="tblMainMenu" ToRole="tblSubMenu" />
+  </EntityType>
+  <EntityType Name="tblSubMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubMenu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="tblMainMenuId" Type="Int32" />
+    <NavigationProperty Name="tblMainMenu" Relationship="Self.FK_tblSubMenu_tblMainMenuId" FromRole="tblSubMenu" ToRole="tblMainMenu" />
+    <NavigationProperty Name="tlbRoles" Relationship="Self.FK_tlbRoles_tblSubMenu_Id" FromRole="tblSubMenu" ToRole="tlbRoles" />
+  </EntityType>
+  <EntityType Name="tlbRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tlbSubMenuId" Type="Int32" Nullable="false" />
+    <Property Name="AspNetUsersId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_tlbRoles_AspNetUsers_Id" FromRole="tlbRoles" ToRole="AspNetUsers" />
+    <NavigationProperty Name="tblSubMenu" Relationship="Self.FK_tlbRoles_tblSubMenu_Id" FromRole="tlbRoles" ToRole="tblSubMenu" />
+  </EntityType>
+  <Association Name="FK_tlbRoles_AspNetUsers_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="tlbRoles" Type="Self.tlbRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tlbRoles">
+        <PropertyRef Name="AspNetUsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubMenu_tblMainMenuId">
+    <End Role="tblMainMenu" Type="Self.tblMainMenu" Multiplicity="0..1" />
+    <End Role="tblSubMenu" Type="Self.tblSubMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMainMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblSubMenu">
+        <PropertyRef Name="tblMainMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tlbRoles_tblSubMenu_Id">
+    <End Role="tblSubMenu" Type="Self.tblSubMenu" Multiplicity="1" />
+    <End Role="tlbRoles" Type="Self.tlbRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tlbRoles">
+        <PropertyRef Name="tlbSubMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="tblMainMenu" EntityType="Self.tblMainMenu" />
+    <EntitySet Name="tblSubMenu" EntityType="Self.tblSubMenu" />
+    <EntitySet Name="tlbRoles" EntityType="Self.tlbRoles" />
+    <AssociationSet Name="FK_tlbRoles_AspNetUsers_Id" Association="Self.FK_tlbRoles_AspNetUsers_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="tlbRoles" EntitySet="tlbRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubMenu_tblMainMenuId" Association="Self.FK_tblSubMenu_tblMainMenuId">
+      <End Role="tblMainMenu" EntitySet="tblMainMenu" />
+      <End Role="tblSubMenu" EntitySet="tblSubMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tlbRoles_tblSubMenu_Id" Association="Self.FK_tlbRoles_tblSubMenu_Id">
+      <End Role="tblSubMenu" EntitySet="tblSubMenu" />
+      <End Role="tlbRoles" EntitySet="tlbRoles" />
+    </AssociationSet>
+    <FunctionImport Name="GetMainMenu">
+      <Parameter Name="UserID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetMenu">
+      <Parameter Name="UserID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetSubMenu">
+      <Parameter Name="UserID" Mode="In" Type="String" />
+      <Parameter Name="MainMenuIndx" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

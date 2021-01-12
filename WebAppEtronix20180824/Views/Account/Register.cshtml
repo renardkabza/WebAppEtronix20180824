@@ -1,0 +1,97 @@
+﻿@using WebAppEtronix20180824.App_Start.Other
+@model WebAppEtronix20180824.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<hr />
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    if (ViewData.ModelState.IsValid && Model != null)
+    {
+        if (Model.EtronixValidation.ValidationCode == EtronixValidationCode.ValidationDic[0])
+        {
+            <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
+                @foreach (var item in Model.EtronixValidation.ValidationMessage)
+                {
+                    <p class="mb-0">
+                        @item
+                    </p>
+                }
+            </div>
+        }
+   }
+    if (Model != null && Model.EtronixValidation.ValidationCode != EtronixValidationCode.ValidationDic[0])
+    {
+            <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
+                @foreach (var item in Model.EtronixValidation.ValidationMessage)
+                {
+                    <p class="mb-0">
+                        @item
+                    </p>
+                }
+            </div>
+    }
+
+    <!--Client Side Validation is switched off ->~/bundles/jqueryval are commented  -->
+    <!--@Html.ValidationSummary("", new {@class = "text-danger"})-->
+    
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label", @id="Pass" })
+        <div class="col-md-12">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-6 control-label", @id = "ConPass" })
+        <div class="col-md-12">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-12">
+            <input type="submit" class="btn btn-primary" value="Register" />
+            <button type="button" class="btn btn-danger" onclick="button109()" >Generate New Password</button>
+        </div>
+        
+        
+        
+    </div>
+}
+
+
+@*
+        commented no client side validation
+        @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+*@
+
+<script type="text/javascript">
+    function button109() {
+        $.get("/Account/GenerateRandomPassword",
+            {},
+            function(response) {
+                console.log(response);
+                $("#Password").val(response);
+                $("#ConfirmPassword").val(response);
+
+            });
+    }
+
+</script>

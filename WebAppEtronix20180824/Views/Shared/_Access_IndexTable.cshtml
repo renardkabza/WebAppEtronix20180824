@@ -1,0 +1,214 @@
+﻿@model PagedList.IPagedList<WebAppEtronix20180824.Models.Entity.AspNetUsers>
+@using System.Data.SqlClient
+@using PagedList.Mvc;
+
+
+<style>
+    .WhiteFont {
+        color: #fff;
+    }
+</style>
+
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-cerulean.css" rel="stylesheet" />
+
+
+<div id="TablePanel" class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <!--<label for="button100" class="text-secondary">Action</label>-->
+                    @*@Html.ActionLink("Go to page", "Index", "Employee",
+            new
+            {
+                @SortOrder = ViewBag.SortOrder,
+                @CurrentSort = ViewBag.CurrentSort,
+                @PreviousSort = ViewBag.PreviousSort,
+                @CurrentPage = ViewBag.CurrentPage,
+                @PreviousPage = ViewBag.PreviousPage,
+                @gotopage = true
+            }, new {@id = "button100", @type = "button", @class = "btn btn-primary btn-block"})*@
+
+                    <div class="btn-group btn-block RKbtn" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button104()"><</button>
+                        <input id="btn1003" type="button" class="btn btn-primary" style="width: 60%" onclick="button103()" value="Go to page" />
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button105()">></button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group RKinput-group">
+                        <input type="text" id="inputDefault" class="form-control" placeholder="@ViewBag.CurrentPage" value="@ViewBag.CurrentPage">
+                        <span class="input-group-addon" id="basic-addon1">/@Model.PageCount</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="AIpanel-body"> <!--"collapse in" was removed-->
+        <div class="container">
+            <div class="row">
+                <div id="Tab1" class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>User Name</span>
+                            </th>
+                            <th>
+
+                                <span>Email</span>
+                            </th>
+                            <th>
+                                <span>Selected User</span>
+                            </th>
+
+
+                        </tr>
+                        
+                        @{ int i = 0; }
+       
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-radio">
+                                        <!--DisplayFor Renders plain text without any html tag-->
+                                        <!--@Html.DisplayFor(modelItem => item.UserName, new {@class = "item.Id"})-->
+                                        @Html.LabelForModel(item.UserName, new { @id = item.Id, @value = item.UserName })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="custom-control custom-radio">
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </div>
+                                </td>
+                                <td>
+                                    <!--
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                        <label class="custom-control-label" for="customCheck1"></label>
+                                    </div>
+                                    -->
+                                    <div class="custom-control custom-radio">
+                                        @Html.RadioButton("RB_User", true, new { @class = "custom-control-input", @id = i, UserIdRow = item.Id })
+                                        <label class="custom-control-label" for=@i UserIdRow=@item.Id><span style="opacity: 0;">..</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+          
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@*
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+               <div class="col-md-3">
+
+                    <input type="button" id="button1090" class="btn btn-success btn-block RKbtn" onclick="button1090()" value="Get Points">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+*@
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+    $(function () {
+        console.log('Start:');
+
+        $('input[type=radio][name=RB_User]').change(function () {
+            //switch off panel of points.
+            //hide tab
+            $('#Tab11').hide();
+            console.log('Radio button pressed');
+            //check this if ticked and take the id 
+            if (this.checked) {
+                //$("#PointsId").removeAttr("style"); // remove previos 'display= none;'
+                $('#PointsId').attr('style', 'display:block;'); //add visibility
+
+
+                //print user's id
+                var vinput = this;
+                var xx = vinput.attributes[0].nodeValue;
+                idUser = xx;
+                console.log("user:" + idUser);
+            }
+            console.log("is checked:" + this.checked);
+        });
+
+    });
+
+    //Goto Page
+    function button103() {
+        console.log('function Button103() pressed by OnClick from _Account_IndexTable:');
+        //filter
+        var vfilterName = $("#user_name").val();
+        var vfilterEmail = $("#email").val();
+
+
+        console.log('UserName:' + vfilterName);
+        console.log('Email:' + vfilterEmail);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('UserName:' + vSortingColumn);
+        console.log('Email:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        var vCurrentPage = $("#inputDefault").val();
+        console.log('Current Page:' + vCurrentPage);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Access/IndexTableActionResult",
+            {
+                userName: vfilterName,
+                email: vfilterEmail,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: vCurrentPage,
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                console.log('After call:');
+                //replace the section page
+                $("#Tab1").html(response);
+            });
+
+
+
+
+    };
+
+  
+
+        
+
+
+
+
+
+</script>
+
+

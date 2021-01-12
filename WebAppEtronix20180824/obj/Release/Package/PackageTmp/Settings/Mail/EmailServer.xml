@@ -1,0 +1,9 @@
+﻿<EmailServer 
+	IncomingServer="pop.ionos.co.uk" 
+	IncomingPort="995" 
+	IncoimgServerSSL="true" 
+	OutgoingServer="smtp.ionos.co.uk" 
+	OutgoingPort="587" 
+	OutgoingServerReqAuthentication="true" 
+	UserName="renard.kabza@etronix.eu" 
+	Password="Z@sada2018"/>
