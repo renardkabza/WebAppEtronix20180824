@@ -23,15 +23,15 @@
             }, new {@id = "button100", @type = "button", @class = "btn btn-primary btn-block"})*@
 
                     <div class="btn-group btn-block RKbtn" role="group" aria-label="...">
-                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button104()"><</button>
-                        <input id="btn1003" type="button" class="btn btn-primary" style="width: 60%" onclick="button103()" value="Go to page" />
-                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button105()">></button>
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button1042()"><</button>
+                        <input id="btn10032" type="button" class="btn btn-primary" style="width: 60%" onclick="button1032()" value="Go to page" />
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button1052()">></button>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="input-group RKinput-group">
-                        <input type="text" id="inputDefault" class="form-control" placeholder="@ViewBag.CurrentPage" value="@ViewBag.CurrentPage">
-                        <span class="input-group-addon" id="basic-addon1">/@Model.PageCount</span>
+                        <input type="text" id="inputDefault2" class="form-control" placeholder="@ViewBag.CurrentPage" value="@ViewBag.CurrentPage">
+                        <span class="input-group-addon" id="basic-addon12">/@Model.PageCount</span>
                     </div>
                 </div>
                 
@@ -67,7 +67,7 @@
                             </th>
                             <th>
                                 <span>Access</span>
-                                <input type="button" id="button1092" class="btn btn-danger btn-block RKbtn" onclick="button1092()" value="Update Access">
+                                
                             </th>
                             @*
                             <th style="display:none;">
@@ -113,7 +113,7 @@
                                 </td>
                                 <td>
                                     <label class="custom-checkbox">
-                                        @Html.CheckBoxFor(modelItem => item.Access)
+                                        @Html.CheckBoxFor(modelItem => item.Access, new {@id="Pt"+item.Id})
                                         <!--<span>Ren</span>-->
                                     </label>
                                 </td>
@@ -153,8 +153,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <input type="button" id="button1091" class="btn btn-danger btn-block RKbtn" onclick="button1091()" value="Update Access">
+                    <input type="button" id="button1092" class="btn btn-primary btn-block RKbtn" onclick="selectAll()" value="Select All">
                 </div>
+                <div class="col-md-3">
+                    <input type="button" id="button1093" class="btn btn-primary btn-block RKbtn" onclick="deselectAll()" value="Deselect All">
+                </div>
+                    <div class="col-md-3">
+                        
+                        <input type="button" id="button1091" class="btn btn-danger btn-block RKbtn" onclick="button1091()" value="Update Access">
+                    </div>
             </div>
 
         </div>
@@ -266,6 +273,8 @@
 
 
     };
+
+   
 
 
 </script>

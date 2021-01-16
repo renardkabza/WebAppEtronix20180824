@@ -437,5 +437,44 @@ namespace WebAppEtronix20180824.Controllers
 
 
         }
+
+        //Goto Previous Page
+        public ActionResult PreviousPageActionResult2(
+            string pointName,
+            string tableName,
+            string databaseName,
+            string tag1,
+            string tag2,
+            string tag3,
+            int? mutID,
+            string sortColumn,
+            string sortOrder,
+            int? currentpage,
+            int? ppageSize,
+            string userId)
+        {
+
+            int? v_currentpage = currentpage;
+            v_currentpage--;
+            var vPoints = PointsList_2(
+                pointName,
+                tableName,
+                databaseName,
+                tag1,
+                tag2,
+                tag3,
+                mutID,
+                sortColumn,
+                sortOrder,
+                v_currentpage,
+                ppageSize,
+                userId);
+
+
+            return PartialView("_Access_IndexTable_2", vPoints);
+
+
+
+        }
     }
 }

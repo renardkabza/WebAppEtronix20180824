@@ -354,7 +354,7 @@
             </div>
             <div class="AIrow">
                 <div class="col-md-3">
-                    <label for="sel1" class="RKtext-secondary">Sort by</label>
+                    <label for="sel12" class="RKtext-secondary">Sort by</label>
                     <select class="form-control" id="sel12">
                         <option selected>Point Name</option>
                         <option value="Email">Table Name</option>
@@ -366,8 +366,8 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="sel2" class="RKtext-secondary">Sorting Order</label>
-                    <select class="form-control" id="sel21">
+                    <label for="sel22" class="RKtext-secondary">Sorting Order</label>
+                    <select class="form-control" id="sel22">
                         <option selected>Asc</option>
                         <option value="Desc">Desc</option>
                     </select>
@@ -400,7 +400,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="input-group RKinput-group">
                     @*<label for="sel3" class="text-secondary">Elements per page</label>*@
-                    <select class="form-control" id="sel31">
+                    <select class="form-control" id="sel32">
                         <option selected>1</option>
                         <option value="2">2</option>
                         <option value="5">5</option>
@@ -891,7 +891,7 @@
         console.log('Sorting Order:' + vSortingOrder);
 
         //pageSize
-        var vPageSize = $("#sel31").val();
+        var vPageSize = $("#sel32").val();
         console.log('PageSize:' + vPageSize);
 
         //http://192.168.1.186:15883/Point/IndexTableActionResult?point=&email=&sortColumn=User+Name&sortOrder=Asc&currentpage=1&ppageSize=1
@@ -923,7 +923,142 @@
         //public ActionResult Index(string employeeName, string email, string phoneNumber,int ? salary, string sortColumn, string sortOrder, int? currentpage, int? ppageSize)
 
 
+
+        
     };
+
+    //_Access_IndexTable_2
+    function selectAll() {
+        console.log('Button Pressed');
+        //var vRows = document.getElementsByName('item.Access');
+
+        // find all checkbox only that are marks as type of checkbox
+        var vRows = $('.custom-checkbox > input[type=checkbox]');
+
+        var vRowsLength = vRows.length;
+
+        vRows.each(function(index, value) {
+            console.log(vRows[index].id);
+            $('#'+vRows[index].id).removeAttr("checked");
+            $('#'+vRows[index].id).checked = false;
+
+            $('#' + vRows[index].id).prop('checked','checked');
+            $('#' + vRows[index].id).checked = true;
+
+        });
+        
+
+
+         console.log('End');
+        
+        };
+        
+    //_Access_IndexTable_2
+    function deselectAll() {
+        console.log('Button Pressed');
+        //var vRows = document.getElementsByName('item.Access');
+
+        // find all checkbox only that are marks as type of checkbox
+        var vRows = $('.custom-checkbox > input[type=checkbox]');
+
+        var vRowsLength = vRows.length;
+
+        vRows.each(function (index, value) {
+            console.log(vRows[index].id);
+            $('#' + vRows[index].id).removeAttr("checked");
+            $('#' + vRows[index].id).checked = false;
+
+            
+
+        });
+
+
+
+        console.log('End');
+
+    };
+
+    //Next page
+    function button1052() {
+        console.log('Button105 clicked');
+        var vfilterName = $("#inputDefault2").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab11').hide();
+        //spinner
+        $('#spinner11').removeClass('d-none');
+        //filter
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //No need of MU
+        //MUT
+        //var vfilterMUT = $("#MUT").attr('valueid');
+        var vfilterMUT = "";
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+
+
+        //Sorting
+        var vSortingColumn = $("#sel12").val();
+        var vSortingOrder = $("#sel22").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel32").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Access/NextPageActionResult2",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault2").val(),
+                ppageSize: vPageSize,
+                userId: idUser
+
+            },
+            //partial view of users
+            function (response) {
+                $('#Tab11').show();
+                $('#spinner11').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab11").html(response);
+            });
+
+    }
+
+    //Renard Kabza
+	//Inspiron
+	//Ide spac
+	
+	
+	
 
 </script>
 
