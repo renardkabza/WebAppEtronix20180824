@@ -980,7 +980,7 @@
 
     //Next page
     function button1052() {
-        console.log('Button105 clicked');
+        console.log('Button1052 clicked');
         var vfilterName = $("#inputDefault2").val();
         console.log(vfilterName);
 
@@ -1053,10 +1053,158 @@
 
     }
 
-    //Renard Kabza
-	//Inspiron
-	//Ide spac
-	
+    
+    //Previous page
+    function button1042() {
+        console.log('Button1042 clicked');
+        var vfilterName = $("#inputDefault2").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab11').hide();
+        //spinner
+        $('#spinner11').removeClass('d-none');
+        //filter
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //No need of MU
+        //MUT
+        //var vfilterMUT = $("#MUT").attr('valueid');
+        var vfilterMUT = "";
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+
+
+        //Sorting
+        var vSortingColumn = $("#sel12").val();
+        var vSortingOrder = $("#sel22").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel32").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Access/PreviousPageActionResult2",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault2").val(),
+                ppageSize: vPageSize,
+                userId: idUser
+
+            },
+            //partial view of users
+            function (response) {
+                $('#Tab11').show();
+                $('#spinner11').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab11").html(response);
+            });
+
+    }
+
+    //Go to page 
+
+    /* Access Points*/
+    function button1032() {
+        console.log('Button1021 pressed by OnClick:');
+        //hide tab
+        $('#Tab11').hide();
+        //spinner
+        $('#spinner11').removeClass('d-none');
+
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+
+
+        //Sorting
+        var vSortingColumn = $("#sel12").val();
+        var vSortingOrder = $("#sel21").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+
+        //pageSize
+        var vPageSize = $("#sel32").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://192.168.1.186:15883/Point/IndexTableActionResult?point=&email=&sortColumn=User+Name&sortOrder=Asc&currentpage=1&ppageSize=1
+        $.get("/Access/IndexTableActionResult_2",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault2").val(),
+                ppageSize: vPageSize,
+                userId: idUser
+
+            },
+            function (response) {
+                $('#Tab11').show();
+                $('#spinner11').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab11").html(response);
+            });
+
+        
+
+
+
+
+    };
 	
 	
 
