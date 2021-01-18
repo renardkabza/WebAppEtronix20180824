@@ -42,4 +42,19 @@ namespace WebAppEtronix20180824.Models.DTO
 
         
     }
+
+    public class PointUpdate
+    {
+        
+        public string PtId { get; set; }
+        public bool PtValue { get; set; }
+        
+    }
+
+
+    public class PointUpdateAll
+    {
+        public List<PointUpdate> pointsList { get; set; }
+    }
+
 }

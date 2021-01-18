@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using PagedList;
 using WebAppEtronix20180824.Models.DTO;
 using WebAppEtronix20180824.Models.Entity;
@@ -475,6 +476,50 @@ namespace WebAppEtronix20180824.Controllers
 
 
 
+        }
+
+        public ActionResult UpdatePoints
+        (
+            string pointName,
+            string tableName,
+            string databaseName,
+            string tag1,
+            string tag2,
+            string tag3,
+            int? mutID,
+            string sortColumn,
+            string sortOrder,
+            int? currentpage,
+            int? ppageSize,
+            string userId,
+            string pointsList)
+        {
+
+            
+            // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+            //https://json2csharp.com/json-to-csharp
+            PointUpdateAll vAllPoints = JsonConvert.DeserializeObject<PointUpdateAll>(pointsList);
+
+
+
+            int? v_currentpage = currentpage;
+            //stay on teh same page and update the points list
+            //v_currentpage--;
+
+            var vPoints = PointsList_2(
+                pointName,
+                tableName,
+                databaseName,
+                tag1,
+                tag2,
+                tag3,
+                mutID,
+                sortColumn,
+                sortOrder,
+                v_currentpage,
+                ppageSize,
+                userId);
+            return PartialView("_Access_IndexTable_2", vPoints);
         }
     }
 }

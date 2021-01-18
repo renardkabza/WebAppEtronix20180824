@@ -494,6 +494,8 @@
 <!--<script src="~/Scripts/jquery-1.10.2.js"></script>--> @*@was working with the radio button*@
 
 <script type="text/javascript">
+    
+
 
 
     /* Users' section */
@@ -794,7 +796,7 @@
     /* Points' section */
 
     //open filter
-    $("#btn_11").click(function () {
+    $("#btn_11").click(function() {
         console.log('btn_2 clicked');
         $("#Filter_11").attr("class", "panel-body");
         //verification purpose
@@ -803,7 +805,7 @@
     });
 
     //close filter
-    $("#btn_21").click(function () {
+    $("#btn_21").click(function() {
         console.log('btn_2 clicked');
         $("#Filter_11").attr("class", "panel-body collapse");
         //verification purpose
@@ -812,7 +814,7 @@
     });
 
     //clear filter
-    $("#btn_51").click(function () {
+    $("#btn_51").click(function() {
         console.log('btn_5 clicked');
         $("#point_name").val('');
         $("#table_name").val('');
@@ -822,15 +824,12 @@
         $("#Tag3").val('');
 
 
-        
-
-
     });
 
 
     //sorting open
 
-    $("#btn_31").click(function () {
+    $("#btn_31").click(function() {
         console.log('btn_3 clicked');
         $("#Sorting_11").attr("class", "panel-body");
         //verification purpose
@@ -838,7 +837,7 @@
         console.log(nb);
     });
 
-    $("#btn_41").click(function () {
+    $("#btn_41").click(function() {
         console.log('btn_4 clicked');
         $("#Sorting_11").attr("class", "panel-body collapse ");
         //verification purpose
@@ -881,8 +880,6 @@
         console.log('MUT:' + vfilterMUT);
 
 
-
-
         //Sorting
         var vSortingColumn = $("#sel12").val();
         var vSortingOrder = $("#sel21").val();
@@ -909,10 +906,10 @@
                 sortOrder: vSortingOrder,
                 currentpage: 1,
                 ppageSize: vPageSize,
-                userId:idUser
+                userId: idUser
 
             },
-            function (response) {
+            function(response) {
                 $('#Tab11').show();
                 $('#spinner11').addClass('d-none');
                 console.log('After call:');
@@ -923,8 +920,6 @@
         //public ActionResult Index(string employeeName, string email, string phoneNumber,int ? salary, string sortColumn, string sortOrder, int? currentpage, int? ppageSize)
 
 
-
-        
     };
 
     //_Access_IndexTable_2
@@ -939,20 +934,19 @@
 
         vRows.each(function(index, value) {
             console.log(vRows[index].id);
-            $('#'+vRows[index].id).removeAttr("checked");
-            $('#'+vRows[index].id).checked = false;
+            $('#' + vRows[index].id).removeAttr("checked");
+            $('#' + vRows[index].id).checked = false;
 
-            $('#' + vRows[index].id).prop('checked','checked');
+            $('#' + vRows[index].id).prop('checked', 'checked');
             $('#' + vRows[index].id).checked = true;
 
         });
-        
 
 
-         console.log('End');
-        
-        };
-        
+        console.log('End');
+
+    };
+
     //_Access_IndexTable_2
     function deselectAll() {
         console.log('Button Pressed');
@@ -963,15 +957,13 @@
 
         var vRowsLength = vRows.length;
 
-        vRows.each(function (index, value) {
+        vRows.each(function(index, value) {
             console.log(vRows[index].id);
             $('#' + vRows[index].id).removeAttr("checked");
             $('#' + vRows[index].id).checked = false;
 
-            
 
         });
-
 
 
         console.log('End');
@@ -1012,8 +1004,6 @@
         console.log('MUT:' + vfilterMUT);
 
 
-
-
         //Sorting
         var vSortingColumn = $("#sel12").val();
         var vSortingOrder = $("#sel22").val();
@@ -1043,7 +1033,7 @@
 
             },
             //partial view of users
-            function (response) {
+            function(response) {
                 $('#Tab11').show();
                 $('#spinner11').addClass('d-none');
                 console.log('After call:');
@@ -1053,7 +1043,7 @@
 
     }
 
-    
+
     //Previous page
     function button1042() {
         console.log('Button1042 clicked');
@@ -1088,8 +1078,6 @@
         console.log('MUT:' + vfilterMUT);
 
 
-
-
         //Sorting
         var vSortingColumn = $("#sel12").val();
         var vSortingOrder = $("#sel22").val();
@@ -1119,7 +1107,7 @@
 
             },
             //partial view of users
-            function (response) {
+            function(response) {
                 $('#Tab11').show();
                 $('#spinner11').addClass('d-none');
                 console.log('After call:');
@@ -1160,8 +1148,6 @@
         console.log('MUT:' + vfilterMUT);
 
 
-
-
         //Sorting
         var vSortingColumn = $("#sel12").val();
         var vSortingOrder = $("#sel21").val();
@@ -1191,7 +1177,7 @@
                 userId: idUser
 
             },
-            function (response) {
+            function(response) {
                 $('#Tab11').show();
                 $('#spinner11').addClass('d-none');
                 console.log('After call:');
@@ -1199,14 +1185,91 @@
                 $("#Tab11").html(response);
             });
 
-        
-
-
-
 
     };
-	
-	
+
+    /* Access Points*/
+    //Update points for the chosen user and currently dispayed page
+    function button1091() {
+        //find all elements with a class which prefix is 'Pt'
+        var vPoints = $("*[id^='Pt']");
+
+        var pointsList = new Array(vPoints.length);
+
+        vPoints.each( function (index) {
+            console.log(vPoints[index].id);
+            var vRow = { PtId: vPoints[index].id , PtValue:vPoints[index].checked};
+            //var vRow = { PtId: 'a', PtValue: 'b' };
+            pointsList[index] = vRow;
+        });
+
+        pointsList = JSON.stringify({ 'pointsList': pointsList });
+
+        console.log('Button1021 pressed by OnClick:');
+        //hide tab
+        $('#Tab11').hide();
+        //spinner
+        $('#spinner11').removeClass('d-none');
+
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel12").val();
+        var vSortingOrder = $("#sel21").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+
+        //pageSize
+        var vPageSize = $("#sel32").val();
+        console.log('PageSize:' + vPageSize);
+
+        
+        $.get("/Access/UpdatePoints",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault2").val(),
+                ppageSize: vPageSize,
+                userId: idUser,
+                pointsList: pointsList
+            },
+            function (response) {
+                $('#Tab11').show();
+                $('#spinner11').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab11").html(response);
+            });
+    };
+
 
 </script>
 
