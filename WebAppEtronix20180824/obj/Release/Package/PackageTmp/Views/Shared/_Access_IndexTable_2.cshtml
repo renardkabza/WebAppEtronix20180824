@@ -205,7 +205,60 @@
 
 <script type="text/javascript">
 
-    
+
+    //events
+
+    $(function() {
+        console.log('Start:');
+
+        $("input[type=checkbox]*[id^='Pt']").change(function() {
+
+            //hide tab
+            //$('#Tab11').hide();
+            console.log('Check field ticked');
+
+            var $this = $(this);
+            //check if originally checked when ticked and take the id 
+            if (this.checked) {
+                console.log("is checked:" + this.checked);
+                
+                console.log($this);
+
+                console.log("#" + $this[0].id);
+                //it gives you a DOM object which does not have events, wusing its id we will find a proper object then we call functions
+                //$("#"+ $this[0].id).removeAttr("checked");
+                //$("#" + $this[0].id).checked = false;
+                
+                //$("#" + $this[0].id).prop('checked', 'checked');
+                //$("#" + $this[0].id).checked = true;
+
+                //html
+                this.setAttribute("checked", "checked");
+                this.checked = false;
+
+                //gui
+                $("#" + $this[0].id).prop('checked', 'checked');
+                $("#" + $this[0].id).checked = true;
+
+            }
+            else
+            {
+                console.log("is unchecked:" + this.checked);
+                //delete the attribute of check
+                
+                console.log($this);
+
+                //removes from html and GUI
+                this.removeAttribute("checked"); // For other browsers
+                this.checked = false;
+
+                
+
+            }
+            
+        });
+
+    });
 
     //Goto Page
     function button103() {
