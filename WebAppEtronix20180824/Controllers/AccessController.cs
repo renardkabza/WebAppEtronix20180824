@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using PagedList;
+using WebAppEtronix20180824.App_Start.Other;
 using WebAppEtronix20180824.Models.DTO;
 using WebAppEtronix20180824.Models.Entity;
 
@@ -501,6 +503,39 @@ namespace WebAppEtronix20180824.Controllers
             PointUpdateAll vAllPoints = JsonConvert.DeserializeObject<PointUpdateAll>(pointsList);
 
 
+            EtronixValidation EV = new EtronixValidation();
+            int alert = -1;
+            string vMessage = null;
+
+            Entities _contextEntities = new Entities();
+            try
+            {
+
+
+                //Update All points for the choses user from the particular page
+                foreach (PointUpdate element in vAllPoints.pointsList)
+                {
+                    var vUserId = new SqlParameter("@UserId", userId);
+                    var vId = new SqlParameter("@Id", element.PtId.Substring(2));
+                    var vAccess = new SqlParameter("@Access", element.PtValue);
+
+                    var vRow = _contextEntities.Database.SqlQuery<Procedures.ResultAccess>(
+                        "UpdateAccessPoint @UserId, @Id , @Access ", 
+                        vUserId,
+                        vId,
+                        vAccess
+                    ).ToList();
+
+                }
+            }
+            catch (Exception exception)
+            {
+                alert = (int)EtronixValidationCode.ValidationCodeEnum.alert_danger;
+                vMessage = exception.Message;
+                EV.ValidationCode = EtronixValidationCode.ValidationDic[alert];
+                EV.AddToList(vMessage);
+                //model.EtronixValidation = EV;
+            }
 
             int? v_currentpage = currentpage;
             //stay on teh same page and update the points list
@@ -519,6 +554,8 @@ namespace WebAppEtronix20180824.Controllers
                 v_currentpage,
                 ppageSize,
                 userId);
+
+            //return just a confirmation
             return PartialView("_Access_IndexTable_2", vPoints);
         }
     }
