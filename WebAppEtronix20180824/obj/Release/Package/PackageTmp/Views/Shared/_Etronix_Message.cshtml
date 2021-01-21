@@ -1,0 +1,36 @@
+﻿@model WebAppEtronix20180824.Models.DTO.Message
+@using WebAppEtronix20180824.App_Start.Other
+
+@if (ViewData.ModelState.IsValid && Model != null && Model.EtronixValidation.ValidationMessage.Count > 0)
+{
+    if (Model.EtronixValidation.ValidationCode == EtronixValidationCode.ValidationDic[0])
+    {
+    <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
+        <ul>
+            @foreach (var item in Model.EtronixValidation.ValidationMessage)
+            {
+                <li class="mb-0">
+                    @item
+                </li>
+            }
+        </ul>
+    </div>
+    }
+}
+@if (Model.EtronixValidation.ValidationMessage.Count > 0 && Model != null && Model.EtronixValidation.ValidationCode != EtronixValidationCode.ValidationDic[0])
+{
+<div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
+    <ul>
+        @foreach (var item in Model.EtronixValidation.ValidationMessage)
+        {
+            <li class="mb-0">
+                @item
+            </li>
+        }
+    </ul>
+</div>
+}

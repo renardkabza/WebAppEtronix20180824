@@ -183,6 +183,7 @@
     <Compile Include="Models\DTO\MeasurementUnit.cs" />
     <Compile Include="Models\DTO\Menu.cs" />
     <Compile Include="Models\DTO\AccessPo.cs" />
+    <Compile Include="Models\DTO\Message.cs" />
     <Compile Include="Models\DTO\PointsMU.cs" />
     <Compile Include="Models\DTO\UserRoles.cs" />
     <Compile Include="Models\Entity\AspNetUsers.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Views\Shared\_Access_Index.cshtml" />
     <Content Include="Views\Shared\_Access_IndexTable.cshtml" />
     <Content Include="Views\Shared\_Access_IndexTable_2.cshtml" />
+    <Content Include="Views\Shared\_Etronix_Message.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

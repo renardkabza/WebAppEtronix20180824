@@ -508,6 +508,7 @@ namespace WebAppEtronix20180824.Controllers
             string vMessage = null;
 
             Entities _contextEntities = new Entities();
+            WebAppEtronix20180824.Models.DTO.Message vModel = new Message();
             try
             {
 
@@ -526,6 +527,12 @@ namespace WebAppEtronix20180824.Controllers
                         vAccess
                     ).ToList();
 
+                    alert = (int)EtronixValidationCode.ValidationCodeEnum.alert_success;
+                    vMessage = "Point:"+element.PtId.Substring(2) +" set to:"+element.PtValue.ToString();
+                    EV.ValidationCode = EtronixValidationCode.ValidationDic[alert];
+                    EV.AddToList(vMessage);
+                    vModel.EtronixValidation = EV;
+
                 }
             }
             catch (Exception exception)
@@ -534,13 +541,16 @@ namespace WebAppEtronix20180824.Controllers
                 vMessage = exception.Message;
                 EV.ValidationCode = EtronixValidationCode.ValidationDic[alert];
                 EV.AddToList(vMessage);
+                
                 //model.EtronixValidation = EV;
+                vModel.EtronixValidation = EV;
             }
 
             int? v_currentpage = currentpage;
             //stay on teh same page and update the points list
             //v_currentpage--;
 
+            //Do not set a list
             var vPoints = PointsList_2(
                 pointName,
                 tableName,
@@ -555,8 +565,14 @@ namespace WebAppEtronix20180824.Controllers
                 ppageSize,
                 userId);
 
+
             //return just a confirmation
-            return PartialView("_Access_IndexTable_2", vPoints);
+            //return PartialView("_Access_IndexTable_2", vPoints);
+            
+
+            //set a confirmation only
+            return PartialView("_Etronix_Message", vModel);
+
         }
     }
 }
