@@ -3,46 +3,46 @@
 @using Microsoft.AspNet.Identity
 @using WebAppEtronix20180824.Models.DTO
 
-<div class="navbar navbar-expand-lg navbar-dark bg-primary">
-    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-    <!--hamburger -->
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+               <div class="navbar navbar-expand-lg navbar-dark bg-primary ">
+                   @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                   <!--hamburger -->
+                   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                       <span class="navbar-toggler-icon"></span>
+                   </button>
+                   <div class="navbar-collapse collapse" id="navbarColor01">
+                       <ul class="navbar-nav mr-auto">
+                           <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
 
-            @if (Request.IsAuthenticated)
-            {
-               
-                foreach (var row in Model)
-                {
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@row.Name</a>
-                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                            @foreach (var rowSubMenu in row.SubMenu)
-                            {
-                                <a class="dropdown-item" href="@Url.Action(rowSubMenu.Action,rowSubMenu.Controller)">@rowSubMenu.Name</a>
-                            }
-                        </div>
-                    </li>
-                }
-                
-                @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                *@
-            }
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Help</a>
-                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item" href="@Url.Action("About","Home")">About</a>
-                    <a class="dropdown-item" href="@Url.Action("Contact","Home")">Contact</a>
-                        
-                </div>
-            </li>
-        </ul>
-        @Html.Partial("_LoginPartial")
-    </div>
-</div>
+                           @if (Request.IsAuthenticated)
+                           {
+
+                               foreach (var row in Model)
+                               {
+                                   <li class="nav-item dropdown">
+                                       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@row.Name</a>
+                                       <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                           @foreach (var rowSubMenu in row.SubMenu)
+                                           {
+                                               <a class="dropdown-item" href="@Url.Action(rowSubMenu.Action,rowSubMenu.Controller)">@rowSubMenu.Name</a>
+                                           }
+                                       </div>
+                                   </li>
+                               }
+
+                               @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                               *@
+                           }
+                           <li class="nav-item dropdown">
+                               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Help</a>
+                               <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                   <a class="dropdown-item" href="@Url.Action("About","Home")">About</a>
+                                   <a class="dropdown-item" href="@Url.Action("Contact","Home")">Contact</a>
+
+                               </div>
+                           </li>
+                       </ul>
+                       @Html.Partial("_LoginPartial")
+                   </div>
+               </div>
 
