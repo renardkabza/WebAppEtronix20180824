@@ -222,6 +222,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Background\EtronixBackGround.png" />
+    <Content Include="Images\Background\EtronixBackGroundR2.png" />
+    <Content Include="Images\Background\EtronixBackGroundR4.png" />
+    <Content Include="Images\Background\EtronixBackGroundR5.png" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.js" />
