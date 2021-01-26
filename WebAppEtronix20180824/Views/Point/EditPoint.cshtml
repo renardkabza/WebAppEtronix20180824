@@ -37,7 +37,7 @@ if (Model.EtronixValidation.ValidationCode != null)
     {
     <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
+        <h4 class="alert alert-heading"> @EtronixValidationCode.ValidationDicRev[0] </h4>
         @foreach (var item in Model.EtronixValidation.ValidationMessage)
         {
             <p class="mb-0">
