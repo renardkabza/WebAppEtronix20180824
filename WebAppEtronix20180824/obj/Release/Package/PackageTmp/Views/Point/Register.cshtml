@@ -81,7 +81,7 @@
             <section id="PointName">
                 <div class="form-group">
                     @Html.LabelFor(m => m.PointName, new { @class = "col-md-8 control-label" })
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(m => m.PointName, new { @class = "form-control", @placeholder = "e.g. Point's Name" })
                     </div>
                 </div>
@@ -91,7 +91,7 @@
             <section id="TableName">
                 <div class="form-group">
                     @Html.LabelFor(m => m.TableName, new { @class = "col-md-8 control-label" })
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(m => m.TableName, new { @class = "form-control", @placeholder = "e.g. Table's Name" })
                     </div>
                 </div>
@@ -101,7 +101,7 @@
             <section id="DatabaseName">
                 <div class="form-group">
                     @Html.LabelFor(m => m.DataBaseName, new { @class = "col-md-8 control-label" })
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(m => m.DataBaseName, new { @class = "form-control", @placeholder = "e.g. DB's Name"  })
                     </div>
                 </div>
@@ -110,7 +110,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.LabelFor(m => m.Tag1, new { @class = "col-md-8 control-label" })
-                <div class="col-md-6">
+                <div class="col-md-12">
                     @Html.TextBoxFor(m => m.Tag1, new { @class = "form-control", @placeholder = "Tag 1"})
                 </div>
             </div>
@@ -118,7 +118,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.LabelFor(m => m.Tag2, new { @class = "col-md-8 control-label" })
-                <div class="col-md-6">
+                <div class="col-md-12">
                     @Html.TextBoxFor(m => m.Tag2, new { @class = "form-control", @placeholder = "Tag 2"})
                 </div>
             </div>
@@ -126,7 +126,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.LabelFor(m => m.Tag3, new { @class = "col-md-8 control-label" })
-                <div class="col-md-6">
+                <div class="col-md-12">
                     @Html.TextBoxFor(m => m.Tag3, new { @class = "form-control", @placeholder = "Tag 3"})
                 </div>
             </div>
@@ -138,7 +138,7 @@
     <div class="col-md-12">
         <div class="form-group">
             @Html.LabelFor(m => m.MUT, new { @class = "col-md-8 control-label" })
-            <div class="col-md-6">
+            <div class="col-md-12">
                 @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "Choose MUT" , @readonly="readonly", @value="", @valueId="" })
             </div>
         </div>
@@ -149,7 +149,7 @@
 </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-offset-2 col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button102()">Choose MUT</button>
                 </div>
@@ -158,7 +158,7 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-6">
+        <div class="col-md-12">
             <input type="submit" class="btn btn-success btn-block" value="Add Point" />
         </div>
     </div>
