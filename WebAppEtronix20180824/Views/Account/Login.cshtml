@@ -14,16 +14,18 @@
 
 @if (Model != null && Model.EtronixValidation.ValidationCode != EtronixValidationCode.ValidationDic[0])
 {
-<div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
-    @foreach (var item in Model.EtronixValidation.ValidationMessage)
-    {
-        <p class="mb-0">
-            @item
-        </p>
-    }
-</div>
+    <br/>
+    <div class="alert alert-dismissible @Model.EtronixValidation.ValidationCode">
+        
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading"> @EtronixValidationCode.ValidationDicRev[6] </h4>
+        @foreach (var item in Model.EtronixValidation.ValidationMessage)
+        {
+            <p class="mb-0">
+                @item
+            </p>
+        }
+    </div>
 }
 
 <div class="row">

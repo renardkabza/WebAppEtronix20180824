@@ -5,17 +5,15 @@
     ViewBag.Title = "Edit User";
 
 }
+<br/>
+<h2><span class="text-white">@ViewBag.Title.</span></h2>
 
-<hr />
-<h2>@ViewBag.Title.</h2>
-
-<h4>Chage details</h4>
-<hr />
+<h4><span class="text-white">Change details</span></h4>
 
 <div id="Message2"></div>
 
 <!--Update User's details-->
-@using (Html.BeginForm("EditUser", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("EditUser", "Account", FormMethod.Post, new { @class = "form-horizontal jumbotron", role = "form" }))
 {
     @Html.AntiForgeryToken()
     if (ViewData.ModelState.IsValid && Model != null && Model.EtronixValidation.ValidationMessage.Count > 0)

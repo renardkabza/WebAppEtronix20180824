@@ -27,12 +27,16 @@
 <!--table-->
 <link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
 
-@using (Html.BeginForm("Register", "Point", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+<br />
+<h2><span class="text-white">Point</span></h2>
+<h4><span class="text-white">Add, delete or modify.</span></h4>
+
+
+
+@using (Html.BeginForm("Register", "Point", FormMethod.Post, new { @class = "form-horizontal jumbotron", role = "form" }))
 {
-<hr />
-<h2>Point </h2>
-<h4>Add, delete or modify.</h4>
-<hr />
+
 
     
     <!--Fedbackk-->

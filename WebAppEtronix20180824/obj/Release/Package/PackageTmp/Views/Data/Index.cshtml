@@ -10,10 +10,10 @@
 <!--table-->
 <link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
 
-    <hr />
-    <h2>Measurement Unit Type</h2>
-    <h4>Add, delete or modify.</h4>
-    <hr />
+    <br />
+    <h2><span class="text-white">Measurement Unit Type</span></h2>
+    <h4><span class="text-white">Add, delete or modify.</span></h4>
+    
 
 @if (Model != null && Model.EtronixValidation.ValidationMessage.Count > 0)
 {
@@ -52,8 +52,8 @@
 
 <div class="row">
     <div class="col-md-12">
-        <section id="measurementUnit">
-            @using (Html.BeginForm("AddType", "Data", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        <!--<section id="measurementUnit">-->
+            @using (Html.BeginForm("AddType", "Data", FormMethod.Post, new { @class = "form-horizontal jumbotron", role = "form" }))
             {
                 <div class="form-group">
                     @Html.LabelFor(m => m.Type, new { @class = "col-md-8 control-label" })
@@ -68,7 +68,7 @@
                 </div>
             }
                 
-        </section>
+        <!--</section>-->
 
     </div>
 </div>
