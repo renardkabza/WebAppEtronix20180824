@@ -170,6 +170,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainMenuController.cs" />
@@ -225,6 +226,7 @@
     <Content Include="Images\Background\EtronixBackGroundR2.png" />
     <Content Include="Images\Background\EtronixBackGroundR4.png" />
     <Content Include="Images\Background\EtronixBackGroundR5.png" />
+    <Content Include="Images\Icons\chart_line.png" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.js" />
@@ -313,6 +315,9 @@
     <Content Include="Views\Shared\_Access_IndexTable.cshtml" />
     <Content Include="Views\Shared\_Access_IndexTable_2.cshtml" />
     <Content Include="Views\Shared\_Etronix_Message.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
+    <Content Include="Views\Shared\_Chart_Index.cshtml" />
+    <Content Include="Views\Shared\_Chart_IndexTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

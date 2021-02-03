@@ -1,0 +1,223 @@
+﻿@model PagedList.IPagedList<WebAppEtronix20180824.Models.DTO.PointsMU>
+@using System.Data.SqlClient
+@using PagedList.Mvc;
+
+
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+
+
+
+<div id="TablePanel" class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div style="padding-left: 15px">
+                    <input type="button" class="btn btn-danger  RKbtn" onclick="ClosePanel_Chart_Index()" value="X">
+                </div>
+                <div class="col-md-3">
+                    <!--<label for="button100" class="text-secondary">Action</label>-->
+                    @*@Html.ActionLink("Go to page", "Index", "Employee",
+                            new
+                            {
+                                @SortOrder = ViewBag.SortOrder,
+                                @CurrentSort = ViewBag.CurrentSort,
+                                @PreviousSort = ViewBag.PreviousSort,
+                                @CurrentPage = ViewBag.CurrentPage,
+                                @PreviousPage = ViewBag.PreviousPage,
+                                @gotopage = true
+                            }, new {@id = "button100", @type = "button", @class = "btn btn-primary btn-block"})*@
+
+
+                    <div class="btn-group btn-block RKbtn" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button104()"><</button>
+                        <input id="btn1003" type="button" class="btn btn-primary" style="width: 60%" onclick="button103()" value="Go to"/>
+                        <button type="button" class="btn btn-primary" style="width: 30%" onclick="button105()">></button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group RKinput-group">
+                        <input type="text" id="inputDefault" class="form-control" placeholder="@ViewBag.CurrentPage" value="@ViewBag.CurrentPage">
+                        <span class="input-group-addon" id="basic-addon1">/@Model.PageCount</span>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="AIpanel-body"> <!--"collapse in" was removed-->
+        <div class="container">
+            <div class="row">
+                <div id="Tab1" class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>Point Name</span>
+                            </th>
+                            <th style="display:none;">
+
+                                <span>Table Name</span>
+                            </th>
+                            <th style="display:none;">
+                                <span>Dabase Name</span>
+                            </th>
+                            <th>
+                                <span>Tag 1</span>
+                            </th>
+                            <th>
+                                <span>Tag 2</span>
+                            </th>
+
+                            <th>
+                                <span>Tag 3</span>
+                            </th>
+                            <th style="display:none;">
+                                <span>MU ID</span>
+                            </th>
+                            <th>
+                                <span>MU Name</span>
+                            </th>
+                            <th>
+                                <span>Action</span>
+                            </th>
+                            <th style="display:none;">
+                                <span>Action</span>
+                            </th>
+
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <!--DisplayFor Renders plain text without any html tag-->
+                                    <!--@Html.DisplayFor(modelItem => item.PointName, new {@class = "item.Id"})-->
+                                    @Html.LabelForModel(item.PointName, new {@id=item.Id, @value=item.PointName})
+
+                                </td>
+                                <td style="display:none;">
+                                    @Html.DisplayFor(modelItem => item.TableName)
+                                </td>
+                                <td style="display:none;" >
+                                    @Html.DisplayFor(modelItem => item.DatabaseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag3)
+                                </td>
+                                <td style="display:none;">
+                                    @Html.DisplayFor(modelItem => item.MUT_id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+
+                                <td>
+                                   
+                                    @{
+                                        string vlink = item.PointName + ";" +
+                                                       item.Tag1 + ";" +
+                                                       item.Tag2 + ";" +
+                                                       item.Tag3 + ";" +
+                                                       item.Type + ";" +
+                                                       item.Id ;
+
+
+                                       <button  class= "btn btn-success btn-block" onclick = "AddPoint('@vlink')" value = "@item.Id" > Add </button>
+                                    }
+
+                                    @*@Html.ActionLink("Add", null, null,
+                                    new { @pointID = item.Id },
+                                    new
+                                    {
+                                        @class = "btn btn-success btn-block",
+                                        @id = item.Id,
+                                        @onclick = "AddPoint('" +
+                                        item.PointName + ";" +
+                                        item.Tag1 + ";" +
+                                        item.Tag2 + ";" +
+                                        item.Tag3 + ";" +
+                                        item.Type + ";" +
+                                        item.Id + ";" +
+                                        "')"
+                                    })*@
+                                    
+                                </td>
+
+
+
+                                <td style="display:none;">
+                                    <button type="button" class="btn btn-danger btn-block" onclick="button107('@item.Id')" value="@item.Id">Delete</button>
+                                </td>
+                                @*
+                                <td>
+                                    <!--Get-->
+                                    @Html.ActionLink("Set Roles", "UsersRoles", "Account", new {@userID = item.Id}, new {@class = "btn btn-primary btn-block", @id = item.Id})
+
+                                </td>*@
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="modal" id="myModal2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white bg-danger">
+                <h5 class="modal-title ">Are you sure you want to delete the point</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--body-->
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="point_idDelete" class="RKtext-secondary">Point Id</label>
+                        <input type="text" class="form-control" id="point_idDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">
+                    </div>
+                </div>
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="point_nameDelete" class="RKtext-secondary">Point Name</label>
+                        <input type="text" class="form-control" id="point_nameDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="button108()">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function ClosePanel_Chart_Index() {
+        $('#TablePanel').remove();
+    };
+</script>
