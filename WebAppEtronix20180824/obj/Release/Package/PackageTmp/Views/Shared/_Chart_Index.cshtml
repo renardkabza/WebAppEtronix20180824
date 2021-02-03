@@ -1,0 +1,998 @@
+﻿@model WebAppEtronix20180824.Models.PointViewModel
+
+
+
+<style>
+    .bg-lgrey {
+        background: darkgray;
+    }
+    .text-white {
+        color: white;
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
+</style>
+
+
+<style>
+    table tr:hover {
+        background-color: #0275d8;
+        color: #fff;
+    }
+
+    table tr:first-child:hover {
+        background-color: white;
+        color: #000000;
+    }
+
+    table tr th {
+        text-align: center;
+        background-color: #fff;
+    }
+
+    table tr td {
+        text-align: center;
+        word-wrap: break-word;
+    }
+</style>
+
+<!--spinner-->
+<link href="~/Content/bootstrap-4.3.1/bootstrap.css" rel="stylesheet" />
+<!--table-->
+<link href="~/Content/Point/bootstrap_PointIndex.css" rel="stylesheet" />
+<!--table-->
+<link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+<!--<br id="Message1"/>-->
+@{
+    ViewBag.Title = "Chart";
+}
+<br />
+<h2><span class="text-white">Points Lists.</span></h2>
+
+<div id="Message2"></div>
+
+<div class="AIpanel AIpanel-default">
+    <div class="AIpanel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!--<label for="button101" class="text-secondary">Filter</label>-->
+                    <button id="btn_1" type="button" class="btn btn-primary btn-block RKbtn">
+                        Filter
+                        <span class="glyphicon glyphicon-filter"></span>
+                    </button>
+                </div>
+                <div class="col-md-3">
+
+                    <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
+                        Sorting
+                        <span class="glyphicon glyphicon-sort"></span>
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group RKinput-group">
+                        @*<label for="sel3" class="text-secondary">Elements per page</label>*@
+                        <select class="form-control" id="sel3">
+                            <option selected>1</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="40">40</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="400">400</option>
+                            <option value="800">800</option>
+                            <option value="1000">1000</option>
+                        </select>
+                        <span class="input-group-addon" id="basic-addon1"> /Page</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input type="button" id="button102" class="btn btn-success btn-block RKbtn" onclick="button102()" value="Get data">
+                </div>
+
+                </div>
+        </div>
+    </div>
+
+    <div id="Filter_1" class="AIpanel-body collapse">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <button id="btn_2" type="button" class="btn btn-danger btn-block RKbtn">
+                        Close Filter
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+                
+                <div class="col-md-3">
+                    <button id="btn_5" type="button" class="btn btn-primary btn-block RKbtn">Clear Filter</button>
+                </div>
+                @*<div class="col-md-6">
+                        <label for="button101">Action</label>-->
+                        @Html.ActionLink("Get filtered data", "Index", "Employee",
+                            new
+                            {
+                                @SortOrder = ViewBag.SortOrder,
+                                @CurrentSort = ViewBag.CurrentSort,
+                                @PreviousSort = ViewBag.PreviousSort,
+                                @CurrentPage = ViewBag.CurrentPage,
+                                @PreviousPage = ViewBag.PreviousPage,
+                                @gotopage = true
+                            }, new { @id = "button101", @type = "button", @class = "btn btn-success btn-block" })
+                    </div>*@
+            </div>
+            <div class="AIrow">
+                <div class="col-md-3">
+                    <label for="point_name" class="RKtext-secondary">Point Name</label>
+                    <input type="text" class="form-control" id="point_name" aria-describedby="basic-addon3" placeholder="Point Name">
+                </div>
+                
+                <div class="col-md-3" style="display:none">
+                    <label for="table_name" class="RKtext-secondary" >Table Name</label>
+                    <input type="text" class="form-control" id="table_name" aria-describedby="basic-addon3" placeholder="Table Name">
+                </div>
+
+                <div class="col-md-3" style="display:none">
+                    <label for="database_name" class="RKtext-secondary">Database Name</label>
+                    <input type="text" class="form-control" id="database_name" aria-describedby="basic-addon3" placeholder="Database Name">
+                </div>
+                <div class="col-md-3">
+                    <label for="Tag1" class="RKtext-secondary">Tag 1</label>
+                    <input type="text" class="form-control" id="Tag1" aria-describedby="basic-addon3" placeholder="Tag 1">
+                </div>
+                <div class="col-md-3">
+                    <label for="Tag2" class="RKtext-secondary">Tag 2</label>
+                    <input type="text" class="form-control" id="Tag2" aria-describedby="basic-addon3" placeholder="Tag 2">
+                </div>
+                <div class="col-md-3">
+                    <label for="Tag3" class="RKtext-secondary">Tag 3</label>
+                    <input type="text" class="form-control" id="Tag3" aria-describedby="basic-addon3" placeholder="Tag 3">
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        <div class="AIrow">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!--@Html.LabelFor(m => m.MUT, new { @class = "col-md-8 control-label" })-->
+                    <label for="MUT" class="RKtext-secondary">Measurement Unit Type</label>
+
+                    @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "Choose MUT", @readonly = "readonly", @value = "", @valueId = "" })
+
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                
+                <div class="form-group">
+                    <label for="btn_Point_1" class="text-white">....</label>
+                    <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button101()">Choose MUT</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        
+
+
+    </div>
+</div>
+<!--
+<div class="AIpanel-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                
+                <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
+                    Sorting
+                    <span class="glyphicon glyphicon-sort"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+<div id="Sorting_1" class="AIpanel-body collapse">
+    <div class="container">
+        <div class="AIrow">
+            <div class="col-md-3">
+                <button id="btn_4" type="button" class="btn btn-danger btn-block RKbtn">
+                    Close Sorting
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </button>
+            </div>
+
+        </div>
+        <div class="AIrow">
+            <div class="col-md-3">
+                <label for="sel1" class="RKtext-secondary">Sort by</label>
+                <select class="form-control" id="sel1">
+                    <option selected>Point Name</option>
+                    <!--<option value="Email">Table Name</option>
+                    <option value="Email">Database Name</option>-->
+                    <option value="Email">Tag 1</option>
+                    <option value="Email">Tag 2</option>
+                    <option value="Email">Tag 3</option>
+                    <option value="Email">MUT</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="sel2" class="RKtext-secondary">Sorting Order</label>
+                <select class="form-control" id="sel2">
+                    <option selected>Asc</option>
+                    <option value="Desc">Desc</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+</div>
+
+@*<div class="panel-footer">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+    </div>*@
+
+
+<div class="container">
+    <div id="spinner1" class="spinner-border text-primary d-none" role="status"></div>
+</div>
+<div id="Tab1">
+
+</div>
+
+
+<br />
+
+<h2><span class="text-white">Chosen Points.</span></h2>
+
+
+<div id="TablePanel2" class="AIpanel AIpanel-default">
+
+    <div class="AIpanel-body">
+        <!--"collapse in" was removed-->
+        <div class="container">
+            <div class="row">
+                <table  class="table">
+                    <tr>
+                        <th>
+                            <span>Point Name</span>
+                        </th>
+                        <th style="display:none;">
+
+                            <span>Table Name</span>
+                        </th>
+                        <th style="display:none;">
+                            <span>Dabase Name</span>
+                        </th>
+                        <th>
+                            <span>Tag 1</span>
+                        </th>
+                        <th>
+                            <span>Tag 2</span>
+                        </th>
+
+                        <th>
+                            <span>Tag 3</span>
+                        </th>
+                        <th style="display:none;">
+                            <span>MU ID</span>
+                        </th>
+                        <th>
+                            <span>MU Name</span>
+                        </th>
+                        <th>
+                            <span>Action</span>
+                        </th>
+                        <th style="display:none;">
+                            <span>Action</span>
+                        </th>
+
+                    </tr>
+                    <tbody id="ChosenPoints"></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="modal" id="myModal" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-lgrey">
+                <h5 class="modal-title text-white ">Measurement Unit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModal()">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--body-->
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="MUId" class="RKtext-secondary">MU Id</label>
+                        <input type="text" class="form-control" id="MUId" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value=""><!--Default MU Null-->
+                    </div>
+                </div>
+                <div class="AIrow">
+                    <div class="col-md-12">
+                        <label for="MU_Type" class="RKtext-secondary">MU Name</label>
+                        <!--<input type="text" class="form-control" id="user_nameDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">-->
+                        <select class="form-control" id="MU_Type">
+                            <!--<option value="64">Null</option>-->
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="ChooseMU()">Choose</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CloseModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@*<script src="~/Scripts/bootstrap-4.3.1/bootstrap.js"></script>*@
+
+
+<script type="text/javascript">
+    $(function () {
+        console.log('Start:');
+
+    });
+
+    function CloseModal() {
+        $('#myModal1').attr('style', 'display:none');
+        //Close Spinner
+        HideSpinner();
+
+    }
+
+    function CloseModal2() {
+        $('#myModal2').attr('style', 'display:none');
+        //Close Spinner
+        HideSpinner();
+
+    }
+
+    $("#button100").click(
+        function () {
+            var vpage = $("#inputDefault").val();
+            var href = $("#button100").attr('href');
+            console.log('href:' + href);
+
+            var res = href.split("&");
+            console.log('substring:' + res);
+            res[3] = "CurrentPage=" + vpage;
+
+            //new href
+            href = res[0] + '&' + res[1] + '&' + res[2] + '&' + res[3] + '&' + res[4] + '&' + res[5];
+            //replace the old href
+            $("#button100").attr("href", href);
+            //verification purpose
+            var nb = $("#button100").attr("href");
+            console.log('End:');
+        });
+
+    $("#btn_2").click(function () {
+        console.log('btn_2 clicked');
+        $("#Filter_1").attr("class", "panel-body collapse");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_1").click(function () {
+        console.log('btn_2 clicked');
+        $("#Filter_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Filter_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_3").click(function () {
+        console.log('btn_3 clicked');
+        $("#Sorting_1").attr("class", "panel-body");
+        //verification purpose
+        var nb = $("#Sorting_1").attr("href");
+        console.log(nb);
+    });
+
+    $("#btn_4").click(function () {
+        console.log('btn_4 clicked');
+        $("#Sorting_1").attr("class", "panel-body collapse ");
+        //verification purpose
+        var nb = $("#Sorting_1").attr("href");
+        console.log(nb);
+    });
+
+    //clear filter
+    $("#btn_5").click(function () {
+        console.log('btn_5 clicked');
+        $("#point_name").val('');
+        $("#table_name").val('');
+        $("#database_name").val('');
+
+        $("#Tag1").val('');
+        $("#Tag2").val('');
+        $("#Tag3").val('');
+
+        $("#MUT").attr("value", "");
+        $("#MUT").attr("valueid", "");
+        
+
+
+    });
+
+
+    $("#button102").click(
+        function () {
+            console.log('button102 pressed JS .click:');
+        });
+    
+    function button102() {
+        console.log('Button102 pressed by OnClick:');
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://192.168.1.186:15883/Point/IndexTableActionResult?point=&email=&sortColumn=User+Name&sortOrder=Asc&currentpage=1&ppageSize=1
+        $.get("/Chart/IndexTableActionResult",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID:vfilterMUT,
+
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: 1,
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+        //public ActionResult Index(string employeeName, string email, string phoneNumber,int ? salary, string sortColumn, string sortOrder, int? currentpage, int? ppageSize)
+
+
+    };
+    
+    //Goto Page
+    function button103() {
+        console.log('function Button103() pressed by OnClick from _Point_IndexTable:');
+
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        var vCurrentPage = $("#inputDefault").val();
+        console.log('Current Page:' + vCurrentPage);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Chart/IndexTableActionResult",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: vCurrentPage,
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                console.log('After call:');
+                //replace the section page
+                $("#Tab1").html(response);
+            });
+
+
+
+
+    };
+
+    //Previous page
+    function button104() {
+        console.log('Button104 clicked');
+        var vfilterName = $("#inputDefault").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+
+
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Chart/PreviousPageActionResult",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault").val(),
+                ppageSize: vPageSize
+
+            },
+            function (response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+
+    }
+
+    //Next page
+    function button105() {
+        console.log('Button105 clicked');
+        var vfilterName = $("#inputDefault").val();
+        console.log(vfilterName);
+
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+        //filter
+        //filter
+        var vfilterPointName = $("#point_name").val();
+        var vfilterTableName = $("#table_name").val();
+        var vfilterDatabaseName = $("#database_name").val();
+        //filter tags
+        var vfilterT1 = $("#Tag1").val();
+        var vfilterT2 = $("#Tag2").val();
+        var vfilterT3 = $("#Tag3").val();
+        //MUT
+        var vfilterMUT = $("#MUT").attr('valueid');
+
+        //print to console
+        console.log('Point Name:' + vfilterPointName);
+        console.log('Table Name:' + vfilterTableName);
+        console.log('Database Name:' + vfilterDatabaseName);
+        console.log('Tag1:' + vfilterT1);
+        console.log('Tag2:' + vfilterT2);
+        console.log('Tag3:' + vfilterT3);
+        console.log('MUT:' + vfilterMUT);
+
+        
+
+
+        //Sorting
+        var vSortingColumn = $("#sel1").val();
+        var vSortingOrder = $("#sel2").val();
+
+        console.log('Sorting Column:' + vSortingColumn);
+        console.log('Sorting Order:' + vSortingOrder);
+        //pageSize
+        var vPageSize = $("#sel3").val();
+        console.log('PageSize:' + vPageSize);
+
+        //http://localhost:8355/Employee/Index/?SortOrder=Name&CurrentSort=Desc&PreviousSort=Desc&CurrentPage=1&PreviousPage=1&gotopage=True
+        $.get("/Chart/NextPageActionResult",
+            {
+                pointName: vfilterPointName,
+                tableName: vfilterTableName,
+                databaseName: vfilterDatabaseName,
+                tag1: vfilterT1,
+                tag2: vfilterT2,
+                tag3: vfilterT3,
+                mutID: vfilterMUT,
+
+                sortColumn: vSortingColumn,
+                sortOrder: vSortingOrder,
+                currentpage: $("#inputDefault").val(),
+                ppageSize: vPageSize
+
+            },
+            //partial view of users
+            function (response) {
+                $('#Tab1').show();
+                $('#spinner1').addClass('d-none');
+                console.log('After call:');
+                //replace the entire page
+                $("#Tab1").html(response);
+            });
+
+    }
+
+    //delete the point open modal
+    function button107(a) {
+        console.log('function Button107() pressed by OnClick from _Account_IndexTable:');
+        var vPoint = a;
+        //console.log('AspNetUser:' + vAspNetUser + ' will be deleted');
+        $("#point_idDelete").val(vPoint);
+        //var vAspNetUserName = $('[Tag1="UserId_4fae574e-328e-4783-b949-8f4b6cb9d1ff"]').val();
+        var vPointData = document.getElementById(vPoint).attributes[2];
+        //$('#point_idDelete').val(vPointData);
+        $('#point_nameDelete').val(vPointData.value);
+        $('#myModal2').modal('show');
+    }
+
+
+    //delete the point call a procedure on DB
+    function button108() {
+        console.log('function Button108() pressed by OnClick action from a partial view of _Account_IndexTable');
+        var vPoint = $("#point_idDelete").val();
+
+        $.get("/Point/DeletePoint",
+            {
+                pointId: vPoint
+            },
+            function (response) {
+                //clode modal
+                $('#myModal2').modal('hide');
+                //delete a partial view of the table to prevent showing the deleted user
+                $('#TablePanel').remove();
+                //add a message
+                //$("#Message").html(response);
+                $(response).insertAfter("#Message2");
+            });
+
+
+    }
+
+    //parameter: b- user id,
+    //Edit User's details;
+    function button106(b) {
+
+
+    }
+
+    /*
+    function button102() {
+        console.log('Button102 Pressed');
+        //Show Spinner
+        ShowSpinner();
+        //AJAX Get MU
+        $.ajax({
+            url: "/Point/GetData"
+        })
+            .error(function () {
+                alert('Data not returned');
+            })
+            .done(function (response) {
+                console.log(response);
+                var availableTags = JSON.parse(response);
+                console.log("Received Data");
+
+                //add ids &tags
+                //[{ "MUid": 1, "MUType": "New" }]
+
+
+                //itterate through the whole list and add all MUs
+                $.each(availableTags,
+                    function (k, l) {
+                        var vK = k; // row
+                        console.log('ID:' + l.MUid + " , Type:" + l.MUType);
+                        var option = new Option(l.MUType, l.MUid);
+                        //first element is set as default
+                        if (k === 0) {
+                            //MUid & MU_Type
+                            var vId2 = $('#MU_Type').val();
+                            //Chosen MU Type
+                            var vType2 = $("#MU_Type :selected").text();
+
+                            // //set the field of Measurement Unit Type on the main page
+                            $('#MUId').attr('value', l.MUid);
+                            $('#MUId').attr('valueid', l.MUid);
+                        }
+                        $('#MU_Type').append($(option));
+                        //$('#MU_Type').append('<option value="' + l.MUid + '"' + '>' + l.MUType + '</option>');
+                    });
+
+
+            });
+
+        //Spinner off
+        HideSpinner();
+        //remove all options before loading new items
+        $('#MU_Type').children().remove();
+        //show modal
+        //$('#myModal').attr('style', 'display:block');
+
+        $('#myModal').modal('show');
+
+        //onfocuse, blurring <body>
+        //$('body').addClass('modal-open');
+    }
+    */
+
+    function button101() {
+        console.log('Button102 Pressed');
+        //Show Spinner
+        ShowSpinner();
+        //AJAX Get MU
+        $.ajax({
+            url: "/Point/GetData"
+        })
+            .error(function () {
+                alert('Data not returned');
+            })
+            .done(function (response) {
+                console.log(response);
+                var availableTags = JSON.parse(response);
+                console.log("Received Data");
+
+                //add ids &tags
+                //[{ "MUid": 1, "MUType": "New" }]
+
+
+                //itterate through the whole list and add all MUs
+                $.each(availableTags,
+                    function (k, l) {
+                        var vK = k; // row
+                        console.log('ID:' + l.MUid + " , Type:" + l.MUType);
+                        var option = new Option(l.MUType, l.MUid);
+                        //first element is set as default
+                        if (k === 0) {
+                            //MUid & MU_Type
+                            var vId2 = $('#MU_Type').val();
+                            //Chosen MU Type
+                            var vType2 = $("#MU_Type :selected").text();
+
+                            // //set the field of Measurement Unit Type on the main page
+                            $('#MUId').attr('value', l.MUid);
+                            $('#MUId').attr('valueid', l.MUid);
+                        }
+                        $('#MU_Type').append($(option));
+                        //$('#MU_Type').append('<option value="' + l.MUid + '"' + '>' + l.MUType + '</option>');
+                    });
+
+
+            });
+
+        //Spinner off
+        HideSpinner();
+        //remove all options before loading new items
+        $('#MU_Type').children().remove();
+        //show modal
+        //$('#myModal').attr('style', 'display:block');
+
+        $('#myModal').modal('show');
+
+        //onfocuse, blurring <body>
+        //$('body').addClass('modal-open');
+    }
+
+    // Show spinner ON
+    function ShowSpinner() {
+        console.log('Spinner: ON');
+        //hide tab
+        $('#Tab1').hide();
+        //spinner
+        $('#spinner1').removeClass('d-none');
+    }
+
+    //Spinnef OFF
+    function HideSpinner() {
+        console.log('Spinner: Off');
+        //hide tab
+        $('#Tab1').show();
+        //spinner
+        $('#spinner1').addClass('d-none');
+    }
+
+    //when the Choose button was pressed
+    function ChooseMU() {
+        //value2 has id
+        var vID = $('#MUId').prop('value');
+        console.log('Chosen MUId:' + vID);
+        //value keeps what is displayed 
+        var vType = $('#MU_Type').text();
+        console.log('Chosen MU_Type:' + vType);
+
+
+
+        //MUid & MU_Type
+        var vId1 = $('#MU_Type').val();
+        //Chosen MU Type
+        var vType1 = $("#MU_Type :selected").text();
+
+        // //set the field of Measurement Unit Type on the main page
+        $('#MUT').attr('value', vType1);
+        $('#MUT').attr('valueid', vId1);
+
+        //hide Modal
+        //$('#myModal').attr('style', 'display:none');
+        $('#myModal').modal('hide');
+
+
+    }
+
+    $("#MU_Type").change(function() {
+        var str = "";
+        var vMuType = $("#MU_Type :selected").text();
+
+
+        var vSelectedValue = $("#MU_Type").val();
+
+        $("#MUId").val(vSelectedValue);
+
+        console.log('vMU_Type:' + vMuType);
+        console.log('vMU_Id:' + vSelectedValue);
+    });
+
+    function AddPoint(pPoint) {
+        console.log('Button Pressed:' + pPoint);
+
+        var res = pPoint.split(";");
+
+        //check if element has not been added yet
+        var element = $("#cp" + res[5]);
+        var elementId = "DeletePoint(" +"'cp" + res[5]+"')";
+        if (element.length === 0) {
+            $("#ChosenPoints").append($("<tr id='cp" + res[5] + "'>").append($('<td>').text(res[0]))
+                .append($('<td>').text(res[1])).
+                 append($('<td>').text(res[2])).
+                 append($('<td>').text(res[3])).
+                 append($('<td>').text(res[4])).
+                 append($('<td>').append($("<button  class='btn btn-danger btn-block' onclick="+elementId+">Delete</button>")))
+            );
+        }
+
+     
+        
+
+
+    };
+
+    function DeletePoint(pPoint) {
+        var velement = "#" + pPoint;
+        $(velement).remove();
+    }
+
+
+</script>
+
