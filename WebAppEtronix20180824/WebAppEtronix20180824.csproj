@@ -216,6 +216,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrapold.css" />
     <Content Include="Content\bootstrapold.min.css" />
+    <Content Include="Content\CP_Colour.css" />
     <Content Include="Content\Custom.css" />
     <Content Include="Content\Point\bootstrap_PointIndex.css" />
     <Content Include="favicon.ico" />

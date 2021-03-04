@@ -38,12 +38,30 @@
     }
 </style>
 
+<!-- colour picker -->
+<link href="~/Content/CP_Colour.css" rel="stylesheet" />
+<style>
+    .scrollable-menu {
+        height: auto;
+        max-height: 400px;
+        overflow-x: hidden;
+    }
+
+    .highlight {
+        background-color: #adadad;
+        color: white;
+    }
+</style>
+
 <!--spinner-->
 <link href="~/Content/bootstrap-4.3.1/bootstrap.css" rel="stylesheet" />
 <!--table-->
 <link href="~/Content/Point/bootstrap_PointIndex.css" rel="stylesheet" />
 <!--table-->
 <link href="~/Content/Account/bootstrap_AccountIndex.css" rel="stylesheet" />
+
+<!--Colour picker -->
+
 
 <!--<br id="Message1"/>-->
 @{
@@ -279,44 +297,49 @@
         <!--"collapse in" was removed-->
         <div class="container">
             <div class="row">
-                <table  class="table">
-                    <tr>
-                        <th>
-                            <span>Point Name</span>
-                        </th>
-                        <th style="display:none;">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <span>Point Name</span>
+                            </th>
+                            <th style="display: none;">
 
-                            <span>Table Name</span>
-                        </th>
-                        <th style="display:none;">
-                            <span>Dabase Name</span>
-                        </th>
-                        <th>
-                            <span>Tag 1</span>
-                        </th>
-                        <th>
-                            <span>Tag 2</span>
-                        </th>
+                                <span>Table Name</span>
+                            </th>
+                            <th style="display: none;">
+                                <span>Dabase Name</span>
+                            </th>
+                            <th>
+                                <span>Tag 1</span>
+                            </th>
+                            <th>
+                                <span>Tag 2</span>
+                            </th>
 
-                        <th>
-                            <span>Tag 3</span>
-                        </th>
-                        <th style="display:none;">
-                            <span>MU ID</span>
-                        </th>
-                        <th>
-                            <span>MU Name</span>
-                        </th>
-                        <th>
-                            <span>Action</span>
-                        </th>
-                        <th style="display:none;">
-                            <span>Action</span>
-                        </th>
+                            <th>
+                                <span>Tag 3</span>
+                            </th>
+                            <th style="display: none;">
+                                <span>MU ID</span>
+                            </th>
+                            <th>
+                                <span>MU Name</span>
+                            </th>
+                            <th>
+                                <span>Colour</span>
+                            </th>
+                            <th>
+                                <span>Action</span>
+                            </th>
+                            <th style="display: none;">
+                                <span>Action</span>
+                            </th>
 
-                    </tr>
-                    <tbody id="ChosenPoints"></tbody>
-                </table>
+                        </tr>
+                        <tbody id="ChosenPoints"></tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
@@ -362,11 +385,197 @@
     </div>
 </div>
 
+<!--Colour Picker Modal -->
+<div class="modal" id="CPmyModal" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 5px">
+            <div class="modal-header highlight " style="border-radius: 5px">
+                <h5 class="modal-title text-white ">Colour Picker </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModal()"></button>
+            </div>
+            <div class="modal-body">
+                <!--body-->
+                <div class="AIrow">
+                    <div class="col-md-12">
 
+                        <div class="btn-group btn-block">
+
+                            <button id="ModalCP_Selector" type="button" class="btn btn-default btn-block nothing CP_Grey " onclick="colourPicker('ModalCP_Selector')">
+                                <!--<span class="caret"></span>-->
+                                Selected
+                            </button>
+                        </div>
+                        <div>
+                            <ul id="CP_Palette" class="CP_List dropdown-menu scrollable-menu btn-block btn">
+                                <li class="CP_Pink" style="background-color: #FFC0CB" onclick="colourPickerSelected('CP_Pink;#FFC0CB')">&nbsp &nbsp &nbsp</li>
+                                <li class="CP_LightPink" style="background-color: #FFB6C1" onclick="colourPickerSelected('CP_LightPink;#FFB6C1')">&nbsp&nbsp&nbsp</li>
+                                <li class="CP_HotPink" style="background-color: #FF69B4" onclick="colourPickerSelected('CP_HotPink;#FF69B4')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DeepPink" style="background-color: #FF1493" onclick="colourPickerSelected('CP_DeepPink;#FF1493')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PaleVioletRed" style="background-color: #DB7093" onclick="colourPickerSelected('CP_PaleVioletRed;#DB7093')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumVioletRed" style="background-color: #C71585" onclick="colourPickerSelected('CP_MediumVioletRed;#C71585')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Lavender" style="background-color: #E6E6FA" onclick="colourPickerSelected('CP_Lavender;#E6E6FA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Thistle" style="background-color: #D8BFD8" onclick="colourPickerSelected('CP_Thistle;#D8BFD8')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Plum" style="background-color: #DDA0DD" onclick="colourPickerSelected('CP_Plum;#DDA0DD')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Orchid" style="background-color: #DA70D6" onclick="colourPickerSelected('CP_Orchid;#DA70D6')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Violet" style="background-color: #EE82EE" onclick="colourPickerSelected('CP_Violet;#EE82EE')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Fuchsia" style="background-color: #FF00FF" onclick="colourPickerSelected('CP_Fuchsia;#FF00FF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Magenta" style="background-color: #FF00FF" onclick="colourPickerSelected('CP_Magenta;#FF00FF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumOrchid" style="background-color: #BA55D3" onclick="colourPickerSelected('CP_MediumOrchid;#BA55D3')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkOrchid" style="background-color: #9932CC" onclick="colourPickerSelected('CP_DarkOrchid;#9932CC')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkViolet" style="background-color: #9400D3" onclick="colourPickerSelected('CP_DarkViolet;#9400D3')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_BlueViolet" style="background-color: #8A2BE2" onclick="colourPickerSelected('CP_BlueViolet;#8A2BE2')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkMagenta" style="background-color: #8B008B" onclick="colourPickerSelected('CP_DarkMagenta;#8B008B')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Purple" style="background-color: #800080" onclick="colourPickerSelected('CP_Purple;#800080')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumPurple" style="background-color: #9370DB" onclick="colourPickerSelected('CP_MediumPurple;#9370DB')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumSlateBlue" style="background-color: #7B68EE" onclick="colourPickerSelected('CP_MediumSlateBlue;#7B68EE')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SlateBlue" style="background-color: #6A5ACD" onclick="colourPickerSelected('CP_SlateBlue;#6A5ACD')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkSlateBlue" style="background-color: #483D8B" onclick="colourPickerSelected('CP_DarkSlateBlue;#483D8B')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_RebeccaPurple" style="background-color: #663399" onclick="colourPickerSelected('CP_RebeccaPurple;#663399')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Indigo " style="background-color: #4B0082" onclick="colourPickerSelected('CP_Indigo ;#4B0082')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightSalmon" style="background-color: #FFA07A" onclick="colourPickerSelected('CP_LightSalmon;#FFA07A')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Salmon" style="background-color: #FA8072" onclick="colourPickerSelected('CP_Salmon;#FA8072')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkSalmon" style="background-color: #E9967A" onclick="colourPickerSelected('CP_DarkSalmon;#E9967A')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightCoral" style="background-color: #F08080" onclick="colourPickerSelected('CP_LightCoral;#F08080')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_IndianRed " style="background-color: #CD5C5C" onclick="colourPickerSelected('CP_IndianRed ;#CD5C5C')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Crimson" style="background-color: #DC143C" onclick="colourPickerSelected('CP_Crimson;#DC143C')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Red" style="background-color: #FF0000" onclick="colourPickerSelected('CP_Red;#FF0000')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_FireBrick" style="background-color: #B22222" onclick="colourPickerSelected('CP_FireBrick;#B22222')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkRed" style="background-color: #8B0000" onclick="colourPickerSelected('CP_DarkRed;#8B0000')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Orange" style="background-color: #FFA500" onclick="colourPickerSelected('CP_Orange;#FFA500')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkOrange" style="background-color: #FF8C00" onclick="colourPickerSelected('CP_DarkOrange;#FF8C00')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Coral" style="background-color: #FF7F50" onclick="colourPickerSelected('CP_Coral;#FF7F50')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Tomato" style="background-color: #FF6347" onclick="colourPickerSelected('CP_Tomato;#FF6347')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_OrangeRed" style="background-color: #FF4500" onclick="colourPickerSelected('CP_OrangeRed;#FF4500')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Gold" style="background-color: #FFD700" onclick="colourPickerSelected('CP_Gold;#FFD700')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Yellow" style="background-color: #FFFF00" onclick="colourPickerSelected('CP_Yellow;#FFFF00')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightYellow" style="background-color: #FFFFE0" onclick="colourPickerSelected('CP_LightYellow;#FFFFE0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LemonChiffon" style="background-color: #FFFACD" onclick="colourPickerSelected('CP_LemonChiffon;#FFFACD')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightGoldenRodYellow" style="background-color: #FAFAD2" onclick="colourPickerSelected('CP_LightGoldenRodYellow;#FAFAD2')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PapayaWhip" style="background-color: #FFEFD5" onclick="colourPickerSelected('CP_PapayaWhip;#FFEFD5')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Moccasin" style="background-color: #FFE4B5" onclick="colourPickerSelected('CP_Moccasin;#FFE4B5')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PeachPuff" style="background-color: #FFDAB9" onclick="colourPickerSelected('CP_PeachPuff;#FFDAB9')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PaleGoldenRod" style="background-color: #EEE8AA" onclick="colourPickerSelected('CP_PaleGoldenRod;#EEE8AA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Khaki" style="background-color: #F0E68C" onclick="colourPickerSelected('CP_Khaki;#F0E68C')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkKhaki" style="background-color: #BDB76B" onclick="colourPickerSelected('CP_DarkKhaki;#BDB76B')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_GreenYellow" style="background-color: #ADFF2F" onclick="colourPickerSelected('CP_GreenYellow;#ADFF2F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Chartreuse" style="background-color: #7FFF00" onclick="colourPickerSelected('CP_Chartreuse;#7FFF00')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LawnGreen" style="background-color: #7CFC00" onclick="colourPickerSelected('CP_LawnGreen;#7CFC00')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Lime" style="background-color: #00FF00" onclick="colourPickerSelected('CP_Lime;#00FF00')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LimeGreen" style="background-color: #32CD32" onclick="colourPickerSelected('CP_LimeGreen;#32CD32')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PaleGreen" style="background-color: #98FB98" onclick="colourPickerSelected('CP_PaleGreen;#98FB98')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightGreen" style="background-color: #90EE90" onclick="colourPickerSelected('CP_LightGreen;#90EE90')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumSpringGreen" style="background-color: #00FA9A" onclick="colourPickerSelected('CP_MediumSpringGreen;#00FA9A')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SpringGreen" style="background-color: #00FF7F" onclick="colourPickerSelected('CP_SpringGreen;#00FF7F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumSeaGreen" style="background-color: #3CB371" onclick="colourPickerSelected('CP_MediumSeaGreen;#3CB371')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SeaGreen" style="background-color: #2E8B57" onclick="colourPickerSelected('CP_SeaGreen;#2E8B57')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_ForestGreen" style="background-color: #228B22" onclick="colourPickerSelected('CP_ForestGreen;#228B22')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Green" style="background-color: #008000" onclick="colourPickerSelected('CP_Green;#008000')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkGreen" style="background-color: #006400" onclick="colourPickerSelected('CP_DarkGreen;#006400')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_YellowGreen" style="background-color: #9ACD32" onclick="colourPickerSelected('CP_YellowGreen;#9ACD32')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_OliveDrab" style="background-color: #6B8E23" onclick="colourPickerSelected('CP_OliveDrab;#6B8E23')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkOliveGreen" style="background-color: #556B2F" onclick="colourPickerSelected('CP_DarkOliveGreen;#556B2F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumAquaMarine" style="background-color: #66CDAA" onclick="colourPickerSelected('CP_MediumAquaMarine;#66CDAA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkSeaGreen" style="background-color: #8FBC8F" onclick="colourPickerSelected('CP_DarkSeaGreen;#8FBC8F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightSeaGreen" style="background-color: #20B2AA" onclick="colourPickerSelected('CP_LightSeaGreen;#20B2AA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkCyan" style="background-color: #008B8B" onclick="colourPickerSelected('CP_DarkCyan;#008B8B')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Teal" style="background-color: #008080" onclick="colourPickerSelected('CP_Teal;#008080')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Aqua" style="background-color: #00FFFF" onclick="colourPickerSelected('CP_Aqua;#00FFFF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Cyan" style="background-color: #00FFFF" onclick="colourPickerSelected('CP_Cyan;#00FFFF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightCyan" style="background-color: #E0FFFF" onclick="colourPickerSelected('CP_LightCyan;#E0FFFF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PaleTurquoise" style="background-color: #AFEEEE" onclick="colourPickerSelected('CP_PaleTurquoise;#AFEEEE')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Aquamarine" style="background-color: #7FFFD4" onclick="colourPickerSelected('CP_Aquamarine;#7FFFD4')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Turquoise" style="background-color: #40E0D0" onclick="colourPickerSelected('CP_Turquoise;#40E0D0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumTurquoise" style="background-color: #48D1CC" onclick="colourPickerSelected('CP_MediumTurquoise;#48D1CC')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkTurquoise" style="background-color: #00CED1" onclick="colourPickerSelected('CP_DarkTurquoise;#00CED1')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_CadetBlue" style="background-color: #5F9EA0" onclick="colourPickerSelected('CP_CadetBlue;#5F9EA0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SteelBlue" style="background-color: #4682B4" onclick="colourPickerSelected('CP_SteelBlue;#4682B4')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightSteelBlue" style="background-color: #B0C4DE" onclick="colourPickerSelected('CP_LightSteelBlue;#B0C4DE')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightBlue" style="background-color: #ADD8E6" onclick="colourPickerSelected('CP_LightBlue;#ADD8E6')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_PowderBlue" style="background-color: #B0E0E6" onclick="colourPickerSelected('CP_PowderBlue;#B0E0E6')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightSkyBlue" style="background-color: #87CEFA" onclick="colourPickerSelected('CP_LightSkyBlue;#87CEFA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SkyBlue" style="background-color: #87CEEB" onclick="colourPickerSelected('CP_SkyBlue;#87CEEB')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_CornflowerBlue" style="background-color: #6495ED" onclick="colourPickerSelected('CP_CornflowerBlue;#6495ED')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DeepSkyBlue" style="background-color: #00BFFF" onclick="colourPickerSelected('CP_DeepSkyBlue;#00BFFF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DodgerBlue" style="background-color: #1E90FF" onclick="colourPickerSelected('CP_DodgerBlue;#1E90FF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_RoyalBlue" style="background-color: #4169E1" onclick="colourPickerSelected('CP_RoyalBlue;#4169E1')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Blue" style="background-color: #0000FF" onclick="colourPickerSelected('CP_Blue;#0000FF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MediumBlue" style="background-color: #0000CD" onclick="colourPickerSelected('CP_MediumBlue;#0000CD')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkBlue" style="background-color: #00008B" onclick="colourPickerSelected('CP_DarkBlue;#00008B')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Navy" style="background-color: #000080" onclick="colourPickerSelected('CP_Navy;#000080')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MidnightBlue" style="background-color: #191970" onclick="colourPickerSelected('CP_MidnightBlue;#191970')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Cornsilk" style="background-color: #FFF8DC" onclick="colourPickerSelected('CP_Cornsilk;#FFF8DC')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_BlanchedAlmond" style="background-color: #FFEBCD" onclick="colourPickerSelected('CP_BlanchedAlmond;#FFEBCD')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Bisque" style="background-color: #FFE4C4" onclick="colourPickerSelected('CP_Bisque;#FFE4C4')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_NavajoWhite" style="background-color: #FFDEAD" onclick="colourPickerSelected('CP_NavajoWhite;#FFDEAD')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Wheat" style="background-color: #F5DEB3" onclick="colourPickerSelected('CP_Wheat;#F5DEB3')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_BurlyWood" style="background-color: #DEB887" onclick="colourPickerSelected('CP_BurlyWood;#DEB887')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Tan" style="background-color: #D2B48C" onclick="colourPickerSelected('CP_Tan;#D2B48C')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_RosyBrown" style="background-color: #BC8F8F" onclick="colourPickerSelected('CP_RosyBrown;#BC8F8F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SandyBrown" style="background-color: #F4A460" onclick="colourPickerSelected('CP_SandyBrown;#F4A460')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_GoldenRod" style="background-color: #DAA520" onclick="colourPickerSelected('CP_GoldenRod;#DAA520')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkGoldenRod" style="background-color: #B8860B" onclick="colourPickerSelected('CP_DarkGoldenRod;#B8860B')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Peru" style="background-color: #CD853F" onclick="colourPickerSelected('CP_Peru;#CD853F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Chocolate" style="background-color: #D2691E" onclick="colourPickerSelected('CP_Chocolate;#D2691E')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Olive" style="background-color: #808000" onclick="colourPickerSelected('CP_Olive;#808000')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SaddleBrown" style="background-color: #8B4513" onclick="colourPickerSelected('CP_SaddleBrown;#8B4513')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Sienna" style="background-color: #A0522D" onclick="colourPickerSelected('CP_Sienna;#A0522D')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Brown" style="background-color: #A52A2A" onclick="colourPickerSelected('CP_Brown;#A52A2A')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Maroon" style="background-color: #800000" onclick="colourPickerSelected('CP_Maroon;#800000')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_White" style="background-color: #FFFFFF" onclick="colourPickerSelected('CP_White;#FFFFFF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Snow" style="background-color: #FFFAFA" onclick="colourPickerSelected('CP_Snow;#FFFAFA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_HoneyDew" style="background-color: #F0FFF0" onclick="colourPickerSelected('CP_HoneyDew;#F0FFF0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MintCream" style="background-color: #F5FFFA" onclick="colourPickerSelected('CP_MintCream;#F5FFFA')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Azure" style="background-color: #F0FFFF" onclick="colourPickerSelected('CP_Azure;#F0FFFF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_AliceBlue" style="background-color: #F0F8FF" onclick="colourPickerSelected('CP_AliceBlue;#F0F8FF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_GhostWhite" style="background-color: #F8F8FF" onclick="colourPickerSelected('CP_GhostWhite;#F8F8FF')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_WhiteSmoke" style="background-color: #F5F5F5" onclick="colourPickerSelected('CP_WhiteSmoke;#F5F5F5')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SeaShell" style="background-color: #FFF5EE" onclick="colourPickerSelected('CP_SeaShell;#FFF5EE')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Beige" style="background-color: #F5F5DC" onclick="colourPickerSelected('CP_Beige;#F5F5DC')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_OldLace" style="background-color: #FDF5E6" onclick="colourPickerSelected('CP_OldLace;#FDF5E6')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_FloralWhite" style="background-color: #FFFAF0" onclick="colourPickerSelected('CP_FloralWhite;#FFFAF0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Ivory" style="background-color: #FFFFF0" onclick="colourPickerSelected('CP_Ivory;#FFFFF0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_AntiqueWhite" style="background-color: #FAEBD7" onclick="colourPickerSelected('CP_AntiqueWhite;#FAEBD7')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Linen" style="background-color: #FAF0E6" onclick="colourPickerSelected('CP_Linen;#FAF0E6')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LavenderBlush" style="background-color: #FFF0F5" onclick="colourPickerSelected('CP_LavenderBlush;#FFF0F5')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_MistyRose" style="background-color: #FFE4E1" onclick="colourPickerSelected('CP_MistyRose;#FFE4E1')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Gainsboro" style="background-color: #DCDCDC" onclick="colourPickerSelected('CP_Gainsboro;#DCDCDC')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightGray" style="background-color: #D3D3D3" onclick="colourPickerSelected('CP_LightGray;#D3D3D3')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Silver" style="background-color: #C0C0C0" onclick="colourPickerSelected('CP_Silver;#C0C0C0')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkGray" style="background-color: #A9A9A9" onclick="colourPickerSelected('CP_DarkGray;#A9A9A9')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DimGray" style="background-color: #696969" onclick="colourPickerSelected('CP_DimGray;#696969')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Gray" style="background-color: #808080" onclick="colourPickerSelected('CP_Gray;#808080')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_LightSlateGray" style="background-color: #778899" onclick="colourPickerSelected('CP_LightSlateGray;#778899')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_SlateGray" style="background-color: #708090" onclick="colourPickerSelected('CP_SlateGray;#708090')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_DarkSlateGray" style="background-color: #2F4F4F" onclick="colourPickerSelected('CP_DarkSlateGray;#2F4F4F')">&nbsp&nbsp&nbsp </li>
+                                <li class="CP_Black" style="background-color: #000000" onclick="colourPickerSelected('CP_Black;#000000')">&nbsp&nbsp&nbsp </li>
+                            </ul>
+                        </div>
+
+
+
+
+                       
+                    </div>
+                    
+                    
+
+
+                </div>
+            </div>
+            <div class="modal-footer highlight" style="border-radius: 5px">
+                <button type="button" class="btn btn-success" onclick="colourPickerSelectedModal()">Set Colour</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideModal()">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+
 @*<script src="~/Scripts/bootstrap-4.3.1/bootstrap.js"></script>*@
 
 
@@ -971,20 +1180,26 @@
 
         //check if element has not been added yet
         var element = $("#cp" + res[5]);
-        var elementId = "DeletePoint(" +"'cp" + res[5]+"')";
+        var elementId = "DeletePoint(" + "'cp" + res[5] + "')";
+
+        //create dynamically a button
+        var r = $(
+            '<div class="btn-group btn-block">' +
+            '<button id="' + 'cp' + res[5] + '_CP_Selector" type="button" class="btn btn-default btn-block dropdown-toggle CP_White"' +
+            'onclick="colourPicker(' + "'"+"cp"+res[5]+"_CP_Selector'" + ')"' + '>&nbsp;</button>' +
+            '</div>');
+
         if (element.length === 0) {
-            $("#ChosenPoints").append($("<tr id='cp" + res[5] + "'>").append($('<td>').text(res[0]))
-                .append($('<td>').text(res[1])).
+            $("#ChosenPoints").append($("<tr id='cp" + res[5] + "'>").
+                 append($('<td>').text(res[0])).
+                 append($('<td>').text(res[1])).
                  append($('<td>').text(res[2])).
                  append($('<td>').text(res[3])).
                  append($('<td>').text(res[4])).
+                 append($('<td>').append(r)).
                  append($('<td>').append($("<button  class='btn btn-danger btn-block' onclick="+elementId+">Delete</button>")))
             );
         }
-
-     
-        
-
 
     };
 
@@ -993,6 +1208,87 @@
         $(velement).remove();
     }
 
+    /* Colour Picker */
+
+    var vPressedColourPicker = "";
+    var vColorGlobal = "";
+    //on load
+
+
+    //which button was pressed, colour
+    function colourPicker(pVutton) {
+        //chosen class - colour
+        if (pVutton != 'ModalCP_Selector') {
+
+
+            vPressedColourPicker = pVutton;
+
+            var vElement = $("#" + vPressedColourPicker);
+
+            showModalCP();
+        } else {
+            //open palette CP_Palette
+            $('#CP_Palette').addClass('show');
+        }
+
+    };
+
+    //when choosing a colour in Modal
+    function colourPickerSelected(pColour) {
+
+        
+        //close palette
+        $('#CP_Palette').removeClass('show');
+
+        var vList = pColour.split(';');
+        var vColour = vList[0];
+        var vRGBhex = vList[1];
+
+        //chosen class - colour
+        //var className = e.toElement.className;
+        //alert('Colour pressedPressed:' + className);
+
+        var vCP_Selector = $('#ModalCP_Selector')[0].className.split(/\s+/);
+
+
+        //remove current colour
+        $('#ModalCP_Selector').removeClass(vCP_Selector[4]);
+        //and a new one
+        $('#ModalCP_Selector').addClass(vColour);
+
+
+
+
+        console.log('ModalCP_Selector Chosen Style:' + vColour);
+        console.log('ModalCP_Selector RGB hex:' + vRGBhex);
+
+        //set variable
+        vColorGlobal = vColour;
+    }
+
+    //When pressing set on Modal
+    function colourPickerSelectedModal() {
+        var vCP_Selector = $('#' + vPressedColourPicker)[0].className.split(/\s+/);
+
+        //remove current colour
+        $('#' + vPressedColourPicker).removeClass(vCP_Selector[4]);
+        //and a new one
+        $('#' + vPressedColourPicker).addClass(vColorGlobal);
+
+
+        console.log('Chosen Style:' + vColorGlobal);
+        hideModalCP();
+
+    }
+
+
+    function showModalCP() {
+        $('#CPmyModal').modal('show');
+    }
+
+    function hideModalCP() {
+        $('#CPmyModal').modal('hide');
+    }
 
 </script>
 
