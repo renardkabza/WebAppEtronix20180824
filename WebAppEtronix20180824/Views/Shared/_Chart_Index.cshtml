@@ -51,6 +51,18 @@
         background-color: #adadad;
         color: white;
     }
+    
+</style>
+
+<!--Chart Control -->
+<style>
+    .center_align {
+        max-width: 100%;
+    }
+
+    select {
+        text-align-last: center;
+    }
 </style>
 
 <!--spinner-->
@@ -127,7 +139,7 @@
                         <span class="glyphicon glyphicon-remove-circle"></span>
                     </button>
                 </div>
-                
+
                 <div class="col-md-3">
                     <button id="btn_5" type="button" class="btn btn-primary btn-block RKbtn">Clear Filter</button>
                 </div>
@@ -150,7 +162,7 @@
                     <label for="point_name" class="RKtext-secondary">Point Name</label>
                     <input type="text" class="form-control" id="point_name" aria-describedby="basic-addon3" placeholder="Point Name">
                 </div>
-                
+
                 <div class="col-md-3" style="display:none">
                     <label for="table_name" class="RKtext-secondary" >Table Name</label>
                     <input type="text" class="form-control" id="table_name" aria-describedby="basic-addon3" placeholder="Table Name">
@@ -192,9 +204,9 @@
 
                 </div>
             </div>
-            
+
             <div class="col-md-3">
-                
+
                 <div class="form-group">
                     <label for="btn_Point_1" class="text-white">....</label>
                     <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button101()">Choose MUT</button>
@@ -205,7 +217,7 @@
 
 
         </div>
-        
+
 
 
     </div>
@@ -215,7 +227,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                
+
                 <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
                     Sorting
                     <span class="glyphicon glyphicon-sort"></span>
@@ -285,18 +297,14 @@
 
 </div>
 
-
 <br />
-
-<h2><span class="text-white">Chosen Points.</span></h2>
-
-
-<div id="TablePanel2" class="AIpanel AIpanel-default">
+<h2 id="HeaderTablePanel2"><span class="text-white">Chosen Points.</span></h2>
+<div id="TablePanel2" class="AIpanel AIpanel-default" >
 
     <div class="AIpanel-body">
         <!--"collapse in" was removed-->
         <div class="container">
-            <div class="row">
+            <div class="AIrow">
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
@@ -347,6 +355,246 @@
 
 
 </div>
+
+<br />
+<h2 id="HeaderChartControlPanel"><span class="text-white">Chart Control.</span></h2>
+<div id="ChartControlPanel" class="AIpanel AIpanel-default" >
+    <div class="AIpanel-body">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3 col-lg-3">
+                    <label for="ChartType" class="text-primary"><h6>Chart Type</h6></label>
+                    <select id="ChartType" class="form-control center_align">
+                        <option value="LineChart">Line Chart</option>
+                        <option value="BarChart">Bar Chart</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="DateRange" class="text-primary"><h6>Date Range</h6></label>
+                    <select id="DateRange" class="form-control center_align">
+                        <option value="Today">Today</option>
+                        <option value="Yesterday">Yesterday</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationInterval" class="text-primary"><h6>Aggregation Interval</h6></label>
+                    <select id="AggregationInterval" class="form-control center_align">
+                        <option value="1m">1 minute</option>
+                        <option value="5m">5 Minutes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationType" class="text-primary"><h6>Aggregation Type</h6></label>
+                    <select id="AggregationType" class="form-control center_align">
+                        <option value="Average">Average</option>
+                        <option value="Maximum">Maximum</option>
+                        <option value="Minimum">Minimum</option>
+                        <option value="Summary">Summary</option>
+                        <option value="Cumulative">Cumulative</option>
+                    </select>
+                </div>
+            </div>
+                <div class="AIrow">
+
+                    <div class="col-md-4 col-lg-2">
+
+                        <label for="DaySelector" class="text-primary"><h6>From</h6></label>
+                        <select id="DaySelector" class="form-control center_align">
+                            <option value="" selected disabled>Day</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 col-lg-2">
+                        <label for="MonthSelector" class="text-primary"><h6>&nbsp;</h6></label>
+                        <select id="MonthSelector" class="form-control center_align">
+                            <option selected>Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 col-lg-2">
+                        <label for="YearSelector" class="text-primary"><h6>&nbsp;</h6></label>
+                        <select id="YearSelector" class="form-control center_align">
+                            <option selected>Year</option>
+                            <option value="2000">2000</option>
+                            <option value="2001">2001</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 col-lg-2">
+                        <label for="StopDaySelector" class="text-primary"><h6>To</h6></label>
+                        <select id="StopDaySelector" class="form-control center_align">
+                            <option selected>Day</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 col-lg-2">
+                        <label for="StopMonthSelector" class="text-primary"><h6>&nbsp;</h6></label>
+                        <select id="StopMonthSelector" class="form-control center_align">
+                            <option selected>Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 col-lg-2">
+                        <label for="StopYearSelector" class="text-primary"><h6>&nbsp;</h6></label>
+                        <select id="StopYearSelector" class="form-control center_align">
+                            <option selected>Year</option>
+                            <option value="2000">2000</option>
+                            <option value="2001">2001</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+</div>
+
 
 
 <div class="modal" id="myModal" style="display: none">
@@ -554,10 +802,10 @@
 
 
 
-                       
+
                     </div>
-                    
-                    
+
+
 
 
                 </div>
@@ -663,7 +911,7 @@
 
         $("#MUT").attr("value", "");
         $("#MUT").attr("valueid", "");
-        
+
 
 
     });
@@ -673,7 +921,7 @@
         function () {
             console.log('button102 pressed JS .click:');
         });
-    
+
     function button102() {
         console.log('Button102 pressed by OnClick:');
         //hide tab
@@ -744,7 +992,7 @@
 
 
     };
-    
+
     //Goto Page
     function button103() {
         console.log('function Button103() pressed by OnClick from _Point_IndexTable:');
@@ -915,7 +1163,7 @@
         console.log('Tag3:' + vfilterT3);
         console.log('MUT:' + vfilterMUT);
 
-        
+
 
 
         //Sorting
@@ -1138,7 +1386,7 @@
         //value2 has id
         var vID = $('#MUId').prop('value');
         console.log('Chosen MUId:' + vID);
-        //value keeps what is displayed 
+        //value keeps what is displayed
         var vType = $('#MU_Type').text();
         console.log('Chosen MU_Type:' + vType);
 
@@ -1174,6 +1422,13 @@
     });
 
     function AddPoint(pPoint) {
+
+        $('#TablePanel2').show();
+        $('#HeaderTablePanel2').show();
+        /*Chart Controls*/
+        $('#ChartControlPanel').show();
+        $('#HeaderChartControlPanel').show();
+
         console.log('Button Pressed:' + pPoint);
 
         var res = pPoint.split(";");
@@ -1206,6 +1461,17 @@
     function DeletePoint(pPoint) {
         var velement = "#" + pPoint;
         $(velement).remove();
+
+        var vQuantity = $("tr[id*='cp']");
+        console.log(vQuantity);
+
+        if (vQuantity.length === 0) {
+            $('#TablePanel2').hide();
+            $('#HeaderTablePanel2').hide();
+            /*Chart Controls*/
+            $('#ChartControlPanel').hide();
+            $('#HeaderChartControlPanel').hide();
+        }
     }
 
     /* Colour Picker */
@@ -1236,7 +1502,7 @@
     //when choosing a colour in Modal
     function colourPickerSelected(pColour) {
 
-        
+
         //close palette
         $('#CP_Palette').removeClass('show');
 
@@ -1289,6 +1555,16 @@
     function hideModalCP() {
         $('#CPmyModal').modal('hide');
     }
+
+    $(document).ready(function () {
+        console.log("Document Ready");
+        /*Chosen points*/
+        $('#TablePanel2').hide();
+        $('#HeaderTablePanel2').hide();
+        /*Chart Controls*/
+        $('#ChartControlPanel').hide();
+        $('#HeaderChartControlPanel').hide();
+    });
 
 </script>
 

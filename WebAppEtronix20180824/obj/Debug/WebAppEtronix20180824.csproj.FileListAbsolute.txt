@@ -233,4 +233,3 @@ C:\Git\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.T
 C:\Git\WebAppEtronix20180824\WebAppEtronix20180824\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Git\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.dll
 C:\Git\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.pdb
-C:\Git\WebAppEtronix20180824\WebAppEtronix20180824\obj\Debug\WebAppEtronix20180824.csprojResolveAssemblyReference.cache
