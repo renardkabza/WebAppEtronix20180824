@@ -337,9 +337,13 @@
                             <th>
                                 <span>Colour</span>
                             </th>
+                            <th style="min-width: 220px">
+                                <span>Line Type</span>
+                            </th>
                             <th>
                                 <span>Action</span>
                             </th>
+                            
                             <th style="display: none;">
                                 <span>Action</span>
                             </th>
@@ -1557,8 +1561,31 @@
         var r = $(
             '<div class="btn-group btn-block">' +
             '<button id="' + 'cp' + res[5] + '_CP_Selector" type="button" class="btn btn-default btn-block dropdown-toggle CP_White"' +
-            'onclick="colourPicker(' + "'"+"cp"+res[5]+"_CP_Selector'" + ')"' + '>&nbsp;</button>' +
+            'onclick="colourPicker(' + "'" + "cp" + res[5] + "_CP_Selector'" + ')"' + 'style="border: 1px solid #ced4da">&nbsp;</button>' +
             '</div>');
+        
+        //LineType
+        var template = '<div class="col-md-12">' +
+            '<div class="form-group">' +
+            //'<label for="Select' + elementId + '">Example select</label>' +
+            '<select class="form-control center_align" id="cp' + 'LineType'+res[5] + '">' +
+            '<option value="Solid" selected >Solid</option>' +
+            '<option value="shortdash">shortdash</option>' +
+            '<option value="dash">dash</option>' +
+            '<option value="longdash">longdash</option>' +
+            '<option value="shortdashdot">shortdashdot</option>' +
+            '<option value="dashdot">dashdot</option>' +
+            '<option value="longdashdot">longdashdot</option>' +
+            '<option value="shortdashdotdot">shortdashdotdot</option>' +
+            '<option value="dashdotdot">dashdotdot</option>' +
+            '<option value="longdashdotdot">longdashdotdot</option>' +
+            '<option value="shortdot">shortdot</option>' +
+            '<option value="dot">dot</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>';
+
+
 
         if (element.length === 0) {
             $("#ChosenPoints").append($("<tr id='cp" + res[5] + "'>").
@@ -1568,6 +1595,7 @@
                  append($('<td>').text(res[3])).
                  append($('<td>').text(res[4])).
                  append($('<td>').append(r)).
+                 append($('<td>').append(template)).
                  append($('<td>').append($("<button  class='btn btn-danger btn-block' onclick="+elementId+">Delete</button>")))
             );
         }
