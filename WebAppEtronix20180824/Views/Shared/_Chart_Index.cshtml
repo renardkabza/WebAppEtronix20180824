@@ -38,6 +38,18 @@
     }
 </style>
 
+<style>
+    .panel-body {
+        background-color: #e9ecef;
+    }
+    .background-grey {
+        background-color: #e9ecef;
+    }
+    .background-lgrey {
+        background-color: #f5f5f5;
+    }
+</style>
+
 <!-- colour picker -->
 <link href="~/Content/CP_Colour.css" rel="stylesheet" />
 <style>
@@ -74,6 +86,8 @@
 
 <!--Colour picker -->
 
+<!--glyhicon -->
+<link href="~/Scripts/glypchionRK.css" rel="stylesheet" />
 
 <!--<br id="Message1"/>-->
 @{
@@ -88,23 +102,10 @@
     <div class="AIpanel-heading">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
-                    <!--<label for="button101" class="text-secondary">Filter</label>-->
-                    <button id="btn_1" type="button" class="btn btn-primary btn-block RKbtn">
-                        Filter
-                        <span class="glyphicon glyphicon-filter"></span>
-                    </button>
-                </div>
-                <div class="col-md-3">
-
-                    <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
-                        Sorting
-                        <span class="glyphicon glyphicon-sort"></span>
-                    </button>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-3" >
                     <div class="input-group RKinput-group">
                         @*<label for="sel3" class="text-secondary">Elements per page</label>*@
+
                         <select class="form-control" id="sel3">
                             <option selected>1</option>
                             <option value="2">2</option>
@@ -120,29 +121,55 @@
                             <option value="1000">1000</option>
                         </select>
                         <span class="input-group-addon" id="basic-addon1"> /Page</span>
+
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <input type="button" id="button102" class="btn btn-success btn-block RKbtn" onclick="button102()" value="Get data">
+                <div class="col-md-4">
+                     
+                    <!--<label for="button101" class="text-secondary">Filter</label>-->
+                    <button id="btn_1" type="button" class="btn btn-primary RKbtn">
+                        
+                        <span class="glyphicon Rkglyphicon-filter" ></span>
+                    </button>
+                
+                
+
+                    <button id="btn_3" type="button" class="btn btn-primary RKbtn">
+                    
+                        <span class="glyphicon Rkglyphicon-sort-by-attributes"></span>
+                    </button>
+                    
+                    <button type="button" id="button102" class="btn btn-success RKbtn" onclick="button102()" value="Get data">Get Data</button>
+            
+                </div>
+                   
+                </div>
+
+                
                 </div>
 
                 </div>
-        </div>
-    </div>
+        
+    
 
     <div id="Filter_1" class="AIpanel-body collapse">
         <div class="container">
             <div class="AIrow">
-                <div class="col-md-3">
-                    <button id="btn_2" type="button" class="btn btn-danger btn-block RKbtn">
-                        Close Filter
-                        <span class="glyphicon glyphicon-remove-circle"></span>
-                    </button>
-                </div>
+                <div class="col-md-12">
+                    <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                        <button id="btn_2" type="button" class="btn btn-danger RKbtn">
 
-                <div class="col-md-3">
-                    <button id="btn_5" type="button" class="btn btn-primary btn-block RKbtn">Clear Filter</button>
-                </div>
+                            <span class="glyphicon Rkglyphicon-remove"> </span> <!--&nbsp; Filter-->
+                            <span class="glyphicon Rkglyphicon-filter"> </span>
+                        </button>
+
+                        <button id="btn_5" type="button" class="btn btn-primary RKbtn">
+                            <span class="glyphicon Rkglyphicon-trash"> </span>
+                            <span class="glyphicon Rkglyphicon-filter"> </span>
+                            <!--Clear Filter-->
+                        </button>
+                    </div>
+                    </div>
                 @*<div class="col-md-6">
                         <label for="button101">Action</label>-->
                         @Html.ActionLink("Get filtered data", "Index", "Employee",
@@ -159,29 +186,29 @@
             </div>
             <div class="AIrow">
                 <div class="col-md-3">
-                    <label for="point_name" class="RKtext-secondary">Point Name</label>
+                    <label for="point_name" class="control-label">Point Name</label>
                     <input type="text" class="form-control" id="point_name" aria-describedby="basic-addon3" placeholder="Point Name">
                 </div>
 
                 <div class="col-md-3" style="display:none">
-                    <label for="table_name" class="RKtext-secondary" >Table Name</label>
+                    <label for="table_name" class="control-label">Table Name</label>
                     <input type="text" class="form-control" id="table_name" aria-describedby="basic-addon3" placeholder="Table Name">
                 </div>
 
                 <div class="col-md-3" style="display:none">
-                    <label for="database_name" class="RKtext-secondary">Database Name</label>
+                    <label for="database_name" class="control-label">Database Name</label>
                     <input type="text" class="form-control" id="database_name" aria-describedby="basic-addon3" placeholder="Database Name">
                 </div>
                 <div class="col-md-3">
-                    <label for="Tag1" class="RKtext-secondary">Tag 1</label>
+                    <label for="Tag1" class="control-label">Tag 1</label>
                     <input type="text" class="form-control" id="Tag1" aria-describedby="basic-addon3" placeholder="Tag 1">
                 </div>
                 <div class="col-md-3">
-                    <label for="Tag2" class="RKtext-secondary">Tag 2</label>
+                    <label for="Tag2" class="control-label">Tag 2</label>
                     <input type="text" class="form-control" id="Tag2" aria-describedby="basic-addon3" placeholder="Tag 2">
                 </div>
                 <div class="col-md-3">
-                    <label for="Tag3" class="RKtext-secondary">Tag 3</label>
+                    <label for="Tag3" class="control-label">Tag 3</label>
                     <input type="text" class="form-control" id="Tag3" aria-describedby="basic-addon3" placeholder="Tag 3">
                 </div>
             </div>
@@ -196,23 +223,20 @@
         <div class="AIrow">
 
             <div class="col-md-3">
-                <div class="form-group">
-                    <!--@Html.LabelFor(m => m.MUT, new { @class = "col-md-8 control-label" })-->
-                    <label for="MUT" class="RKtext-secondary">Measurement Unit Type</label>
+                <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                    
+                        <!--@Html.LabelFor(m => m.MUT, new {@class = "col-md-8 control-label"})-->
+                        <!--<label for="MUT" class="RKtext-secondary">Measurement Unit Type</label>-->
+                        @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "MUT", @readonly = "readonly", @value = "", @valueId = "" })
+                        
 
-                    @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "Choose MUT", @readonly = "readonly", @value = "", @valueId = "" })
-
+                        <!--<label for="btn_Point_1" class="text-white">Measurement Unit Type</label>-->
+                    <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button101()">
+                        <span class="glyphicon Rkglyphicon-search"> </span>
+                    </button>
+                    
                 </div>
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="form-group">
-                    <label for="btn_Point_1" class="text-white">....</label>
-                    <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button101()">Choose MUT</button>
                 </div>
-
-            </div>
 
 
 
@@ -243,9 +267,10 @@
     <div class="container">
         <div class="AIrow">
             <div class="col-md-3">
-                <button id="btn_4" type="button" class="btn btn-danger btn-block RKbtn">
-                    Close Sorting
-                    <span class="glyphicon glyphicon-remove-circle"></span>
+                <button id="btn_4" type="button" class="btn btn-danger RKbtn">
+                    
+                    <span class="glyphicon Rkglyphicon-remove"></span><!--&nbsp; Sorting-->
+                    <span class="glyphicon Rkglyphicon-sort-by-attributes"> </span>
                 </button>
             </div>
 
@@ -255,12 +280,12 @@
                 <label for="sel1" class="RKtext-secondary">Sort by</label>
                 <select class="form-control" id="sel1">
                     <option selected>Point Name</option>
-                    <!--<option value="Email">Table Name</option>
-                    <option value="Email">Database Name</option>-->
-                    <option value="Email">Tag 1</option>
-                    <option value="Email">Tag 2</option>
-                    <option value="Email">Tag 3</option>
-                    <option value="Email">MUT</option>
+                    <option value="Table Name">Table Name</option>
+                    <option value="Database Name">Database Name</option>-->
+                    <option value="Tag 1">Tag 1</option>
+                    <option value="Tag 2">Tag 2</option>
+                    <option value="Tag 3">Tag 3</option>
+                    <option value="MUT">MUT</option>
                 </select>
             </div>
             <div class="col-md-3">
@@ -720,23 +745,23 @@
 <div class="modal" id="myModal" style="display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-lgrey">
+            <div class="modal-header bg-lgrey bg-primary ">
                 <h5 class="modal-title text-white ">Measurement Unit</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModal()">
                     <span class="text-white" aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body background-grey">
                 <!--body-->
                 <div class="AIrow">
                     <div class="col-md-12">
-                        <label for="MUId" class="RKtext-secondary">MU Id</label>
+                        <label for="MUId" class="control-label">MU Id</label>
                         <input type="text" class="form-control" id="MUId" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value=""><!--Default MU Null-->
                     </div>
                 </div>
                 <div class="AIrow">
                     <div class="col-md-12">
-                        <label for="MU_Type" class="RKtext-secondary">MU Name</label>
+                        <label for="MU_Type" class="control-label">MU Name</label>
                         <!--<input type="text" class="form-control" id="user_nameDelete" aria-describedby="basic-addon3" disabled="disabled" placeholder="" value="">-->
                         <select class="form-control" id="MU_Type">
                             <!--<option value="64">Null</option>-->
@@ -745,7 +770,7 @@
                 </div>
 
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer background-lgrey">
                 <button type="button" class="btn btn-success" onclick="ChooseMU()">Choose</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CloseModal()">Cancel</button>
             </div>

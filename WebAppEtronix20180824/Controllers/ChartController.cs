@@ -168,7 +168,12 @@ namespace WebAppEtronix20180824.Controllers
                     else
                         vPointsMasters = db.Points.OrderBy(m => m.Tag3).ToList();
                     break;
-
+                case "MUT":
+                    if (sortOrder == "Desc")
+                        vPointsMasters = db.Points.OrderByDescending(m => m.MUT_id).ToList();
+                    else
+                        vPointsMasters = db.Points.OrderBy(m => m.MUT_id).ToList();
+                    break;
 
 
                 default: //by Employee Name and ASC
