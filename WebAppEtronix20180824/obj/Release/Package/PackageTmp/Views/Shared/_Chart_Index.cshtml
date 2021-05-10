@@ -66,6 +66,10 @@
         background-color: #adadad;
         color: white;
     }
+    .highlightRed {
+        background-color: #e12b31;
+        color: white;
+    }
 </style>
 
 <!--Chart Control -->
@@ -116,21 +120,40 @@
                     <label for="ChartType" class="text-primary"><h6>Chart Type</h6></label>
                     <select id="ChartType" class="form-control center_align">
                         <option value="LineChart">Line Chart</option>
-                        <option value="BarChart">Bar Chart</option>
+                        @*<option value="BarChart">Bar Chart</option>*@
                     </select>
                 </div>
                 <div class="col-md-3 col-lg-3">
                     <label for="DateRange" class="text-primary"><h6>Date Range</h6></label>
                     <select id="DateRange" class="form-control center_align">
+                        <option value="" selected disabled>Date Range</option>
                         <option value="Today">Today</option>
                         <option value="Yesterday">Yesterday</option>
+                        <option value="Last 1h">Last 1h</option>
+                        <option value="Last 24h">Last 24h</option>
+                        <option value="Last 1D">Last 1D</option>
+                        <option value="Last 1W">Last 1W</option>
+                        <option value="Last 1M">Last 1M</option>
+                        <option value="Last 1Y">Last 1Y</option>
+                        <option value="Week-To-Date">Week-To-Date</option>
+                        <option value="Month-To-Date">Month-To-Date</option>
+                        <option value="Year-To-Date">Year-To-Date</option>
                     </select>
                 </div>
                 <div class="col-md-3 col-lg-3">
                     <label for="AggregationInterval" class="text-primary"><h6>Aggregation Interval</h6></label>
                     <select id="AggregationInterval" class="form-control center_align">
-                        <option value="1m">1 minute</option>
-                        <option value="5m">5 Minutes</option>
+                        <option value="1m">1 min</option>
+                        <option value="5m">5 min</option>
+                        <option value="10m">10 min</option>
+                        <option value="15m">15 min</option>
+                        <option value="30m">30 min</option>
+                        <option value="1h">1 h</option>
+                        <option value="1D">1 D</option>
+                        <option value="1W">1 W</option>
+                        <option value="1M">1 M</option>
+                        <option value="1Y">1 Y</option>
+
                     </select>
                 </div>
                 <div class="col-md-3 col-lg-3">
@@ -450,85 +473,93 @@
 </div>
 
 <br />
-<h2><span class="text-white">Points Lists.</span></h2>
+<h2 id="PointsListPanelHeader"><span class="text-white">Points Lists.</span></h2>
 
 <div id="Message2"></div>
 
-<div class="AIpanel AIpanel-default">
-    <div class="AIpanel-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="input-group RKinput-group">
-                        @*<label for="sel3" class="text-secondary">Elements per page</label>*@
+<div id="PointsListPanel" class="AIpanel AIpanel-default">
+<div class="AIpanel-heading">
+<div class="container">
+    <div class="row">
+        <div style="padding-left: 15px">
+            <!--<input type="button" class="btn btn-danger  RKbtn" onclick="ClosePointsListPanel()" value="X">-->
+            <button type="button" class="btn btn-danger RKbtn" onclick="ClosePointsListPanel()">
+                <span class="glyphicon Rkglyphicon-remove"> </span> <!--&nbsp; Filter-->
 
-                        <select class="form-control" id="sel3">
-                            <option selected>1</option>
-                            <option value="2">2</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="80">80</option>
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="400">400</option>
-                            <option value="800">800</option>
-                            <option value="1000">1000</option>
-                        </select>
-                        <span class="input-group-addon" id="basic-addon1"> /Page</span>
+            </button>
+        </div>      
+        
+            <div class="col-md-3">
+                <div class="input-group RKinput-group">
+                    @*<label for="sel3" class="text-secondary">Elements per page</label>*@
 
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <!--<label for="button101" class="text-secondary">Filter</label>-->
-                    <button id="btn_1" type="button" class="btn btn-primary RKbtn">
-
-                        <span class="glyphicon Rkglyphicon-filter"></span>
-                    </button>
-
-
-
-                    <button id="btn_3" type="button" class="btn btn-primary RKbtn">
-
-                        <span class="glyphicon Rkglyphicon-sort-by-attributes"></span>
-                    </button>
-
-                    <button type="button" id="button102" class="btn btn-success RKbtn" onclick="button102()" value="Get data">Get Data</button>
-                    <button type="button" id="PointStatus" class="btn btn-success RKbtn d-none">Loading Data </button>
+                    <select class="form-control" id="sel3">
+                        <option selected>1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="80">80</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="400">400</option>
+                        <option value="800">800</option>
+                        <option value="1000">1000</option>
+                    </select>
+                    <span class="input-group-addon" id="basic-addon1"> /Page</span>
 
                 </div>
-                
+            </div>
+            <div class="col-md-4">
+
+                <!--<label for="button101" class="text-secondary">Filter</label>-->
+                <button id="btn_1" type="button" class="btn btn-primary RKbtn">
+
+                    <span class="glyphicon Rkglyphicon-filter"></span>
+                </button>
+
+
+
+                <button id="btn_3" type="button" class="btn btn-primary RKbtn">
+
+                    <span class="glyphicon Rkglyphicon-sort-by-attributes"></span>
+                </button>
+
+                <button type="button" id="button102" class="btn btn-success RKbtn" onclick="button102()" value="Get data">Get Data</button>
+                <button type="button" id="PointStatus" class="btn btn-success RKbtn d-none">Loading Data </button>
 
             </div>
 
 
         </div>
 
+
     </div>
 
+</div>
 
 
-    <div id="Filter_1" class="AIpanel-body collapse">
-        <div class="container">
-            <div class="AIrow">
-                <div class="col-md-12">
-                    <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                        <button id="btn_2" type="button" class="btn btn-danger RKbtn">
 
-                            <span class="glyphicon Rkglyphicon-remove"> </span> <!--&nbsp; Filter-->
-                            <span class="glyphicon Rkglyphicon-filter"> </span>
-                        </button>
+<div id="Filter_1" class="AIpanel-body collapse">
+    <div class="container">
+        <div class="AIrow">
+            <div class="col-md-12">
+                <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                    <button id="btn_2" type="button" class="btn btn-danger RKbtn">
 
-                        <button id="btn_5" type="button" class="btn btn-primary RKbtn">
-                            <span class="glyphicon Rkglyphicon-trash"> </span>
-                            <span class="glyphicon Rkglyphicon-filter"> </span>
-                            <!--Clear Filter-->
-                        </button>
-                    </div>
+                        <span class="glyphicon Rkglyphicon-remove"> </span> <!--&nbsp; Filter-->
+                        <span class="glyphicon Rkglyphicon-filter"> </span>
+                    </button>
+
+                    <button id="btn_5" type="button" class="btn btn-primary RKbtn">
+                        <span class="glyphicon Rkglyphicon-trash"> </span>
+                        <span class="glyphicon Rkglyphicon-filter"> </span>
+                        <!--Clear Filter-->
+                    </button>
                 </div>
-                @*<div class="col-md-6">
+            </div>
+            @*<div class="col-md-6">
                         <label for="button101">Action</label>-->
                         @Html.ActionLink("Get filtered data", "Index", "Employee",
                             new
@@ -541,36 +572,35 @@
                                 @gotopage = true
                             }, new { @id = "button101", @type = "button", @class = "btn btn-success btn-block" })
                     </div>*@
-            </div>
-            <div class="AIrow">
-                <div class="col-md-3">
-                    <label for="point_name" class="control-label">Point Name</label>
-                    <input type="text" class="form-control" id="point_name" aria-describedby="basic-addon3" placeholder="Point Name">
-                </div>
-
-                <div class="col-md-3" style="display:none">
-                    <label for="table_name" class="control-label">Table Name</label>
-                    <input type="text" class="form-control" id="table_name" aria-describedby="basic-addon3" placeholder="Table Name">
-                </div>
-
-                <div class="col-md-3" style="display:none">
-                    <label for="database_name" class="control-label">Database Name</label>
-                    <input type="text" class="form-control" id="database_name" aria-describedby="basic-addon3" placeholder="Database Name">
-                </div>
-                <div class="col-md-3">
-                    <label for="Tag1" class="control-label">Tag 1</label>
-                    <input type="text" class="form-control" id="Tag1" aria-describedby="basic-addon3" placeholder="Tag 1">
-                </div>
-                <div class="col-md-3">
-                    <label for="Tag2" class="control-label">Tag 2</label>
-                    <input type="text" class="form-control" id="Tag2" aria-describedby="basic-addon3" placeholder="Tag 2">
-                </div>
-                <div class="col-md-3">
-                    <label for="Tag3" class="control-label">Tag 3</label>
-                    <input type="text" class="form-control" id="Tag3" aria-describedby="basic-addon3" placeholder="Tag 3">
-                </div>
+        </div>
+        <div class="AIrow">
+            <div class="col-md-3">
+                <label for="point_name" class="control-label">Point Name</label>
+                <input type="text" class="form-control" id="point_name" aria-describedby="basic-addon3" placeholder="Point Name">
             </div>
 
+            <div class="col-md-3" style="display:none">
+                <label for="table_name" class="control-label">Table Name</label>
+                <input type="text" class="form-control" id="table_name" aria-describedby="basic-addon3" placeholder="Table Name">
+            </div>
+
+            <div class="col-md-3" style="display:none">
+                <label for="database_name" class="control-label">Database Name</label>
+                <input type="text" class="form-control" id="database_name" aria-describedby="basic-addon3" placeholder="Database Name">
+            </div>
+            <div class="col-md-3">
+                <label for="Tag1" class="control-label">Tag 1</label>
+                <input type="text" class="form-control" id="Tag1" aria-describedby="basic-addon3" placeholder="Tag 1">
+            </div>
+            <div class="col-md-3">
+                <label for="Tag2" class="control-label">Tag 2</label>
+                <input type="text" class="form-control" id="Tag2" aria-describedby="basic-addon3" placeholder="Tag 2">
+            </div>
+            <div class="col-md-3">
+                <label for="Tag3" class="control-label">Tag 3</label>
+                <input type="text" class="form-control" id="Tag3" aria-describedby="basic-addon3" placeholder="Tag 3">
+            </div>
+        </div>
 
 
 
@@ -578,92 +608,93 @@
 
 
 
-            <div class="AIrow">
 
-                <div class="col-md-3">
-                    <div class="btn-group btn-block" role="group" aria-label="Basic example">
+        <div class="AIrow">
 
-                        <!--@Html.LabelFor(m => m.MUT, new {@class = "col-md-8 control-label"})-->
-                        <!--<label for="MUT" class="RKtext-secondary">Measurement Unit Type</label>-->
-                           @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "MUT", @readonly = "readonly", @value = "", @valueId = "" })
+            <div class="col-md-3">
+                <div class="btn-group btn-block" role="group" aria-label="Basic example">
+
+                    <!--@Html.LabelFor(m => m.MUT, new {@class = "col-md-8 control-label"})-->
+                    <!--<label for="MUT" class="RKtext-secondary">Measurement Unit Type</label>-->
+                    @Html.TextBoxFor(m => m.MUT, new { @class = "form-control", @placeholder = "MUT", @readonly = "readonly", @value = "", @valueId = "" })
 
 
-                        <!--<label for="btn_Point_1" class="text-white">Measurement Uni
+                    <!--<label for="btn_Point_1" class="text-white">Measurement Uni
                         t Type</label>-->
-                        <button id="btn_Point_1" type="button" cl
-                        ass="btn btn-primary b
+                    <button id="btn_Point_1" type="button" cl
+                            ass="btn btn-primary b
                         <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button101()">
-                            <span class="glyphicon Rkglyphicon-search"> </span>
-                        </button>
-
-                    </div>
-                </div>
-
-
-
-            </div>
-
-
-
-        </div>
-    </div>
-    <!--
-    <div class="AIpanel-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-
-                    <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
-                        Sorting
-                        <span class="glyphicon glyphicon-sort"></span>
+                        <span class="glyphicon Rkglyphicon-search"> </span>
                     </button>
+
                 </div>
-            </div>
-        </div>
-    </div>
-    -->
-
-
-    <div id="Sorting_1" class="AIpanel-body collapse">
-        <div class="container">
-            <div class="AIrow">
-                <div class="col-md-3">
-                    <button id="btn_4" type="button" class="btn btn-danger RKbtn">
-
-                        <span class="glyphicon Rkglyphicon-remove"></span><!--&nbsp; Sorting-->
-                        <span class="glyphicon Rkglyphicon-sort-by-attributes"> </span>
-                    </button>
-                </div>
-
-            </div>
-            <div class="AIrow">
-                <div class="col-md-3">
-                    <label for="sel1" class="RKtext-secondary">Sort by</label>
-                    <select class="form-control" id="sel1">
-                        <option selected>Point Name</option>
-                        <option value="Table Name">Table Name</option>
-                        <option value="Database Name">Database Name</option>-->
-                        <option value="Tag 1">Tag 1</option>
-                        <option value="Tag 2">Tag 2</option>
-                        <option value="Tag 3">Tag 3</option>
-                        <option value="MUT">MUT</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="sel2" class="RKtext-secondary">Sorting Order</label>
-                    <select class="form-control" id="sel2">
-                        <option selected>Asc</option>
-                        <option value="Desc">Desc</option>
-                    </select>
-                </div>
-
-
             </div>
 
 
 
         </div>
+
+
+
     </div>
+</div>
+<!--
+<div class="AIpanel-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+
+                <button id="btn_3" type="button" class="btn btn-primary btn-block RKbtn">
+                    Sorting
+                    <span class="glyphicon glyphicon-sort"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+<div id="Sorting_1" class="AIpanel-body collapse">
+    <div class="container">
+        <div class="AIrow">
+            <div class="col-md-3">
+                <button id="btn_4" type="button" class="btn btn-danger RKbtn">
+
+                    <span class="glyphicon Rkglyphicon-remove"></span><!--&nbsp; Sorting-->
+                    <span class="glyphicon Rkglyphicon-sort-by-attributes"> </span>
+                </button>
+            </div>
+
+        </div>
+        <div class="AIrow">
+            <div class="col-md-3">
+                <label for="sel1" class="RKtext-secondary">Sort by</label>
+                <select class="form-control" id="sel1">
+                    <option selected>Point Name</option>
+                    <option value="Table Name">Table Name</option>
+                    <option value="Database Name">Database Name</option>-->
+                    <option value="Tag 1">Tag 1</option>
+                    <option value="Tag 2">Tag 2</option>
+                    <option value="Tag 3">Tag 3</option>
+                    <option value="MUT">MUT</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="sel2" class="RKtext-secondary">Sorting Order</label>
+                <select class="form-control" id="sel2">
+                    <option selected>Asc</option>
+                    <option value="Desc">Desc</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</div>
 
 
 </div>
@@ -692,7 +723,7 @@
         <div class="container">
             <div class="AIrow">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="ChosenPoints">
                         <tr>
                             <th>
                                 <span>Point Name</span>
@@ -735,7 +766,7 @@
                             </th>
 
                         </tr>
-                        <tbody id="ChosenPoints"></tbody>
+                        <!--<tbody></tbody>-->
                     </table>
                 </div>
 
@@ -985,7 +1016,16 @@
     </div>
 </div>
 
+<div class="modal" id="DateRangeValidation" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div id="DateRangeValidationMessage" class="modal-content" style="border-radius: 5px">
 
+            
+
+        </div>
+
+    </div>
+</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
@@ -1788,6 +1828,39 @@
         var vMinuteTo = $("#MinuteSelectorTo").val();
 
 
+        var vPoints = $("*[id^='cp']");
+        
+
+
+        
+
+        var pointsListArray = new Array(vPoints.length/3);
+
+        for (let i = 0; i < vPoints.length / 3; i++) {
+            
+            //points id
+            var vId = vPoints[i*3+0].id.replace('cp', '');
+            //point colour
+            var vColour = vPoints[i*3+1].id;
+            var vColourPicker = $('#' + vColour);
+            var vColourPickerClasses = vColourPicker[0].classList;
+            var vColourPickerCPColour = vColourPickerClasses[4];
+            //point line type
+            var vPointTypeId = vPoints[i*3+2].id;
+            var vPointType = $('#' + vPointTypeId + ' option:selected').val();
+            
+            var vRow = {
+                PtId: vId,
+                PtColour: vColourPickerCPColour,
+                PtLineType: vPointType
+            }
+
+            pointsListArray[i] = vRow;
+        }
+
+
+   
+
         //AJAX Get Data
         $.ajax({
             url: "/Controller/Method"
@@ -1806,6 +1879,90 @@
 
 
     }
+
+    function ClosePointsListPanel() {
+        $('#PointsListPanel').hide();
+        $('#PointsListPanelHeader').hide();
+
+    }
+
+    //2021-05-10
+    function GetChar() {
+
+        var vCharType = $("#ChartType").val();
+        var vDateRange = $("#DateRange").val();
+        var vAggregationInterval = $("#AggregationInterval").val();
+        var vCharType = $("#AggregationType").val();
+
+        //From 
+        var vDateRangeDayFrom = $("#DaySelectorFrom").val();
+        var vDateRangeMonthFrom = $("#MonthSelectorFrom").val();
+        var vDateRangeYearFrom = $("#YearSelectorFrom").val();
+        var vDateRangeTimeHourFrom = $("#HourSelectorFrom").val();
+        var vDateRangeTimeMinuteFrom = $("#MinuteSelectorFrom").val();
+        //To
+        var vDateRangeDayTo = $("#DaySelectorTo").val();
+        var vDateRangeMonthTo = $("#MonthSelectorTo").val();
+        var vDateRangeYearTo = $("#YearSelectorTo").val();
+        var vDateRangeTimeHourTo = $("#HourSelectorTo").val();
+        var vDateRangeTimeMinuteTo = $("#MinuteSelectorTo").val();
+
+        //either datarange must be set or from & to fields
+        var vErrorValidationvDateRange = false;
+        if (vDateRange === null) {
+            console.log("vDatreRange is null");
+            vErrorValidationvDateRange = true;
+        }
+        var vErrorValidationvTimeRanges = false;
+        if (
+            vDateRangeDayFrom == null ||
+                vDateRangeMonthFrom === null ||
+                vDateRangeYearFrom === null ||
+                vDateRangeTimeHourFrom === null ||
+                vDateRangeTimeMinuteFrom === null ||
+                vDateRangeDayTo == null ||
+                vDateRangeMonthTo === null ||
+                vDateRangeYearTo === null ||
+                vDateRangeTimeHourTo === null ||
+                vDateRangeTimeMinuteTo === null
+        )
+        {
+            vErrorValidationvTimeRanges = true;
+        }
+
+        //$('#DateRangeValidation').modal('show');
+        //if two error we ca not process a call 
+        //Show a message
+        if (vErrorValidationvDateRange === true || ErrorValidationvTimeRanges === true) {
+            DateRangeValidationCreate('Choose  Date Range or set Date & Time');
+        } else {
+            //process data 
+
+        }
+    }
+
+    function HideDateRangeValidation() {
+        $('#DateRangeValidation').modal('hide');
+    }
+
+    function DateRangeValidationCreate(pMessage) {
+        
+        var vErrorWindow = $(
+            '<div class="alert alert-dismissible alert-danger" style="margin:0px 0px 0px 0px">' +
+            '<button type="button" class="close" data-dismiss="alert" onclick="HideDateRangeValidation()">×</button>' +
+            '<h4 class="alert-heading"> Date Range </h4>' +
+            '<p id="ErrorMessage"class="mb-0">' +
+            pMessage +
+            '</p>' +
+            '</div>'
+        );
+
+        $("#DateRangeValidationMessage").append(vErrorWindow);
+        $('#DateRangeValidation').modal('show');
+
+    }
+
+    
 
 </script>
 
