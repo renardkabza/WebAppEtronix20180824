@@ -1912,7 +1912,7 @@
         //either datarange must be set or from & to fields
         var vErrorValidationvDateRange = false;
         if (vDateRange === null) {
-            console.log("vDatreRange is null");
+            console.log("Date Range is null");
             vErrorValidationvDateRange = true;
         }
         var vErrorValidationvTimeRanges = false;
@@ -1935,16 +1935,88 @@
         //Either Date Range or a time frame ( from to ) must be set 
         //Show an error message
         if (vErrorValidationvDateRange === true && vErrorValidationvTimeRanges === true) {
-            DateRangeValidationCreate('Choose  Date Range or set a time frame - From-To');
+            DateRangeValidationCreate('Choose Date Range or set a time frame using Date From and Date To fields');
+            return;
         }
 
+        
+        if (vErrorValidationvTimeRanges != true)
+            {
+        //check whether data does not include 
+        //30 Feb, 31 April, 31 June, 31 Sep, 31 Nov 
+        //or 29 Feb for non leap years.
+        var vErrorValidationDate = false;
+        //checke a leap year
+        var vLeapYearFrom = CheckLeapYear(vDateRangeYearFrom);
+        var vLeapYearTo = CheckLeapYear(vDateRangeYearTo);
+
+        var prohibitedDates = [
+            '302',
+            '312',
+            '314' ,
+            '316' ,
+            '319' ,
+            '3111'];
+
+        // alloweDate if a leap year flag is set to true 
+        var allowedDate = '292';
+
+        var prohibitedDateFromError = false;
+        for (var i = 0; i < prohibitedDates.length;i++) {
+            var vFrom = vDateRangeDayFrom + vDateRangeMonthFrom;
+            if (vFrom == prohibitedDates[i]) {
+                prohibitedDateFromError = true;
+                console.log('DataFrom validation: not passed');
+                break;
+            }
+
+            if (vFrom == allowedDate) {
+                if (vLeapYearFrom != true) {
+                    prohibitedDateFromError = true;
+                    console.log('DataFrom validation: not passed');
+                    break;
+                }
+            }
+        }
+
+        if (prohibitedDateFromError == false) {
+            console.log("DataFrom validation: passed");
+        }else {
+            DateRangeValidationCreate('DateFrom validation: not passed');
+        }
+
+        //To
+        var prohibitedDateToError= false;
+        for (var ii = 0; ii < prohibitedDates.length; ii++) {
+            var vTo = vDateRangeDayTo + vDateRangeMonthTo;
+            if (vTo == prohibitedDates[ii]) {
+                prohibitedDateToError = true;
+                console.log('DataTo Validation: not passed');
+                break;
+            }
+
+            if (vTo == allowedDate) {
+                if (vLeapYearTo != true) {
+                    prohibitedDateToError = true;
+                    console.log('DataTo Validation: not passed');
+                    break;
+                }
+            }
+        }
+
+        if (prohibitedDateToError == false) {
+            console.log("DataTo validation: passed");
+        } else {
+            DateRangeValidationCreate('DataTo validation: not passed');
+        }
 
         
+        }
 
-
-        //console.log(isValidDate('2011-09-31'));
-        //console.log(isValidDate('2011-09-30'));
-
+        if (vErrorValidationvDateRange != true) {
+            console.log('Data Range chosen, date validation not required');
+        }
+        
 
     }
 
@@ -1969,7 +2041,7 @@
 
     }
 
-    //date validation 
+    //date validation , it must be set otherwhise, is error
     function isValidDate(s) {
         var bits = s.split('-');
 
@@ -2016,6 +2088,20 @@
         //DateRange
         $('#DateRange').val(null);
 
+    }
+
+    function CheckLeapYear(pYear) {
+        if (pYear === null) {
+            console.log("Year is not set ");
+            return false;
+        }
+        if ((pYear % 4 == 0) && (pYear % 100 != 0) || (pYear % 400 == 0))
+        {
+            console.log("Year is a leap one");
+            return true;
+        }
+        console.log("Year is not a leap one");
+        return false;
     }
 
 
