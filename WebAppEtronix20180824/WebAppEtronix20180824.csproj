@@ -181,11 +181,13 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataViewModel.cs" />
+    <Compile Include="Models\DTO\ChartModel.cs" />
     <Compile Include="Models\DTO\MeasurementUnit.cs" />
     <Compile Include="Models\DTO\Menu.cs" />
     <Compile Include="Models\DTO\AccessPo.cs" />
     <Compile Include="Models\DTO\Message.cs" />
     <Compile Include="Models\DTO\PointsMU.cs" />
+    <Compile Include="Models\DTO\Series.cs" />
     <Compile Include="Models\DTO\UserRoles.cs" />
     <Compile Include="Models\Entity\AspNetUsers.cs" />
     <Compile Include="Models\Entity\Entities.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -323,6 +324,87 @@ namespace WebAppEtronix20180824.Controllers
 
 
 
+        }
+
+        public ActionResult FetchChartSerie(
+            int PointId,
+            string ChartType,
+            string DateRange,
+            string AggregationInterval,
+            string AggregationType,
+            string DateFrom,
+            string DateTo,
+            string SeriesColor,
+            string SeriesDashStyle
+            )
+
+        {
+           
+
+
+
+            //Get hex color
+
+            Entities _contextEntities = new Entities();
+            var vColorName = new SqlParameter("@ColorName", SeriesColor.Substring(3));
+
+            string vHexColor = _contextEntities.Database.SqlQuery<System.String>("GetColor " +"@ColorName", vColorName).FirstOrDefault();
+
+
+
+            //GetTables Details
+            
+            var vPointDetailSqlParameter = new SqlParameter("@PointId", PointId);
+
+            PointDetails vPointDetails = _contextEntities.Database
+                .SqlQuery<PointDetails>("GetPointDetails " + "@PointId", vPointDetailSqlParameter).FirstOrDefault();
+                
+
+
+
+
+
+
+
+            ulong Max = 8760 * 1 + 1;
+            float vd = 0;
+
+            Root vObject = new Root();
+            vObject.seriesdata = new List<double>();
+
+            Random vRandom = new Random();
+
+            for (ulong i = 0; i < Max; i++)
+            {
+                //time = (ulong)(1609459200000 + ((i * 60) * 1000));
+                vd = vRandom.Next(-100, 100);
+                vObject.seriesdata.Add(vd);
+            }
+
+
+
+            vObject.Id = PointId;
+            vObject.seriesType = "spline";
+            vObject.seriesName = "Main Power";
+            vObject.seriesDashStyle = SeriesDashStyle;
+            vObject.seriesColor = vHexColor;
+            vObject.LineWidth = 2;
+            vObject.pointStart = 1609459200000;
+            vObject.pointInterval = 60000;
+            vObject.seriesYaxisTitle = "";
+            vObject.seriesYaxisColor = vHexColor;
+            vObject.seriesLabelFormat = "kW";
+            vObject.seriesLabelStyleColor = vHexColor;
+            vObject.errorFlag = false;
+            vObject.errorMessage = "";
+
+
+
+            return Json(vObject, JsonRequestBehavior.AllowGet);
+
+
+
+            //return null;
         }
     }
 }

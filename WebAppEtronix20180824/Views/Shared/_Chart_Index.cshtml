@@ -92,6 +92,9 @@
     .AIpanel-body {
         background-color: #e9ecef;
     }
+    .AIpanel-body-White {
+        background-color: #FFFFFF;
+    }
 </style>
 
 <!--spinner-->
@@ -1026,10 +1029,33 @@
 
     </div>
 </div>
+@*HighChart*@
+
+
+
+<div id="ChartPanel" class="AIpanel AIpanel-default" style="display: block; ">
+    <div class="AIpanel-body-White">
+        <div class="container">
+            <div class="AIrow">
+                
+                <div id="ChartContainer" style="height: 100%; min-width: 100%"></div>
+			
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
-
 @*<script src="~/Scripts/bootstrap-4.3.1/bootstrap.js"></script>*@
 
 
@@ -1939,79 +1965,89 @@
             return;
         }
 
-        
+        //the user has chosen Data Range
+        if (vErrorValidationvDateRange  != true) {
+            //call AJAX
+        }
+        //the user has chosen time Range
         if (vErrorValidationvTimeRanges != true)
             {
-        //check whether data does not include 
-        //30 Feb, 31 April, 31 June, 31 Sep, 31 Nov 
-        //or 29 Feb for non leap years.
-        var vErrorValidationDate = false;
-        //checke a leap year
-        var vLeapYearFrom = CheckLeapYear(vDateRangeYearFrom);
-        var vLeapYearTo = CheckLeapYear(vDateRangeYearTo);
+                //check whether data does not include 
+                //30 Feb, 31 April, 31 June, 31 Sep, 31 Nov 
+                //or 29 Feb for non leap years.
+                var vErrorValidationDate = false;
+                //checke a leap year
+                var vLeapYearFrom = CheckLeapYear(vDateRangeYearFrom);
+                var vLeapYearTo = CheckLeapYear(vDateRangeYearTo);
 
-        var prohibitedDates = [
-            '302',
-            '312',
-            '314' ,
-            '316' ,
-            '319' ,
-            '3111'];
+                var prohibitedDates = [
+                    '302',
+                    '312',
+                    '314' ,
+                    '316' ,
+                    '319' ,
+                    '3111'];
 
-        // alloweDate if a leap year flag is set to true 
-        var allowedDate = '292';
+                // alloweDate if a leap year flag is set to true 
+                var allowedDate = '292';
 
-        var prohibitedDateFromError = false;
-        for (var i = 0; i < prohibitedDates.length;i++) {
-            var vFrom = vDateRangeDayFrom + vDateRangeMonthFrom;
-            if (vFrom == prohibitedDates[i]) {
-                prohibitedDateFromError = true;
-                console.log('DataFrom validation: not passed');
-                break;
-            }
+                var prohibitedDateFromError = false;
+                for (var i = 0; i < prohibitedDates.length;i++) {
+                    var vFrom = vDateRangeDayFrom + vDateRangeMonthFrom;
+                    if (vFrom == prohibitedDates[i]) {
+                        prohibitedDateFromError = true;
+                        console.log('DataFrom validation: not passed');
+                        break;
+                    }
 
-            if (vFrom == allowedDate) {
-                if (vLeapYearFrom != true) {
-                    prohibitedDateFromError = true;
-                    console.log('DataFrom validation: not passed');
-                    break;
+                    if (vFrom == allowedDate) {
+                        if (vLeapYearFrom != true) {
+                            prohibitedDateFromError = true;
+                            console.log('DataFrom validation: not passed');
+                            break;
+                        }
+                    }
                 }
-            }
-        }
 
-        if (prohibitedDateFromError == false) {
-            console.log("DataFrom validation: passed");
-        }else {
-            DateRangeValidationCreate('DateFrom validation: not passed');
-        }
-
-        //To
-        var prohibitedDateToError= false;
-        for (var ii = 0; ii < prohibitedDates.length; ii++) {
-            var vTo = vDateRangeDayTo + vDateRangeMonthTo;
-            if (vTo == prohibitedDates[ii]) {
-                prohibitedDateToError = true;
-                console.log('DataTo Validation: not passed');
-                break;
-            }
-
-            if (vTo == allowedDate) {
-                if (vLeapYearTo != true) {
-                    prohibitedDateToError = true;
-                    console.log('DataTo Validation: not passed');
-                    break;
+                if (prohibitedDateFromError == false) {
+                    console.log("DataFrom validation: passed");
+                }else {
+                    DateRangeValidationCreate('DateFrom validation: not passed');
                 }
+
+                //To
+                var prohibitedDateToError= false;
+                for (var ii = 0; ii < prohibitedDates.length; ii++) {
+                    var vTo = vDateRangeDayTo + vDateRangeMonthTo;
+                    if (vTo == prohibitedDates[ii]) {
+                        prohibitedDateToError = true;
+                        console.log('DataTo Validation: not passed');
+                        break;
+                    }
+
+                    if (vTo == allowedDate) {
+                        if (vLeapYearTo != true) {
+                            prohibitedDateToError = true;
+                            console.log('DataTo Validation: not passed');
+                            break;
+                        }
+                    }
+                }
+
+                if (prohibitedDateToError == false) {
+                    console.log("DataTo validation: passed");
+                } else {
+                    DateRangeValidationCreate('DataTo validation: not passed');
+                }
+
+            //call AJAX
+
+                FetchChartSerie(1234, 'spline', null, '1min', 'Average', '2021-01-01 00:00', '2021-01-07 00:00');
+                //RenderChart();
+
             }
-        }
 
-        if (prohibitedDateToError == false) {
-            console.log("DataTo validation: passed");
-        } else {
-            DateRangeValidationCreate('DataTo validation: not passed');
-        }
 
-        
-        }
 
         if (vErrorValidationvDateRange != true) {
             console.log('Data Range chosen, date validation not required');
@@ -2104,6 +2140,298 @@
         return false;
     }
 
+
+
+    var seriesData3 = [];
+    var i = 0;
+    var seriesYaxis = [];
+
+    var seriesColour = [];
+    var seriesDataRK = [];
+    j = 0;
+    //dynamic formating
+    function FetchChartSerie(
+        pointId, 
+        chartType, 
+        dataRange, 
+        aggregationInterval,
+        aggregationType,
+        dateFrom,
+        dateTo
+        )
+        {
+        var vCharType = $("#ChartType").val();
+        var vDateRange = $("#DateRange").val();
+        var vAggregationInterval = $("#AggregationInterval").val();
+        var vAggregationType = $("#AggregationType").val();
+
+        //From 
+        var vDateRangeDayFrom = $("#DaySelectorFrom").val();
+        var vDateRangeMonthFrom = $("#MonthSelectorFrom").val();
+        var vDateRangeYearFrom = $("#YearSelectorFrom").val();
+        var vDateRangeTimeHourFrom = $("#HourSelectorFrom").val();
+        var vDateRangeTimeMinuteFrom = $("#MinuteSelectorFrom").val();
+        //To
+        var vDateRangeDayTo = $("#DaySelectorTo").val();
+        var vDateRangeMonthTo = $("#MonthSelectorTo").val();
+        var vDateRangeYearTo = $("#YearSelectorTo").val();
+        var vDateRangeTimeHourTo = $("#HourSelectorTo").val();
+        var vDateRangeTimeMinuteTo = $("#MinuteSelectorTo").val();
+
+        
+            var vPoints = $("*[id^='cp']");
+
+
+            var pointsListArray = new Array(vPoints.length / 3);
+
+            for (let i = 0; i < vPoints.length / 3; i++) {
+
+                //points id
+                var vId = vPoints[i * 3 + 0].id.replace('cp', '');
+                //point colour
+                var vColour = vPoints[i * 3 + 1].id;
+                var vColourPicker = $('#' + vColour);
+                var vColourPickerClasses = vColourPicker[0].classList;
+                var vColourPickerCPColour = vColourPickerClasses[4];
+                //point line type
+                var vPointTypeId = vPoints[i * 3 + 2].id;
+                var vPointType = $('#' + vPointTypeId + ' option:selected').val();
+
+                var vRow = {
+                    PtId: vId,
+                    PtColour: vColourPickerCPColour,
+                    PtLineType: vPointType
+                }
+
+                pointsListArray[i] = vRow;
+            }
+
+            //Konvert data into YYYY-MM-DD hh:mm
+            var vDataStartPoint = vDateRangeYearFrom + "-";
+            if (parseInt(vDateRangeMonthFrom, 10) < 10) {
+                vDataStartPoint += "0" + vDateRangeMonthFrom;
+            } else {
+                vDataStartPoint +=  vDateRangeMonthFrom;
+            }
+            if (parseInt(vDateRangeDayFrom, 10) < 10) {
+                vDataStartPoint += "-0" + vDateRangeDayFrom;
+            } else {
+                vDataStartPoint += "-"+vDateRangeDayFrom;
+            }
+
+            vDataStartPoint += " " + vDateRangeTimeHourFrom + ":" + vDateRangeTimeMinuteFrom;
+            
+            var vDataStopPoint = vDateRangeYearTo + "-";
+            if (parseInt(vDateRangeMonthTo, 10) < 10) {
+                vDataStopPoint += "0" + vDateRangeMonthTo;
+            } else {
+                vDataStopPoint += vDateRangeMonthTo;
+            }
+            if (parseInt(vDateRangeDayTo, 10) < 10) {
+                vDataStopPoint += "-0" + vDateRangeDayTo;
+            } else {
+                vDataStopPoint += "-" + vDateRangeDayTo;
+            }
+
+            vDataStopPoint += " " + vDateRangeTimeHourTo + ":" + vDateRangeTimeMinuteTo;
+
+
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: '/Chart/FetchChartSerie/',
+            data: {
+                "PointId": pointsListArray[0].PtId,
+                "ChartType": vCharType,
+                "DateRange": dataRange,
+                "AggregationInterval": vAggregationInterval,
+                "AggregationType": vAggregationType,
+                "DateFrom": vDataStartPoint,
+                "DateTo": vDataStopPoint,
+                "SeriesColor": pointsListArray[0].PtColour,
+                "SeriesDashStyle": pointsListArray[0].PtLineType
+
+
+            },
+            error: function () {
+                alert("An error occurred.");
+            },
+            success: function (data) {
+
+
+                var vSeriesAllinOne = data;
+
+
+                //alert('Data in JSON received');
+                seriesDataRK[j] = vSeriesAllinOne.seriesdata;
+                seriesColour[j] = vSeriesAllinOne.seriesColor; //variable
+
+                //bindChart(seriesData);
+                //GenerateChart21();
+
+
+                seriesData3[i] = {
+                    type: vSeriesAllinOne.seriesType, //  variable
+                    name: vSeriesAllinOne.seriesName,  //variable
+                    data: seriesDataRK[j], //variable
+                    //yAxis: 0, // label of the Y axiss 
+                    dashStyle: vSeriesAllinOne.seriesDashStyle, //variable
+                    /*
+                    tooltip: {
+                        
+                        shared: true,
+     
+                        //valueDecimals: 3
+                        //valueSuffix: ' kW'
+                        
+                        
+                    },*/
+                    lineWidth: vSeriesAllinOne.LineWidth, //variable
+                    pointStart: vSeriesAllinOne.pointStart,//Date.UTC(2020, 1, 1, 0, 0, 0), //variable
+                    pointInterval: vSeriesAllinOne.pointInterval, //60 * 1000, // 1minute =  60sec * 1000ms = 60000ms //varibale
+                    dataGrouping: {
+                        enabled: false
+                    },
+                    animation: {
+                        duration: 0
+                    }
+                }
+
+                seriesYaxis[i] = { //--- 1st yAxis
+                    title: {
+                        text: vSeriesAllinOne.seriesLabelFormat,//'Temp 1',
+                        style: {
+                            color: 'grey'//vSeriesAllinOne.seriesColor//'#FF7ed8'
+                        }
+                    },
+                    labels: {
+                        format: '{value} ',//+ vSeriesAllinOne.seriesLabelFormat, //'°C', //variable
+
+                        style: {
+                            color: 'grey' //vSeriesAllinOne.seriesColor//'#FF7ed8' //variable
+
+                        }
+
+                    },
+                    lineColor: '#CCD6EB',
+                    lineWidth: 1,
+
+                    linkedTo: null,
+                    opposite: false
+                    //or
+                    //opposite: false
+                };
+
+                i++;
+                j++;
+
+                RenderChart();
+            }
+
+        });
+
+
+    }
+
+
+    //Render Chart
+    function RenderChart() {
+
+
+        var options = {
+            chart: {
+                //type: 'line',
+                zoomType: 'x'
+            },
+            /*
+            title: {
+                text: 'AAPL Stock Price'
+            },*/
+            xAxis: {
+                type: 'datetime'
+            },
+            colors: seriesColour,
+            series: seriesData3,
+            tooltip: {
+                xDateFormat: '%Y-%m-%d %H:%M',
+                split: false,
+                //shared: true,
+                //valueDecimals: 2,
+                headerFormat: '<span style="font-size:10px">{point.key}</span><br/><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.2f}</b></td>' + '</tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true,
+
+                positioner: function (boxWidth, boxHeight, point) {
+                    return { x: point.plotX, y: point.plotY - 50 };
+                }
+                
+            },
+            yAxis: seriesYaxis,
+                
+
+            rangeSelector: {
+                inputEnabled: false, //disable range selectors
+                selected: 7, //0 1st button
+                buttons: [
+                    {
+                        type: 'minute',
+                        count: 5,
+                        text: '5M'
+                    },
+                    {
+                        type: 'hour',
+                        count: 1,
+                        text: '1h'
+                    },
+                    {
+                        type: 'day',
+                        count: 1,
+                        text: '1d'
+                    },
+
+                    {
+                        type: 'week',
+                        count: 1,
+                        text: '1w'
+                    },
+                    {
+                        type: 'month',
+                        count: 1,
+                        text: '1m'
+                    },
+                    {
+                        type: 'year',
+                        count: 1,
+                        text: '1y'
+                    },
+                    {
+                        type: 'ytd',
+                        text: 'YTD'
+                    },
+                    {
+                        type: 'all',
+                        text: 'All'
+                    }
+                ]
+            },
+            plotOptions: {
+                series: {
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                }
+            }
+        };
+        Highcharts.stockChart('ChartContainer', options);
+
+    }
+
+    
 
 </script>
 
