@@ -335,7 +335,8 @@ namespace WebAppEtronix20180824.Controllers
             string DateFrom,
             string DateTo,
             string SeriesColor,
-            string SeriesDashStyle
+            string SeriesDashStyle,
+            string MU
             )
 
         {
@@ -358,42 +359,83 @@ namespace WebAppEtronix20180824.Controllers
 
             PointDetails vPointDetails = _contextEntities.Database
                 .SqlQuery<PointDetails>("GetPointDetails " + "@PointId", vPointDetailSqlParameter).FirstOrDefault();
-                
 
 
 
 
+            //Prepare 
+            List<SeriesData> vSeriesData = new List<SeriesData>();
+
+            var vTableName = new SqlParameter("@TableName", vPointDetails.TableName );
+            var vDBName = new SqlParameter("@DataBaseName", vPointDetails.DatabaseName );
+            var vDateTimeFrom = new SqlParameter("@DateTimeStart", DateFrom );
+            var vDateTimeTo = new SqlParameter("@DateTimeStop", DateTo );
+
+            int[] vIntervalTab = PrepareIntervals(AggregationInterval);
+
+
+            var vAggregationInterval = new SqlParameter("@AggregationInterval", vIntervalTab[0].ToString());
+            var vAggregationFunction = new SqlParameter("@AggregationFunction", AggregationType);
+            var vAggregationNDays = new SqlParameter("@AggregationNDays", vIntervalTab[1].ToString());
+            var vAggregationFunctionCum = new SqlParameter("@AggregationFunctionCum", "Null");
+
+
+            
+
+            vSeriesData = _contextEntities.Database.SqlQuery<SeriesData>("GetSeriesAggregationDynamicNMinutesNDays_TestV2 " +
+                                                           "@TableName, " +
+                                                           "@DataBaseName, " +
+                                                           "@DateTimeStart, " +
+                                                           "@DateTimeStop, " +
+                                                           "@AggregationInterval, " +
+                                                           "@AggregationFunction, " +
+                                                           "@AggregationNDays, " +
+                                                           "@AggregationFunctionCum " ,
+                                                           vTableName,
+                                                           vDBName,
+                                                           vDateTimeFrom,
+                                                           vDateTimeTo,
+                                                           vAggregationInterval,
+                                                           vAggregationFunction,
+                                                           vAggregationNDays,
+                                                           vAggregationFunctionCum).ToList();
+             
 
 
 
-            ulong Max = 8760 * 1 + 1;
+
+            ulong Max = 60;//8760 * 1 + 1;
             float vd = 0;
 
             Root vObject = new Root();
-            vObject.seriesdata = new List<double>();
+            vObject.seriesdata = new List<double?>();
 
             Random vRandom = new Random();
 
-            for (ulong i = 0; i < Max; i++)
+            for (int i = 0; i < vSeriesData.Count; i++)
             {
                 //time = (ulong)(1609459200000 + ((i * 60) * 1000));
-                vd = vRandom.Next(-100, 100);
-                vObject.seriesdata.Add(vd);
+                //vd = vRandom.Next(-100, 100);
+
+                vObject.seriesdata.Add(vSeriesData[i].Value);
             }
 
+            //Get the start Point
 
+            long vDateTimeStart = GetCurrentUnixTimestampMillis(Convert.ToDateTime(DateFrom));
+            long vInterval = LongGetIntervalInMilliseconds(AggregationInterval);
 
             vObject.Id = PointId;
             vObject.seriesType = "spline";
-            vObject.seriesName = "Main Power";
+            vObject.seriesName = vPointDetails.PointName;
             vObject.seriesDashStyle = SeriesDashStyle;
             vObject.seriesColor = vHexColor;
             vObject.LineWidth = 2;
-            vObject.pointStart = 1609459200000;
-            vObject.pointInterval = 60000;
+            vObject.pointStart = vDateTimeStart; //1609459200000; unix ms from the epoch
+            vObject.pointInterval = vInterval;
             vObject.seriesYaxisTitle = "";
             vObject.seriesYaxisColor = vHexColor;
-            vObject.seriesLabelFormat = "kW";
+            vObject.seriesLabelFormat = MU;
             vObject.seriesLabelStyleColor = vHexColor;
             vObject.errorFlag = false;
             vObject.errorMessage = "";
@@ -406,5 +448,232 @@ namespace WebAppEtronix20180824.Controllers
 
             //return null;
         }
+
+        private static readonly DateTime UnixEpoch =
+            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+        public static long GetCurrentUnixTimestampMillis(DateTime pDateTime)
+        {
+            return (long)(pDateTime - UnixEpoch).TotalMilliseconds;
+        }
+
+        public static DateTime DateTimeFromUnixTimestampMillis(long millis)
+        {
+            return UnixEpoch.AddMilliseconds(millis);
+        }
+
+        public static long LongGetIntervalInMilliseconds(string pInterval)
+        {
+            long vInterval = 60000;
+            switch (pInterval)
+            {
+                case "1m":
+                    vInterval = vInterval*1;
+                    break;
+                case "5m":
+                    vInterval = vInterval*5;
+                    break;
+                case "10m":
+                    vInterval = vInterval*10;
+                    break;
+                case "15m":
+                    vInterval = vInterval * 15;
+                    break;
+                case "20m":
+                    vInterval = vInterval * 30;
+                    break;
+                case "30m":
+                    vInterval = vInterval * 30;
+                    break;
+                case "1h":
+                    vInterval = vInterval * 60;
+                    break;
+                case "2h":
+                    vInterval = vInterval * 60*2;
+                    break;
+                case "3h":
+                    vInterval = vInterval * 60 * 3;
+                    break;
+                case "4h":
+                    vInterval = vInterval * 60 * 4;
+                    break;
+                case "6h":
+                    vInterval = vInterval * 60 * 6;
+                    break;
+                case "12h":
+                    vInterval = vInterval * 60 * 12;
+                    break;
+                case "1D":
+                    vInterval = vInterval * 60 * 24;
+                    break;
+                case "2D":
+                    vInterval = vInterval * 60 * 24*2;
+                    break;
+                case "3D":
+                    vInterval = vInterval * 60 * 24 * 3;
+                    break;
+                case "4D":
+                    vInterval = vInterval * 60 * 24 * 4;
+                    break;
+                case "5D":
+                    vInterval = vInterval * 60 * 24 * 5;
+                    break;
+                case "6D":
+                    vInterval = vInterval * 60 * 24 * 6;
+                    break;
+                case "1W":
+                    vInterval = vInterval * 60 * 24 * 7;
+                    break;
+                case "2W":
+                    vInterval = vInterval * 60 * 24 * 7*2;
+                    break;
+                case "3W":
+                    vInterval = vInterval * 60 * 24 * 7 * 3;
+                    break;
+                case "1M":
+                    vInterval = vInterval * 60 * 24  * 31;
+                    break;
+                case "2M":
+                    vInterval = vInterval * 60 * 24 * 31*2;
+                    break;
+                case "3M":
+                    vInterval = vInterval * 60 * 24  * 31 * 3;
+                    break;
+                case "4M":
+                    vInterval = vInterval * 60 * 24  * 31 * 4;
+                    break;
+                case "6M":
+                    vInterval = vInterval * 60 * 24  * 31 * 6;
+                    break;
+                case "1Y":
+                    vInterval = vInterval * 60 * 24  * 31 * 12;
+                    break;
+
+                default:
+                    //1m
+                    vInterval = 60000;
+                    break;
+
+                    
+            }
+
+            return vInterval;
+        }
+
+        public static int [] PrepareIntervals (string pInterval)
+        {
+            int vInterval = 1;
+            int vNDays =0;
+
+            int[] vVariableInt = new int[2];
+
+
+            switch (pInterval)
+            {
+                case "1m":
+                    vInterval = 1;
+                    break;
+                case "5m":
+                    vInterval = 5;
+                    break;
+                case "10m":
+                    vInterval = 10;
+                    break;
+                case "15m":
+                    vInterval = 15;
+                    break;
+                case "20m":
+                    vInterval = 20;
+                    break;
+                case "30m":
+                    vInterval = 30;
+                    break;
+                case "1h":
+                    vInterval = 60;
+                    break;
+                case "2h":
+                    vInterval = 60*2;
+                    break;
+                case "3h":
+                    vInterval = 60 * 3;
+                    break;
+                case "4h":
+                    vInterval = 60 * 4;
+                    break;
+                case "6h":
+                    vInterval = 360;
+                    break;
+                case "12h":
+                    vInterval = 720;
+                    break;
+                case "1D":
+                    vInterval = 1440;
+                    break;
+                case "2D":
+                    vInterval = 1440;
+                    vNDays = 2;
+                    break;
+                case "3D":
+                    vInterval = 1440;
+                    vNDays = 3;
+                    break;
+                case "4D":
+                    vInterval = 1440;
+                    vNDays = 4;
+                    break;
+                case "5D":
+                    vInterval = 1440;
+                    vNDays = 5;
+                    break;
+                case "6D":
+                    vInterval = 1440;
+                    vNDays = 6;
+                    break;
+                case "1W":
+                    vInterval = 1440;
+                    vNDays = 7;
+                    break;
+                case "2W":
+                    vInterval = 1440;
+                    vNDays = 14;
+                    break;
+                case "3W":
+                    vInterval = 1440;
+                    vNDays = 21;
+                    break;
+                case "1M":
+                    vInterval = vInterval * 60 * 24  * 31;
+                    break;
+                case "2M":
+                    vInterval = vInterval * 60 * 24 * 31*2;
+                    break;
+                case "3M":
+                    vInterval = vInterval * 60 * 24  * 31 * 3;
+                    break;
+                case "4M":
+                    vInterval = vInterval * 60 * 24  * 31 * 4;
+                    break;
+                case "6M":
+                    vInterval = vInterval * 60 * 24  * 31 * 6;
+                    break;
+                case "1Y":
+                    vInterval = vInterval * 60 * 24  * 31 * 12;
+                    break;
+
+                default:
+                    //1m
+                    vInterval = 60000;
+                    break;
+
+                    
+            }
+
+            vVariableInt[0] = vInterval;
+            vVariableInt[1] = vNDays;
+
+            return vVariableInt;
+
+        }
+
     }
 }

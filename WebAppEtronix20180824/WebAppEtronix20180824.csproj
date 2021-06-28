@@ -250,6 +250,7 @@
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap-4.3.1\bootstrap.min.js.map" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\WebAppEtronix.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\glypchionRK.css" />

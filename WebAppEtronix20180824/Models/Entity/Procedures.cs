@@ -138,8 +138,8 @@ namespace WebAppEtronix20180824.Models.Entity
             public bool Access { get; set; }
 
 
-
-
         }
+
+
     }
 }

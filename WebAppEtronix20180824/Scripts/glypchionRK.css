@@ -1,7 +1,7 @@
 ﻿@font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'),url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg') format('svg');
 }
 
 .glyphicon {
@@ -54,6 +54,8 @@
 .Rkglyphicon-search:before {
   content: "\e003";
 }
+
+
 
 .Rkglyphicon-heart:before {
   content: "\e005";
@@ -597,6 +599,13 @@
 
 .Rkglyphicon-sort-by-attributes:before {
   content: "\e155";
+}
+
+.Rkglyphicon-menu-down:before {
+    content: "\e259";
+}
+.Rkglyphicon-menu-up:before {
+    content: "\e260";
 }
 
 .Rkglyphicon-sort-by-attributes-alt:before {

@@ -1,3 +1,5 @@
+using System.Data.Entity.Infrastructure;
+
 namespace WebAppEtronix20180824.Models.Entity
 {
     using System;
@@ -10,6 +12,16 @@ namespace WebAppEtronix20180824.Models.Entity
         public Entities()
             : base("name=Entities")
         {
+            //var adapter = (IObjectContextAdapter)this;
+            //var objectContext = adapter.ObjectContext;
+            //objectContext.CommandTimeout = 1 * 60; // value in seconds
+            this.SetCommandTimeOut(180);
+        }
+
+        public void SetCommandTimeOut(int Timeout)
+        {
+            var objectContext = (this as IObjectContextAdapter).ObjectContext;
+            objectContext.CommandTimeout = Timeout;
         }
 
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
