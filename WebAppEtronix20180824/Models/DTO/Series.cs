@@ -16,7 +16,8 @@ namespace WebAppEtronix20180824.Models.DTO
     public class Root
     {
         public int Id { get; set; }
-        public List<double ?> seriesdata { get; set; }
+        public List<double ?> seriesdata { get; set; } // was null able double 
+        //public string seriesdata { get; set; } // was null able double 
         public string seriesType { get; set; }
         public string seriesName { get; set; }
         public string seriesDashStyle { get; set; }

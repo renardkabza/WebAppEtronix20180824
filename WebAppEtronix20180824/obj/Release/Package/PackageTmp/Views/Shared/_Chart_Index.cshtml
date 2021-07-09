@@ -117,397 +117,424 @@
 <br />
 <h2 id="HeaderChartControlPanel"><span class="text-white">Chart Control.</span></h2>
 <div id="ChartControlPanel" class="AIpanel AIpanel-default">
-    <div class="AIpanel-body">
+    <div class="AIpanel-heading">
         <div class="container">
-        <div class="AIrow">
-            <div class="col-md-3 col-lg-3">
-                <label for="ChartType" class="text-primary"><h6>Chart Type</h6></label>
-                <select id="ChartType" class="form-control center_align">
-                    <option value="LineChart">Line Chart</option>
-                    @*<option value="BarChart">Bar Chart</option>*@
-                </select>
-            </div>
-            <div class="col-md-3 col-lg-3">
-                <label for="DateRange" class="text-primary"><h6>Date Range</h6></label>
-                <select id="DateRange" class="form-control center_align">
-                    <option value="" selected disabled>Date Range</option>
-                    <option value="Today">Today</option>
-                    <option value="Yesterday">Yesterday</option>
-                    <option value="Last 1h">Last 1h</option>
-                    <option value="Last 24h">Last 24h</option>
-                    <option value="Last 1D">Last 1D</option>
-                    <option value="Last 1W">Last 1W</option>
-                    <option value="Last 1M">Last 1M</option>
-                    <option value="Last 1Y">Last 1Y</option>
-                    <option value="Week-To-Date">Week-To-Date</option>
-                    <option value="Month-To-Date">Month-To-Date</option>
-                    <option value="Year-To-Date">Year-To-Date</option>
-                </select>
-            </div>
-            
-            <!--
-            <div class="col-md-3 col-lg-3">
-                <label for="AggregationType" class="text-primary"><h6>Aggr. Fun 1</h6></label>
-                <select id="AggregationType" class="form-control center_align">
-                    <option value="Average">Average</option>
-                    <option value="Maximum">Maximum</option>
-                    <option value="Minimum">Minimum</option>
-                    <option value="Summary">Summary</option>
-                    <option value="Cumulative">Cumulative</option>
-                </select>
-            </div> -->
-        </div>
-        <div class="AIrow">
-            <div class="col-md-3 col-lg-3">
-                <label for="AggregationInterval" class="text-primary"><h6>Aggregation Interval</h6></label>
-                <select id="AggregationInterval" class="form-control center_align">
-                    <option value="1m">1 min</option>
-                    <option value="5m">5 min</option>
-                    <option value="10m">10 min</option>
-                    <option value="15m">15 min</option>
-                    <option value="20m">20 min</option>
-                    <option value="30m">30 min</option>
-                    <option value="1h">1 h</option>
-                    <option value="2h">2 h</option>
-                    <option value="3h">3 h</option>
-                    <option value="4h">4 h</option>
-                    <option value="6h">6 h</option>
-                    <option value="8h">8 h</option>
-                    <option value="12h">12 h</option>
-                    <option value="1D">1 D</option>
-                    <option value="2D">2 D</option>
-                    <option value="3D">3 D</option>
-                    <option value="4D">4 D</option>
-                    <option value="5D">5 D</option>
-                    <option value="1W">1 W</option>
-                    <option value="2W">2 W</option>
-                    <option value="3W">3 W</option>
-                    <option value="1M">1 M</option>
-                    <option value="2M">2 M</option>
-                    <option value="3M">3 M</option>
-                    <option value="4M">4 M</option>
-                    <option value="6M">6 M</option>
-                    <option value="1Y">1 Y</option>
+            <div class="row">
+                <div class="col-md-4">
 
-                </select>
-            </div>
-            <div class="col-md-3 col-lg-3">
-                <label for="AggregationType" class="text-primary"><h6>Aggr. Fun 1</h6></label>
-                <select id="AggregationType" class="form-control center_align">
-                    <option value="Average">Average</option>
-                    <option value="Maximum">Maximum</option>
-                    <option value="Minimum">Minimum</option>
-                    
-                </select>
-            </div>
-            <div class="col-md-3 col-lg-3">
-                <label for="AggregationTypeFun2" class="text-primary"><h6>Aggr. Fun 2</h6></label>
-                <select id="AggregationTypeFun2" class="form-control center_align">
-                    
-                    <option value="Summary">Summary</option>
-                    <option value="Cumulative">Cumulative</option>
-                </select>
+                    <!--<label for="button101" class="text-secondary">Filter</label>-->
+                    <button id="btn_6" type="button" class="btn btn-primary RKbtn" onclick="OpenChartControlPanelBody()">
+                        <span class="glyphicon Rkglyphicon-chevron-down"></span>
+                    </button>
+
+                    <button id="btn_7" type="button" class="btn btn-primary RKbtn" onclick="HideChartControlPanelBody()">
+                        <span class="glyphicon Rkglyphicon-chevron-up"></span>
+                    </button>
+                </div>
+
             </div>
         </div>
-        <div class="AIrow">
+    
+    </div>
+    <div id="ChartControlPanelBody" class="AIpanel-body">
+        <div class="container">
+            <div class="AIrow">
+                <div class="col-md-3 col-lg-3">
+                    <label for="ChartType" class="text-primary"><h6>Chart Type</h6></label>
+                    <select id="ChartType" class="form-control center_align">
+                        <option value="LineChart">Line Chart</option>
+                        @*<option value="BarChart">Bar Chart</option>*@
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="DateRange" class="text-primary"><h6>Date Range</h6></label>
+                    <select id="DateRange" class="form-control center_align">
+                        <option value="" selected disabled>Date Range</option>
+                        <option value="Today">Today</option>
+                        <option value="Yesterday">Yesterday</option>
+                        <option value="Last 1h">Last 1h</option>
+                        <option value="Last 24h">Last 24h</option>
+                        <option value="Last 1D">Last 1D</option>
+                        <option value="Last 1W">Last 1W</option>
+                        <option value="Last 1M">Last 1M</option>
+                        <option value="Last 1Y">Last 1Y</option>
+                        <option value="Week-To-Date">Week-To-Date</option>
+                        <option value="Month-To-Date">Month-To-Date</option>
+                        <option value="Year-To-Date">Year-To-Date</option>
+                    </select>
+                </div>
 
-            <div class="col-md-4 col-lg-2">
-
-                <label for="DaySelectorFrom" class="text-primary"><h6>Date From</h6></label>
-                <select id="DaySelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Day</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-
-                </select>
+                <!--
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationType" class="text-primary"><h6>Aggr. Fun 1</h6></label>
+                    <select id="AggregationType" class="form-control center_align">
+                        <option value="Average">Average</option>
+                        <option value="Maximum">Maximum</option>
+                        <option value="Minimum">Minimum</option>
+                        <option value="Summary">Summary</option>
+                        <option value="Cumulative">Cumulative</option>
+                    </select>
+                </div> -->
             </div>
+            <div class="AIrow">
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationInterval" class="text-primary"><h6>Aggregation Interval</h6></label>
+                    <select id="AggregationInterval" class="form-control center_align">
+                        <option value="1m">1 min</option>
+                        <option value="5m">5 min</option>
+                        <option value="10m">10 min</option>
+                        <option value="15m">15 min</option>
+                        <option value="20m">20 min</option>
+                        <option value="30m">30 min</option>
+                        <option value="1h">1 h</option>
+                        <option value="2h">2 h</option>
+                        <option value="3h">3 h</option>
+                        <option value="4h">4 h</option>
+                        <option value="6h">6 h</option>
+                        <option value="8h">8 h</option>
+                        <option value="12h">12 h</option>
+                        <option value="1D">1 D</option>
+                        <option value="2D">2 D</option>
+                        <option value="3D">3 D</option>
+                        <option value="4D">4 D</option>
+                        <option value="5D">5 D</option>
+                        <option value="1W">1 W</option>
+                        <option value="2W">2 W</option>
+                        <option value="3W">3 W</option>
+                        <option value="1M">1 M</option>
+                        <option value="2M">2 M</option>
+                        <option value="3M">3 M</option>
+                        <option value="4M">4 M</option>
+                        <option value="6M">6 M</option>
+                        <option value="1Y">1 Y</option>
 
-            <div class="col-md-4 col-lg-2">
-                <label for="MonthSelectorFrom" class="text-primary"><h6>&nbsp;</h6></label>
-                <select id="MonthSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationType" class="text-primary"><h6>Aggr. Fun 1</h6></label>
+                    <select id="AggregationType" class="form-control center_align">
+                        <option value="Avg">Average</option>
+                        <option value="Max">Maximum</option>
+                        <option value="Min">Minimum</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationTypeFun2" class="text-primary"><h6>Convertion</h6></label>
+                    <select id="AggregationTypeFun2" class="form-control center_align">
+                        <option value="Null">Null</option>
+                        <option value="P2ESummary">P2E Summary</option>
+                        <option value="P2ECumulative">P2E Cumulative</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <label for="AggregationTypeFun3" class="text-primary"><h6>Energy</h6></label>
+                    <select id="AggregationTypeFun3" class="form-control center_align">
+                        <option value="Null">Null</option>
+                        <option value="Sum">Sum</option>
+                        <option value="Cum">Cum</option>
+                    </select>
+                </div>
+                
             </div>
+            <div class="AIrow">
 
-            <div class="col-md-4 col-lg-2">
-                <label for="YearSelectorFrom" class="text-primary"><h6>&nbsp;</h6></label>
-                <select id="YearSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Year</option>
-                    <option value="2000">2000</option>
-                    <option value="2001">2001</option>
-                    <option value="2002">2002</option>
-                    <option value="2003">2003</option>
-                    <option value="2004">2004</option>
-                    <option value="2005">2005</option>
-                    <option value="2006">2006</option>
-                    <option value="2007">2007</option>
-                    <option value="2008">2008</option>
-                    <option value="2009">2009</option>
-                    <option value="2010">2010</option>
-                    <option value="2011">2011</option>
-                    <option value="2012">2012</option>
-                    <option value="2013">2013</option>
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                    <option value="2028">2028</option>
-                    <option value="2029">2029</option>
-                    <option value="2030">2030</option>
-                </select>
+                <div class="col-md-4 col-lg-2">
+
+                    <label for="DaySelectorFrom" class="text-primary"><h6>Date From</h6></label>
+                    <select id="DaySelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Day</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <label for="MonthSelectorFrom" class="text-primary"><h6>&nbsp;</h6></label>
+                    <select id="MonthSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <label for="YearSelectorFrom" class="text-primary"><h6>&nbsp;</h6></label>
+                    <select id="YearSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Year</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <label for="HourSelectorFrom" class="text-primary"><h6>Time From</h6></label>
+                    <select id="HourSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Hour</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <label for="MinuteSelectorFrom" class="text-primary"><h6>&nbsp;</h6></label>
+                    <select id="MinuteSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Minute</option>
+                        <option value="00">00</option>
+                        <option value="05">05</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                        <option value="55">55</option>
+                    </select>
+                </div>
             </div>
+            <div class="AIrow">
+                <div class="col-md-4 col-lg-2">
+                    <label for="DaySelectorTo" class="text-primary"><h6>Date To</h6></label>
+                    <select id="DaySelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Day</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
 
-            <div class="col-md-4 col-lg-2">
-                <label for="HourSelectorFrom" class="text-primary"><h6>Time From</h6></label>
-                <select id="HourSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Hour</option>
-                    <option value="00">00</option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
+                    </select>
+                </div>
 
-                </select>
+                <div class="col-md-4 col-lg-2">
+                    <label for="MonthSelectorTo" class="text-primary"><h6>&nbsp;</h6></label>
+                    <select id="MonthSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <label for="YearSelectorTo" class="text-primary"><h6>&nbsp;</h6></label>
+                    <select id="YearSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Year</option>
+                        <option value="2000">2000</option>
+                        <option value="2001">2001</option>
+                        <option value="2002">2002</option>
+                        <option value="2003">2003</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <label for="HourSelectorTo" class="text-primary"><h6>Time To</h6></label>
+                    <select id="HourSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Time</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <label for="MinuteSelectorTo" class="text-primary"><h6>&nbsp;</h6></label>
+                    <select id="MinuteSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
+                        <option value="" selected disabled>Minute</option>
+                        <option value="00">00</option>
+                        <option value="05">05</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                        <option value="55">55</option>
+
+                    </select>
+                </div>
             </div>
-
-            <div class="col-md-4 col-lg-2">
-                <label for="MinuteSelectorFrom" class="text-primary"><h6>&nbsp;</h6></label>
-                <select id="MinuteSelectorFrom" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Minute</option>
-                    <option value="00">00</option>
-                    <option value="05">05</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="30">30</option>
-                    <option value="35">35</option>
-                    <option value="40">40</option>
-                    <option value="45">45</option>
-                    <option value="50">50</option>
-                    <option value="55">55</option>
-                </select>
-            </div>
-        </div>
-        <div class="AIrow">
-            <div class="col-md-4 col-lg-2">
-                <label for="DaySelectorTo" class="text-primary"><h6>Date To</h6></label>
-                <select id="DaySelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Day</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-
-                </select>
-            </div>
-
-            <div class="col-md-4 col-lg-2">
-                <label for="MonthSelectorTo" class="text-primary"><h6>&nbsp;</h6></label>
-                <select id="MonthSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-
-                </select>
-            </div>
-
-            <div class="col-md-4 col-lg-2">
-                <label for="YearSelectorTo" class="text-primary"><h6>&nbsp;</h6></label>
-                <select id="YearSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Year</option>
-                    <option value="2000">2000</option>
-                    <option value="2001">2001</option>
-                    <option value="2002">2002</option>
-                    <option value="2003">2003</option>
-                    <option value="2004">2004</option>
-                    <option value="2005">2005</option>
-                    <option value="2006">2006</option>
-                    <option value="2007">2007</option>
-                    <option value="2008">2008</option>
-                    <option value="2009">2009</option>
-                    <option value="2010">2010</option>
-                    <option value="2011">2011</option>
-                    <option value="2012">2012</option>
-                    <option value="2013">2013</option>
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                    <option value="2028">2028</option>
-                    <option value="2029">2029</option>
-                    <option value="2030">2030</option>
-                </select>
-            </div>
-            <div class="col-md-4 col-lg-2">
-                <label for="HourSelectorTo" class="text-primary"><h6>Time To</h6></label>
-                <select id="HourSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Time</option>
-                    <option value="00">00</option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-
-                </select>
-            </div>
-
-            <div class="col-md-4 col-lg-2">
-                <label for="MinuteSelectorTo" class="text-primary"><h6>&nbsp;</h6></label>
-                <select id="MinuteSelectorTo" class="form-control center_align" onchange="DateFrameChanged()">
-                    <option value="" selected disabled>Minute</option>
-                    <option value="00">00</option>
-                    <option value="05">05</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="30">30</option>
-                    <option value="35">35</option>
-                    <option value="40">40</option>
-                    <option value="45">45</option>
-                    <option value="50">50</option>
-                    <option value="55">55</option>
-
-                </select>
-            </div>
-        </div>
 
         </div>
     </div>
@@ -663,9 +690,7 @@
 
                     <!--<label for="btn_Point_1" class="text-white">Measurement Uni
                         t Type</label>-->
-                    <button id="btn_Point_1" type="button" cl
-                            ass="btn btn-primary b
-                        <button id="btn_Point_1" type="button" class="btn btn-primary btn-block" onclick="button101()">
+                    <button id="btn_Point_1" class="btn btn-primary btn-block" onclick="button101()">
                         <span class="glyphicon Rkglyphicon-search"> </span>
                     </button>
 
@@ -2120,8 +2145,31 @@
 
     }
 
+
+    var seriesData3 = [];
+    var i = 0;
+    var seriesYaxis = [];
+
+    var seriesColour = [];
+    var seriesDataRK = [];
+    j = 0;
+
+    //2018-06-28
+    function CleanBuffer() {
+        seriesData3 = [];
+         i = 0;
+        seriesYaxis = [];
+
+         seriesColour = [];
+         seriesDataRK = [];
+        j = 0;
+    }
+
     //2021-05-10
     function GetChar() {
+        CleanBuffer();
+        // clear buffers
+        
 
         //show panel
         $('#ChartPanel').show();
@@ -2251,7 +2299,8 @@
 
             //call AJAX
 
-                FetchChartSerie(1234, 'spline', null, '1min', 'Average', '2021-01-01 00:00', '2021-01-07 00:00');
+                //FetchChartSerie(1234, 'spline', null, '1min', 'Average', '2020-01-01 00:00:00', '2021-01-07 00:00');
+                FetchChartSerie();
                 //RenderChart();
 
             }
@@ -2351,22 +2400,16 @@
 
 
 
-    var seriesData3 = [];
-    var i = 0;
-    var seriesYaxis = [];
-
-    var seriesColour = [];
-    var seriesDataRK = [];
-    j = 0;
+    
     //dynamic formating
     function FetchChartSerie(
-        pointId, 
+        /*pointId, 
         chartType, 
         dataRange, 
         aggregationInterval,
         aggregationType,
         dateFrom,
-        dateTo
+        dateTo*/
         )
         {
         var vCharType = $("#ChartType").val();
@@ -2428,7 +2471,7 @@
                 vDataStartPoint += "-"+vDateRangeDayFrom;
             }
 
-            vDataStartPoint += " " + vDateRangeTimeHourFrom + ":" + vDateRangeTimeMinuteFrom;
+            vDataStartPoint += " " + vDateRangeTimeHourFrom + ":" + vDateRangeTimeMinuteFrom+":00";
             
             var vDataStopPoint = vDateRangeYearTo + "-";
             if (parseInt(vDateRangeMonthTo, 10) < 10) {
@@ -2442,101 +2485,114 @@
                 vDataStopPoint += "-" + vDateRangeDayTo;
             }
 
-            vDataStopPoint += " " + vDateRangeTimeHourTo + ":" + vDateRangeTimeMinuteTo;
+            vDataStopPoint += " " + vDateRangeTimeHourTo + ":" + vDateRangeTimeMinuteTo+":00";
 
+            var vMU = vPoints[0].cells[5].outerText;
 
-        $.ajax({
-            type: "GET",
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            url: '/Chart/FetchChartSerie/',
-            data: {
-                "PointId": pointsListArray[0].PtId,
-                "ChartType": vCharType,
-                "DateRange": dataRange,
-                "AggregationInterval": vAggregationInterval,
-                "AggregationType": vAggregationType,
-                "DateFrom": vDataStartPoint,
-                "DateTo": vDataStopPoint,
-                "SeriesColor": pointsListArray[0].PtColour,
-                "SeriesDashStyle": pointsListArray[0].PtLineType
+            $.ajax({
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: '/Chart/FetchChartSerie/',
+                timeout: 0,
+                async: true,
+                data: {
+                    "PointId": pointsListArray[0].PtId,
+                    "ChartType": vCharType,
+                    "DateRange": vDateRange,
+                    "AggregationInterval": vAggregationInterval,
+                    "AggregationType": vAggregationType,
+                    "DateFrom": vDataStartPoint,
+                    "DateTo": vDataStopPoint,
+                    "SeriesColor": pointsListArray[0].PtColour,
+                    "SeriesDashStyle": pointsListArray[0].PtLineType,
+                    "MU": vMU
 
+                },
+                error: /*function() {
+                    alert("An error occurred.");*/
+                    function (xhr, status, error) {
+                        //var err = JSON.parse(xhr.responseText);
+                        alert("Status:" + status);
+                        alert("Error:" + error);
+                        alert("xhr.response:" + xhr.responseText);
+                        alert("eval of xhr.response:" + xhr.error);
 
-            },
-            error: function () {
-                alert("An error occurred.");
-            },
-            success: function (data) {
-
-
-                var vSeriesAllinOne = data;
-
-
-                //alert('Data in JSON received');
-                seriesDataRK[j] = vSeriesAllinOne.seriesdata;
-                seriesColour[j] = vSeriesAllinOne.seriesColor; //variable
-
-                //bindChart(seriesData);
-                //GenerateChart21();
-
-
-                seriesData3[i] = {
-                    type: vSeriesAllinOne.seriesType, //  variable
-                    name: vSeriesAllinOne.seriesName,  //variable
-                    data: seriesDataRK[j], //variable
-                    //yAxis: 0, // label of the Y axiss 
-                    dashStyle: vSeriesAllinOne.seriesDashStyle, //variable
-                    /*
-                    tooltip: {
-                        
-                        shared: true,
-     
-                        //valueDecimals: 3
-                        //valueSuffix: ' kW'
-                        
-                        
-                    },*/
-                    lineWidth: vSeriesAllinOne.LineWidth, //variable
-                    pointStart: vSeriesAllinOne.pointStart,//Date.UTC(2020, 1, 1, 0, 0, 0), //variable
-                    pointInterval: vSeriesAllinOne.pointInterval, //60 * 1000, // 1minute =  60sec * 1000ms = 60000ms //varibale
-                    dataGrouping: {
-                        enabled: false
                     },
-                    animation: {
-                        duration: 0
+                success: function(data) {
+
+
+                    var vSeriesAllinOne = data;
+
+
+                    //alert('Data in JSON received');
+                    seriesDataRK[j] = vSeriesAllinOne.seriesdata;
+                    seriesColour[j] = vSeriesAllinOne.seriesColor; //variable
+
+                    //bindChart(seriesData);
+                    //GenerateChart21();
+
+
+                    seriesData3[i] = {
+                        type: vSeriesAllinOne.seriesType, //  variable
+                        name: vSeriesAllinOne.seriesName, //variable
+                        data: seriesDataRK[j], //variable
+                        //yAxis: 0, // label of the Y axiss 
+                        dashStyle: vSeriesAllinOne.seriesDashStyle, //variable
+                        /*
+                        tooltip: {
+                            
+                            shared: true,
+         
+                            //valueDecimals: 3
+                            //valueSuffix: ' kW'
+                            
+                            
+                        },*/
+                        lineWidth: vSeriesAllinOne.LineWidth, //variable
+                        pointStart: vSeriesAllinOne.pointStart, //Date.UTC(2020, 1, 1, 0, 0, 0), //variable
+                        pointInterval:
+                            vSeriesAllinOne
+                                .pointInterval, //60 * 1000, // 1minute =  60sec * 1000ms = 60000ms //varibale
+                        dataGrouping: {
+                            enabled: false
+                        },
+                        animation: {
+                            duration: 0
+                        }
                     }
+
+                    seriesYaxis[i] = { //--- 1st yAxis
+                        title: {
+                            text: vSeriesAllinOne.seriesLabelFormat, //'Temp 1',
+                            style: {
+                                color: 'grey' //vSeriesAllinOne.seriesColor//'#FF7ed8'
+                            }
+                        },
+                        labels: {
+                            format: '{value} ', //+ vSeriesAllinOne.seriesLabelFormat, //'°C', //variable
+
+                            style: {
+                                color: 'grey' //vSeriesAllinOne.seriesColor//'#FF7ed8' //variable
+
+                            }
+
+                        },
+                        lineColor: '#CCD6EB',
+                        lineWidth: 1,
+
+                        linkedTo: null,
+                        opposite: false
+                        //or
+                        //opposite: false
+                    };
+
+                    i++;
+                    j++;
+
+                    RenderChart();
                 }
-
-                seriesYaxis[i] = { //--- 1st yAxis
-                    title: {
-                        text: vSeriesAllinOne.seriesLabelFormat,//'Temp 1',
-                        style: {
-                            color: 'grey'//vSeriesAllinOne.seriesColor//'#FF7ed8'
-                        }
-                    },
-                    labels: {
-                        format: '{value} ',//+ vSeriesAllinOne.seriesLabelFormat, //'°C', //variable
-
-                        style: {
-                            color: 'grey' //vSeriesAllinOne.seriesColor//'#FF7ed8' //variable
-
-                        }
-
-                    },
-                    lineColor: '#CCD6EB',
-                    lineWidth: 1,
-
-                    linkedTo: null,
-                    opposite: false
-                    //or
-                    //opposite: false
-                };
-
-                i++;
-                j++;
-
-                RenderChart();
-            }
+                
 
         });
 
@@ -2640,6 +2696,13 @@
 
     }
 
+    function OpenChartControlPanelBody() {
+        $('#ChartControlPanelBody').show();
+    }
+
+    function HideChartControlPanelBody() {
+        $('#ChartControlPanelBody').hide();
+    }
     
 
 </script>

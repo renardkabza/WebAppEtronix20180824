@@ -595,7 +595,7 @@
                     <span class="glyphicon Rkglyphicon-sort-by-attributes"></span>
                 </button>
 
-                <button type="button" id="button102" class="btn btn-success RKbtn" onclick="button102()" value="Get data">Get Data</button>
+                <button type="button" id="button102x" class="btn btn-success RKbtn" onclick="button102()" value="Get data">Get Data</button>
                 <button type="button" id="PointStatus" class="btn btn-success RKbtn d-none">Loading Data </button>
 
             </div>
@@ -852,6 +852,10 @@
 
                 <div class="col-md-3">
                     <input type="button" id="button102" class="btn btn-success btn-block RKbtn" onclick="GetChar()" value="Get Chart">
+                </div>
+                
+                <div class="col-md-3">
+                    <input type="button" id="button103" class="btn btn-success btn-block RKbtn" onclick="GetChar2()" value="Get Chart">
                 </div>
 
             </div>
@@ -2512,9 +2516,13 @@
                 error: /*function() {
                     alert("An error occurred.");*/
                     function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        alert(err.Message);
-                },
+                        //var err = JSON.parse(xhr.responseText);
+                        alert("Status:" + status);
+                        alert("Error:" + error);
+                        alert("xhr.response:" + xhr.responseText);
+                        alert("eval of xhr.response:" + xhr.error);
+
+                    },
                 success: function(data) {
 
 
@@ -2547,9 +2555,7 @@
                         },*/
                         lineWidth: vSeriesAllinOne.LineWidth, //variable
                         pointStart: vSeriesAllinOne.pointStart, //Date.UTC(2020, 1, 1, 0, 0, 0), //variable
-                        pointInterval:
-                            vSeriesAllinOne
-                                .pointInterval, //60 * 1000, // 1minute =  60sec * 1000ms = 60000ms //varibale
+                        pointInterval: vSeriesAllinOne.pointInterval, //60 * 1000, // 1minute =  60sec * 1000ms = 60000ms //varibale
                         dataGrouping: {
                             enabled: false
                         },
@@ -2595,12 +2601,161 @@
 
     }
 
+    //dynamic formating
+    function FetchChartSerieZoomed(pStartUnix, pStopUnix
+        /*pointId, 
+        chartType, 
+        dataRange, 
+        aggregationInterval,
+        aggregationType,
+        dateFrom,
+        dateTo*/
+        ) {
+        var vCharType = $("#ChartType").val();
+        var vDateRange = $("#DateRange").val();
+        var vAggregationInterval = $("#AggregationInterval").val();
+        var vAggregationType = $("#AggregationType").val();
 
+        //From 
+        var vDateRangeDayFrom = $("#DaySelectorFrom").val();
+        var vDateRangeMonthFrom = $("#MonthSelectorFrom").val();
+        var vDateRangeYearFrom = $("#YearSelectorFrom").val();
+        var vDateRangeTimeHourFrom = $("#HourSelectorFrom").val();
+        var vDateRangeTimeMinuteFrom = $("#MinuteSelectorFrom").val();
+        //To
+        var vDateRangeDayTo = $("#DaySelectorTo").val();
+        var vDateRangeMonthTo = $("#MonthSelectorTo").val();
+        var vDateRangeYearTo = $("#YearSelectorTo").val();
+        var vDateRangeTimeHourTo = $("#HourSelectorTo").val();
+        var vDateRangeTimeMinuteTo = $("#MinuteSelectorTo").val();
+
+
+        var vPoints = $("*[id^='cp']");
+
+
+        var pointsListArray = new Array(vPoints.length / 3);
+
+        for (let i = 0; i < vPoints.length / 3; i++) {
+
+            //points id
+            var vId = vPoints[i * 3 + 0].id.replace('cp', '');
+            //point colour
+            var vColour = vPoints[i * 3 + 1].id;
+            var vColourPicker = $('#' + vColour);
+            var vColourPickerClasses = vColourPicker[0].classList;
+            var vColourPickerCPColour = vColourPickerClasses[4];
+            //point line type
+            var vPointTypeId = vPoints[i * 3 + 2].id;
+            var vPointType = $('#' + vPointTypeId + ' option:selected').val();
+
+            var vRow = {
+                PtId: vId,
+                PtColour: vColourPickerCPColour,
+                PtLineType: vPointType
+            }
+
+            pointsListArray[i] = vRow;
+        }
+
+        //Konvert data into YYYY-MM-DD hh:mm
+        var vDataStartPoint = vDateRangeYearFrom + "-";
+        if (parseInt(vDateRangeMonthFrom, 10) < 10) {
+            vDataStartPoint += "0" + vDateRangeMonthFrom;
+        } else {
+            vDataStartPoint += vDateRangeMonthFrom;
+        }
+        if (parseInt(vDateRangeDayFrom, 10) < 10) {
+            vDataStartPoint += "-0" + vDateRangeDayFrom;
+        } else {
+            vDataStartPoint += "-" + vDateRangeDayFrom;
+        }
+
+        vDataStartPoint += " " + vDateRangeTimeHourFrom + ":" + vDateRangeTimeMinuteFrom + ":00";
+
+        var vDataStopPoint = vDateRangeYearTo + "-";
+        if (parseInt(vDateRangeMonthTo, 10) < 10) {
+            vDataStopPoint += "0" + vDateRangeMonthTo;
+        } else {
+            vDataStopPoint += vDateRangeMonthTo;
+        }
+        if (parseInt(vDateRangeDayTo, 10) < 10) {
+            vDataStopPoint += "-0" + vDateRangeDayTo;
+        } else {
+            vDataStopPoint += "-" + vDateRangeDayTo;
+        }
+
+        vDataStopPoint += " " + vDateRangeTimeHourTo + ":" + vDateRangeTimeMinuteTo + ":00";
+
+        var vMU = vPoints[0].cells[5].outerText;
+
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: '/Chart/FetchChartSerieZoomed/',
+            timeout: 0,
+            async: true,
+            data: {
+                "PointId": pointsListArray[0].PtId,
+                "ChartType": vCharType,
+                "DateRange": vDateRange,
+                "AggregationInterval": vAggregationInterval,
+                "AggregationType": vAggregationType,
+                "DateFrom": pStartUnix,
+                "DateTo": pStopUnix,
+                "SeriesColor": pointsListArray[0].PtColour,
+                "SeriesDashStyle": pointsListArray[0].PtLineType,
+                "MU": vMU
+
+            },
+            error: /*function() {
+                    alert("An error occurred.");*/
+                function (xhr, status, error) {
+                    //var err = JSON.parse(xhr.responseText);
+                    alert("Status:" + status);
+                    alert("Error:" + error);
+                    alert("xhr.response:" + xhr.responseText);
+                    alert("eval of xhr.response:" + xhr.error);
+
+                },
+            success: function (data) {
+
+
+                var vSeriesAllinOne = data;
+
+
+                //alert('Data in JSON received');
+                //seriesDataRK[j] = vSeriesAllinOne.seriesdata;
+
+                chart.series[0].setData(vSeriesAllinOne.seriesdata);
+                //chart.series[0].pointInterval = 3600000;
+
+                
+                
+                chart.series[0].update({
+                    pointStart: vSeriesAllinOne.pointStart,
+                    pointInterval: vSeriesAllinOne.pointInterval
+                        //data: data.data
+                    }, true); // true if you want redraw
+                i++;
+                j++;
+
+                //RenderChart();
+            }
+
+
+        });
+
+
+    }
+
+    var chart;
     //Render Chart
+    var options;
     function RenderChart() {
 
 
-        var options = {
+         options = {
             chart: {
                 //type: 'line',
                 zoomType: 'x'
@@ -2610,9 +2765,18 @@
                 text: 'AAPL Stock Price'
             },*/
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
+                events: {
+                    afterSetExtremes: afterSetExtremes
+                }
             },
             colors: seriesColour,
+            navigator: {
+                adaptToUpdatedData: false,
+                series: {
+                    data: seriesData3[0].data
+                }
+            },
             series: seriesData3,
             tooltip: {
                 xDateFormat: '%Y-%m-%d %H:%M',
@@ -2688,7 +2852,7 @@
                 }
             }
         };
-        Highcharts.stockChart('ChartContainer', options);
+        chart = Highcharts.stockChart('ChartContainer', options);
 
     }
 
@@ -2698,6 +2862,486 @@
 
     function HideChartControlPanelBody() {
         $('#ChartControlPanelBody').hide();
+    }
+
+    //dynamic formating
+    function FetchChartSerieV2(
+        /*pointId, 
+        chartType, 
+        dataRange, 
+        aggregationInterval,
+        aggregationType,
+        dateFrom,
+        dateTo*/
+        ) {
+        var vCharType = $("#ChartType").val();
+        var vDateRange = $("#DateRange").val();
+        var vAggregationInterval = $("#AggregationInterval").val();
+        var vAggregationType = $("#AggregationType").val();
+
+        //From 
+        var vDateRangeDayFrom = $("#DaySelectorFrom").val();
+        var vDateRangeMonthFrom = $("#MonthSelectorFrom").val();
+        var vDateRangeYearFrom = $("#YearSelectorFrom").val();
+        var vDateRangeTimeHourFrom = $("#HourSelectorFrom").val();
+        var vDateRangeTimeMinuteFrom = $("#MinuteSelectorFrom").val();
+        //To
+        var vDateRangeDayTo = $("#DaySelectorTo").val();
+        var vDateRangeMonthTo = $("#MonthSelectorTo").val();
+        var vDateRangeYearTo = $("#YearSelectorTo").val();
+        var vDateRangeTimeHourTo = $("#HourSelectorTo").val();
+        var vDateRangeTimeMinuteTo = $("#MinuteSelectorTo").val();
+
+
+        var vPoints = $("*[id^='cp']");
+
+
+        var pointsListArray = new Array(vPoints.length / 3);
+
+        for (let i = 0; i < vPoints.length / 3; i++) {
+
+            //points id
+            var vId = vPoints[i * 3 + 0].id.replace('cp', '');
+            //point colour
+            var vColour = vPoints[i * 3 + 1].id;
+            var vColourPicker = $('#' + vColour);
+            var vColourPickerClasses = vColourPicker[0].classList;
+            var vColourPickerCPColour = vColourPickerClasses[4];
+            //point line type
+            var vPointTypeId = vPoints[i * 3 + 2].id;
+            var vPointType = $('#' + vPointTypeId + ' option:selected').val();
+
+            var vRow = {
+                PtId: vId,
+                PtColour: vColourPickerCPColour,
+                PtLineType: vPointType
+            }
+
+            pointsListArray[i] = vRow;
+        }
+
+        //Konvert data into YYYY-MM-DD hh:mm
+        var vDataStartPoint = vDateRangeYearFrom + "-";
+        if (parseInt(vDateRangeMonthFrom, 10) < 10) {
+            vDataStartPoint += "0" + vDateRangeMonthFrom;
+        } else {
+            vDataStartPoint += vDateRangeMonthFrom;
+        }
+        if (parseInt(vDateRangeDayFrom, 10) < 10) {
+            vDataStartPoint += "-0" + vDateRangeDayFrom;
+        } else {
+            vDataStartPoint += "-" + vDateRangeDayFrom;
+        }
+
+        vDataStartPoint += " " + vDateRangeTimeHourFrom + ":" + vDateRangeTimeMinuteFrom + ":00";
+
+        var vDataStopPoint = vDateRangeYearTo + "-";
+        if (parseInt(vDateRangeMonthTo, 10) < 10) {
+            vDataStopPoint += "0" + vDateRangeMonthTo;
+        } else {
+            vDataStopPoint += vDateRangeMonthTo;
+        }
+        if (parseInt(vDateRangeDayTo, 10) < 10) {
+            vDataStopPoint += "-0" + vDateRangeDayTo;
+        } else {
+            vDataStopPoint += "-" + vDateRangeDayTo;
+        }
+
+        vDataStopPoint += " " + vDateRangeTimeHourTo + ":" + vDateRangeTimeMinuteTo + ":00";
+
+        var vMU = vPoints[0].cells[5].outerText;
+
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            url: '/Chart/FetchChartSerie/',
+            timeout: 0,
+            async: true,
+            data: {
+                "PointId": pointsListArray[0].PtId,
+                "ChartType": vCharType,
+                "DateRange": vDateRange,
+                "AggregationInterval": vAggregationInterval,
+                "AggregationType": vAggregationType,
+                "DateFrom": vDataStartPoint,
+                "DateTo": vDataStopPoint,
+                "SeriesColor": pointsListArray[0].PtColour,
+                "SeriesDashStyle": pointsListArray[0].PtLineType,
+                "MU": vMU
+
+            },
+            error: /*function() {
+                    alert("An error occurred.");*/
+                function (xhr, status, error) {
+                    //var err = JSON.parse(xhr.responseText);
+                    alert("Status:" + status);
+                    alert("Error:" + error);
+                    alert("xhr.response:" + xhr.responseText);
+                    alert("eval of xhr.response:" + xhr.error);
+
+                },
+            success: function (data) {
+
+
+                var vSeriesAllinOne = data;
+
+
+                //alert('Data in JSON received');
+                seriesDataRK[j] = vSeriesAllinOne.seriesdata;
+                seriesColour[j] = vSeriesAllinOne.seriesColor; //variable
+
+                //bindChart(seriesData);
+                //GenerateChart21();
+
+
+                seriesData3[i] = {
+                    type: vSeriesAllinOne.seriesType, //  variable
+                    name: vSeriesAllinOne.seriesName, //variable
+                    data: seriesDataRK[j], //variable
+                    //yAxis: 0, // label of the Y axiss 
+                    dashStyle: vSeriesAllinOne.seriesDashStyle, //variable
+                    /*
+                    tooltip: {
+                        
+                        shared: true,
+     
+                        //valueDecimals: 3
+                        //valueSuffix: ' kW'
+                        
+                        
+                    },*/
+                    lineWidth: vSeriesAllinOne.LineWidth, //variable
+                    pointStart: vSeriesAllinOne.pointStart, //Date.UTC(2020, 1, 1, 0, 0, 0), //variable
+                    pointInterval:
+                        vSeriesAllinOne
+                            .pointInterval, //60 * 1000, // 1minute =  60sec * 1000ms = 60000ms //varibale
+                    dataGrouping: {
+                        enabled: false
+                    },
+                    animation: {
+                        duration: 0
+                    }
+                }
+
+                seriesYaxis[i] = { //--- 1st yAxis
+                    title: {
+                        text: vSeriesAllinOne.seriesLabelFormat, //'Temp 1',
+                        style: {
+                            color: 'grey' //vSeriesAllinOne.seriesColor//'#FF7ed8'
+                        }
+                    },
+                    labels: {
+                        format: '{value} ', //+ vSeriesAllinOne.seriesLabelFormat, //'°C', //variable
+
+                        style: {
+                            color: 'grey' //vSeriesAllinOne.seriesColor//'#FF7ed8' //variable
+
+                        }
+
+                    },
+                    lineColor: '#CCD6EB',
+                    lineWidth: 1,
+
+                    linkedTo: null,
+                    opposite: false
+                    //or
+                    //opposite: false
+                };
+
+                i++;
+                j++;
+
+                RenderChartV2();
+            }
+
+
+        });
+
+
+    }
+
+
+    var options2;
+
+    //Render Chart
+    function RenderChartV2() {
+
+
+        options2 = {
+            chart: {
+                //type: 'line',
+                zoomType: 'x'
+            },
+            /*
+            title: {
+                text: 'AAPL Stock Price'
+            },*/
+            xAxis: {
+                type: 'datetime',
+                events: {
+                    afterSetExtremes: afterSetExtremes
+                },
+                minRange: 3600 * 1000 // one hour
+            },
+            colors: seriesColour,
+            series: seriesData3,
+            tooltip: {
+                xDateFormat: '%Y-%m-%d %H:%M',
+                split: false,
+                //shared: true,
+                //valueDecimals: 2,
+                headerFormat: '<span style="font-size:10px">{point.key}</span><br/><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.2f}</b></td>' + '</tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true,
+
+                positioner: function (boxWidth, boxHeight, point) {
+                    return { x: point.plotX, y: point.plotY - 50 };
+                }
+
+            },
+            yAxis: seriesYaxis,
+
+
+            rangeSelector: {
+                inputEnabled: false, //disable range selectors
+                selected: 7, //0 1st button
+                buttons: [
+                    {
+                        type: 'minute',
+                        count: 5,
+                        text: '5M'
+                    },
+                    {
+                        type: 'hour',
+                        count: 1,
+                        text: '1h'
+                    },
+                    {
+                        type: 'day',
+                        count: 1,
+                        text: '1d'
+                    },
+
+                    {
+                        type: 'week',
+                        count: 1,
+                        text: '1w'
+                    },
+                    {
+                        type: 'month',
+                        count: 1,
+                        text: '1m'
+                    },
+                    {
+                        type: 'year',
+                        count: 1,
+                        text: '1y'
+                    },
+                    {
+                        type: 'ytd',
+                        text: 'YTD'
+                    },
+                    {
+                        type: 'all',
+                        text: 'All'
+                    }
+                ]
+            },
+            plotOptions: {
+                series: {
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                }
+            }
+        };
+        Highcharts.stockChart('ChartContainer', options2);
+
+    }
+
+    function GetChar2() {
+        CleanBuffer();
+        // clear buffers
+
+
+        //show panel
+        $('#ChartPanel').show();
+
+        var vCharType = $("#ChartType").val();
+        var vDateRange = $("#DateRange").val();
+        var vAggregationInterval = $("#AggregationInterval").val();
+        var vCharType = $("#AggregationType").val();
+
+        //From 
+        var vDateRangeDayFrom = $("#DaySelectorFrom").val();
+        var vDateRangeMonthFrom = $("#MonthSelectorFrom").val();
+        var vDateRangeYearFrom = $("#YearSelectorFrom").val();
+        var vDateRangeTimeHourFrom = $("#HourSelectorFrom").val();
+        var vDateRangeTimeMinuteFrom = $("#MinuteSelectorFrom").val();
+        //To
+        var vDateRangeDayTo = $("#DaySelectorTo").val();
+        var vDateRangeMonthTo = $("#MonthSelectorTo").val();
+        var vDateRangeYearTo = $("#YearSelectorTo").val();
+        var vDateRangeTimeHourTo = $("#HourSelectorTo").val();
+        var vDateRangeTimeMinuteTo = $("#MinuteSelectorTo").val();
+
+        //either datarange must be set or from & to fields
+        var vErrorValidationvDateRange = false;
+        if (vDateRange === null) {
+            console.log("Date Range is null");
+            vErrorValidationvDateRange = true;
+        }
+        var vErrorValidationvTimeRanges = false;
+        if (
+            vDateRangeDayFrom == null ||
+                vDateRangeMonthFrom === null ||
+                vDateRangeYearFrom === null ||
+                vDateRangeTimeHourFrom === null ||
+                vDateRangeTimeMinuteFrom === null ||
+                vDateRangeDayTo == null ||
+                vDateRangeMonthTo === null ||
+                vDateRangeYearTo === null ||
+                vDateRangeTimeHourTo === null ||
+                vDateRangeTimeMinuteTo === null
+        ) {
+            vErrorValidationvTimeRanges = true;
+        }
+
+
+        //Either Date Range or a time frame ( from to ) must be set 
+        //Show an error message
+        if (vErrorValidationvDateRange === true && vErrorValidationvTimeRanges === true) {
+            DateRangeValidationCreate('Choose Date Range or set a time frame using Date From and Date To fields');
+            return;
+        }
+
+        //the user has chosen Data Range
+        if (vErrorValidationvDateRange != true) {
+            //call AJAX
+        }
+        //the user has chosen time Range
+        if (vErrorValidationvTimeRanges != true) {
+            //check whether data does not include 
+            //30 Feb, 31 April, 31 June, 31 Sep, 31 Nov 
+            //or 29 Feb for non leap years.
+            var vErrorValidationDate = false;
+            //checke a leap year
+            var vLeapYearFrom = CheckLeapYear(vDateRangeYearFrom);
+            var vLeapYearTo = CheckLeapYear(vDateRangeYearTo);
+
+            var prohibitedDates = [
+                '302',
+                '312',
+                '314',
+                '316',
+                '319',
+                '3111'];
+
+            // alloweDate if a leap year flag is set to true 
+            var allowedDate = '292';
+
+            var prohibitedDateFromError = false;
+            for (var i = 0; i < prohibitedDates.length; i++) {
+                var vFrom = vDateRangeDayFrom + vDateRangeMonthFrom;
+                if (vFrom == prohibitedDates[i]) {
+                    prohibitedDateFromError = true;
+                    console.log('DataFrom validation: not passed');
+                    break;
+                }
+
+                if (vFrom == allowedDate) {
+                    if (vLeapYearFrom != true) {
+                        prohibitedDateFromError = true;
+                        console.log('DataFrom validation: not passed');
+                        break;
+                    }
+                }
+            }
+
+            if (prohibitedDateFromError == false) {
+                console.log("DataFrom validation: passed");
+            } else {
+                DateRangeValidationCreate('DateFrom validation: not passed');
+            }
+
+            //To
+            var prohibitedDateToError = false;
+            for (var ii = 0; ii < prohibitedDates.length; ii++) {
+                var vTo = vDateRangeDayTo + vDateRangeMonthTo;
+                if (vTo == prohibitedDates[ii]) {
+                    prohibitedDateToError = true;
+                    console.log('DataTo Validation: not passed');
+                    break;
+                }
+
+                if (vTo == allowedDate) {
+                    if (vLeapYearTo != true) {
+                        prohibitedDateToError = true;
+                        console.log('DataTo Validation: not passed');
+                        break;
+                    }
+                }
+            }
+
+            if (prohibitedDateToError == false) {
+                console.log("DataTo validation: passed");
+            } else {
+                DateRangeValidationCreate('DataTo validation: not passed');
+            }
+
+            //call AJAX
+
+            //FetchChartSerie(1234, 'spline', null, '1min', 'Average', '2020-01-01 00:00:00', '2021-01-07 00:00');
+            FetchChartSerieV2();
+            //RenderChart();
+
+        }
+
+
+
+        if (vErrorValidationvDateRange != true) {
+            console.log('Data Range chosen, date validation not required');
+        }
+
+
+    }
+
+    function HideDateRangeValidation() {
+        $('#DateRangeValidation').modal('hide');
+    }
+
+    function DateRangeValidationCreate(pMessage) {
+
+        var vErrorWindow = $(
+            '<div class="alert alert-dismissible alert-danger" style="margin:0px 0px 0px 0px">' +
+            '<button type="button" class="close" data-dismiss="alert" onclick="HideDateRangeValidation()">×</button>' +
+            '<h4 class="alert-heading"> Date Range </h4>' +
+            '<p id="ErrorMessage"class="mb-0">' +
+            pMessage +
+            '</p>' +
+            '</div>'
+        );
+
+        $("#DateRangeValidationMessage").append(vErrorWindow);
+        $('#DateRangeValidation').modal('show');
+
+    }
+
+    function afterSetExtremes(e) {
+        
+        chart.showLoading('Loading data from server...');
+        
+        //alert('Math.round(e.min):' + Math.round(e.min));
+        console.log('e.min:' + e.min);
+        console.log('e.max:' + e.max);
+
+        FetchChartSerieZoomed(Math.round(e.min), Math.round(e.max));
+        chart.hideLoading();
     }
     
 

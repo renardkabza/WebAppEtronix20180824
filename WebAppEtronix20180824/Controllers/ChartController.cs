@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
@@ -373,8 +374,17 @@ namespace WebAppEtronix20180824.Controllers
 
             int[] vIntervalTab = PrepareIntervals(AggregationInterval);
 
-
-            var vAggregationInterval = new SqlParameter("@AggregationInterval", vIntervalTab[0].ToString());
+            int step = 0;
+            if (ReccommendedSetp(Convert.ToDateTime(DateFrom), Convert.ToDateTime(DateTo)) > vIntervalTab[0])
+            {
+                step = ReccommendedSetp(Convert.ToDateTime(DateFrom), Convert.ToDateTime(DateTo));
+            }
+            else
+            {
+                step = vIntervalTab[0];
+            }
+            //var vAggregationInterval = new SqlParameter("@AggregationInterval", vIntervalTab[0].ToString());
+            var vAggregationInterval = new SqlParameter("@AggregationInterval", step.ToString());
             var vAggregationFunction = new SqlParameter("@AggregationFunction", AggregationType);
             var vAggregationNDays = new SqlParameter("@AggregationNDays", vIntervalTab[1].ToString());
             var vAggregationFunctionCum = new SqlParameter("@AggregationFunctionCum", "Null");
@@ -404,26 +414,55 @@ namespace WebAppEtronix20180824.Controllers
 
 
 
-            ulong Max = 60;//8760 * 1 + 1;
-            float vd = 0;
+            //ulong Max = 60;//8760 * 1 + 1;
+            //float vd = 0;
 
             Root vObject = new Root();
-            vObject.seriesdata = new List<double?>();
+            vObject.seriesdata = new List<double ?>();
 
             Random vRandom = new Random();
-
+            
             for (int i = 0; i < vSeriesData.Count; i++)
             {
                 //time = (ulong)(1609459200000 + ((i * 60) * 1000));
                 //vd = vRandom.Next(-100, 100);
 
-                vObject.seriesdata.Add(vSeriesData[i].Value);
+                vObject.seriesdata.Add(vSeriesData[i].Value); //vSeriesData[i].Value
             }
-
+            
+            /*
+            string a = "[";
+            for (int i = 0; i < vSeriesData.Count; i++)
+            {
+                a += "[";
+                var time = GetCurrentUnixTimestampMillis(vSeriesData[i].Timestamp);
+                a += time;
+                a += ",";
+                var vd = vSeriesData[i].Value;
+                a += vd;
+                a += "],";
+                //vObject.seriesdata.Add(vSeriesData[i].Value);
+            }
+            a = a.Remove(a.LastIndexOf(','), 1);
+            a += "]";
+            vObject.seriesdata = a;
+             */
             //Get the start Point
 
             long vDateTimeStart = GetCurrentUnixTimestampMillis(Convert.ToDateTime(DateFrom));
-            long vInterval = LongGetIntervalInMilliseconds(AggregationInterval);
+            long vInterval0 = LongGetIntervalInMilliseconds(AggregationInterval);
+            long vInterval1 = ReccommendedSetpInmiliseconds(Convert.ToDateTime(DateFrom), Convert.ToDateTime(DateTo));
+
+            long vInterval = 0;
+
+            if (vInterval0 > vInterval1)
+            {
+                vInterval = vInterval0;
+            }
+            else
+            {
+                vInterval = vInterval1;
+            }
 
             vObject.Id = PointId;
             vObject.seriesType = "spline";
@@ -442,7 +481,11 @@ namespace WebAppEtronix20180824.Controllers
 
 
 
-            return Json(vObject, JsonRequestBehavior.AllowGet);
+            //return Json(vObject, JsonRequestBehavior.AllowGet);
+
+            var jsonResult = Json(vObject, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
 
 
 
@@ -675,5 +718,238 @@ namespace WebAppEtronix20180824.Controllers
 
         }
 
+        public ActionResult FetchChartSerieZoomed(
+            int PointId,
+            string ChartType,
+            string DateRange,
+            string AggregationInterval,
+            string AggregationType,
+            string DateFrom,
+            string DateTo,
+            string SeriesColor,
+            string SeriesDashStyle,
+            string MU
+            )
+        {
+
+
+
+
+            //Get hex color
+
+            Entities _contextEntities = new Entities();
+            var vColorName = new SqlParameter("@ColorName", SeriesColor.Substring(3));
+
+            string vHexColor = _contextEntities.Database.SqlQuery<System.String>("GetColor " + "@ColorName", vColorName).FirstOrDefault();
+
+
+
+            //GetTables Details
+
+            var vPointDetailSqlParameter = new SqlParameter("@PointId", PointId);
+
+            PointDetails vPointDetails = _contextEntities.Database
+                .SqlQuery<PointDetails>("GetPointDetails " + "@PointId", vPointDetailSqlParameter).FirstOrDefault();
+
+
+
+
+            //Prepare 
+            List<SeriesData> vSeriesData = new List<SeriesData>();
+
+            var vTableName = new SqlParameter("@TableName", vPointDetails.TableName);
+            var vDBName = new SqlParameter("@DataBaseName", vPointDetails.DatabaseName);
+            DateTime vDTStart = UnixTimeStampToDateTime(double.Parse(DateFrom));
+
+            var vDateTimeFrom = new SqlParameter("@DateTimeStart", vDTStart);
+            DateTime vDTStop = UnixTimeStampToDateTime(double.Parse(DateTo));
+            var vDateTimeTo = new SqlParameter("@DateTimeStop", vDTStop);
+
+            int[] vIntervalTab = PrepareIntervals(AggregationInterval);
+
+            /*
+            int step = 0;
+            if (ReccommendedSetp(Convert.ToDateTime(DateFrom), Convert.ToDateTime(DateTo)) > vIntervalTab[0])
+            {
+                step = ReccommendedSetp(Convert.ToDateTime(DateFrom), Convert.ToDateTime(DateTo));
+            }
+            else
+            {
+                step = vIntervalTab[0];
+            }
+            */
+            var vAggregationInterval = new SqlParameter("@AggregationInterval", ReccommendedSetp(Convert.ToDateTime(vDTStart), Convert.ToDateTime(vDTStop))); //vIntervalTab[0].ToString());
+            var vAggregationFunction = new SqlParameter("@AggregationFunction", AggregationType);
+            var vAggregationNDays = new SqlParameter("@AggregationNDays", vIntervalTab[1].ToString());
+            var vAggregationFunctionCum = new SqlParameter("@AggregationFunctionCum", "Null");
+
+
+
+
+            vSeriesData = _contextEntities.Database.SqlQuery<SeriesData>("GetSeriesAggregationDynamicNMinutesNDays_TestV2 " +
+                                                           "@TableName, " +
+                                                           "@DataBaseName, " +
+                                                           "@DateTimeStart, " +
+                                                           "@DateTimeStop, " +
+                                                           "@AggregationInterval, " +
+                                                           "@AggregationFunction, " +
+                                                           "@AggregationNDays, " +
+                                                           "@AggregationFunctionCum ",
+                                                           vTableName,
+                                                           vDBName,
+                                                           vDateTimeFrom,
+                                                           vDateTimeTo,
+                                                           vAggregationInterval,
+                                                           vAggregationFunction,
+                                                           vAggregationNDays,
+                                                           vAggregationFunctionCum).ToList();
+
+
+
+
+
+            //ulong Max = 60;//8760 * 1 + 1;
+            //float vd = 0;
+
+            Root vObject = new Root();
+            vObject.seriesdata = new List<double?>();
+
+            Random vRandom = new Random();
+            for (int i = 0; i < vSeriesData.Count; i++)
+            {
+                vObject.seriesdata.Add(vSeriesData[i].Value);
+            }
+            
+            /*
+            string a = "[";
+            for (int i = 0; i < vSeriesData.Count; i++)
+            {
+                a += "[";
+                var time = vSeriesData[i].Timestamp;
+                a += time;
+                a += ",";
+                var vd = vSeriesData[i].Value;
+                a += vd;
+                a += "],";
+                //vObject.seriesdata.Add(vSeriesData[i].Value);
+            }
+            a=a.Remove(a.LastIndexOf(','), 1);
+            a += "]";
+            vObject.seriesdata = a;
+             * */
+            //Get the start Point
+
+            long vDateTimeStart = long.Parse(DateFrom); //GetCurrentUnixTimestampMillis(Convert.ToDateTime(DateFrom));
+            long vInterval = LongGetIntervalInMilliseconds(AggregationInterval);
+
+            //long vInterval0 = LongGetIntervalInMilliseconds(AggregationInterval);
+            //long vInterval1 = ReccommendedSetpInmiliseconds(Convert.ToDateTime(DateFrom), Convert.ToDateTime(DateTo));
+
+            /*
+            long vInterval = 0;
+
+            if (vInterval0 > vInterval1)
+            {
+                vInterval = vInterval0;
+            }
+            else
+            {
+                vInterval = vInterval1;
+            }
+             **/
+
+            vObject.Id = PointId;
+            vObject.seriesType = "spline";
+            vObject.seriesName = vPointDetails.PointName;
+            vObject.seriesDashStyle = SeriesDashStyle;
+            vObject.seriesColor = vHexColor;
+            vObject.LineWidth = 2;
+            vObject.pointStart = vDateTimeStart; //1609459200000; unix ms from the epoch
+            vObject.pointInterval = ReccommendedSetpInmiliseconds(Convert.ToDateTime(vDTStart), Convert.ToDateTime(vDTStop));//vInterval;
+            vObject.seriesYaxisTitle = "";
+            vObject.seriesYaxisColor = vHexColor;
+            vObject.seriesLabelFormat = MU;
+            vObject.seriesLabelStyleColor = vHexColor;
+            vObject.errorFlag = false;
+            vObject.errorMessage = "";
+
+
+
+            //return Json(vObject, JsonRequestBehavior.AllowGet);
+
+            var jsonResult = Json(vObject, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+
+
+
+            //return null;
+        }
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddMilliseconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+
+        public int ReccommendedSetp(DateTime p1, DateTime p2)
+        {
+            TimeSpan span = p2.Subtract(p1);
+
+            int howManyDays = span.Days;
+
+            if (howManyDays > 180 )
+            {
+                return 1440;
+            }
+            else if (howManyDays > 90)
+            {
+                return 240;
+            }
+            else if (howManyDays >31)
+            {
+                return 240;
+            }
+            else if (howManyDays >1)
+            {
+                return 60;
+            }
+            else
+            {
+                return 1;
+            }
+
+        }
+
+        public long ReccommendedSetpInmiliseconds(DateTime p1, DateTime p2)
+        {
+            TimeSpan span = p2.Subtract(p1);
+
+            int howManyDays = span.Days;
+            long minute = 60000;
+            if (howManyDays > 180)
+            {
+                return 1440 * minute;
+            }
+            else if (howManyDays > 90)
+            {
+                return 240 * minute;
+            }
+            else if (howManyDays > 31)
+            {
+                return 240 * minute;
+            }
+            else if (howManyDays > 1)
+            {
+                return 60 * minute;
+            }
+            else
+            {
+                return 1 * minute;
+            }
+
+        }
     }
 }
